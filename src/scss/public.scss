@@ -1,0 +1,121 @@
+@use "sass:math";
+@import "_/_Lib";
+@import "_/Core";
+@import "Lalilo";
+@import "_/Bootstrap";
+
+// scss/admin.scss
+$sidebar-w: 345px;
+$sidebar-w-sm: 90px;
+$nav-bg: #0a2747;       // 深藍底
+$nav-bg-dark: #081e37;  // 更深的底部區
+$nav-text: #e8eef6;
+$accent: #ff6b00;       // 側欄選中橘色
+$border-light: #e9edf3;
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+
+  &.is-collapsed {
+    .sidebar { width: $sidebar-w-sm; }
+    .sidebar .label { 
+      opacity: 0; 
+      visibility: hidden; 
+      width: 0; 
+    }
+  }
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: $sidebar-w;
+  background: $nav-bg;
+  color: $nav-text;
+  display: flex;
+  flex-direction: column;
+  transition: width .25s ease;
+
+  .brand {
+    height: 56px;
+    background: rgba(255,255,255,.06);
+    .brand-name .label { font-weight: 600; }
+    .menu-btn { color: #fff; border-color: rgba(255,255,255,.3); }
+  }
+
+  .menu {
+    .nav-item {
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: $nav-text;
+        padding: 12px 16px;
+        border-left: 4px solid transparent;
+        text-decoration: none;
+
+        i { font-size: 1.1rem; min-width: 24px; text-align: center; }
+        .label { transition: opacity .2s ease, visibility .2s ease, width .2s ease; white-space: nowrap; }
+
+        &:hover { background: rgba(255,255,255,.06); }
+      }
+
+      &.is-active > .nav-link {
+        background: linear-gradient(90deg, rgba(255,107,0,.25), rgba(255,107,0,.15));
+        border-left-color: $accent;
+        color: #fff;
+      }
+    }
+
+    /* 不可點擊 */
+    .is-disabled {
+      opacity: .45;
+      .nav-link {
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+    }
+  }
+
+  /* 側欄底部深色區（可放版本、Logo 等） */
+  &::after {
+    content: "";
+    margin-top: auto;
+    display: block;
+    height: 90px;
+    background: $nav-bg-dark;
+  }
+}
+
+/* --- Content --- */
+.content {
+  flex: 1 1 auto;
+  background: #f6f8fb;
+  min-width: 0; // 防止 flex 溢出
+
+  .topbar {
+    height: 56px;
+    background: #fff;
+    border-bottom: 1px solid $border-light;
+  }
+
+  .page {
+    .card { border-color: $border-light; }
+    .content-box {
+      min-height: calc(100vh - 56px - 2rem); // 讓內容有高度
+      display: grid;
+      place-items: center;
+      background: #e3e6ea;
+    }
+    .placeholder-box {
+      font-size: 28px;
+      color: #333;
+    }
+  }
+}
+
+/* --- 寬度較小時預設收合（覆蓋備援） --- */
+@media (max-width: 1366px) {
+  .layout:not(.is-collapsed) .sidebar { width: $sidebar-w-sm; }
+  .layout:not(.is-collapsed) .sidebar .label { opacity: 0; visibility: hidden; width: 0; }
+}
