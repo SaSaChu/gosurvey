@@ -1,105 +1,41 @@
+/* ==============================
+   Bootstrap 初始化（Tooltip）
+============================== */
 $(function () {
-  // 啟用 Bootstrap Tooltips
   document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (el) {
-    new bootstrap.Tooltip(el, { boundary: document.body, placement: 'right' });
+    new bootstrap.Tooltip(el, { boundary: document.body, trigger: 'hover focus' });
   });
+});
 
-  // ===== 側欄展開/收合（沿用） =====
+/* ==============================
+   側欄：收合記憶 + Tooltip 行為
+============================== */
+$(function () {
   const $layout = $('#appLayout');
   const SIDEBAR_KEY = 'admin_sidebar_collapsed';
+
+  // 初始：記憶 or 小螢幕預設收合
   const remembered = localStorage.getItem(SIDEBAR_KEY);
   if (remembered === '1' || (!remembered && window.innerWidth < 1366)) {
     $layout.addClass('is-collapsed');
   }
-  $('#toggleSidebar').on('click', function () {
-    $layout.toggleClass('is-collapsed');
-    localStorage.setItem(SIDEBAR_KEY, $layout.hasClass('is-collapsed') ? '1' : '0');
-  });
 
-  // 側欄 active 狀態（示例）
-  $('.menu').on('click', '.nav-item:not(.is-disabled) .nav-link', function (e) {
-    e.preventDefault();
-    $('.menu .nav-item').removeClass('is-active');
-    $(this).closest('.nav-item').addClass('is-active');
-    // TODO: 這裡接路由或載入內容
-  });
-
-  // ===== 通知抽屜 =====
-  const $drawer = $('#notifDrawer');
-  const $backdrop = $('#notifBackdrop');
-  const $openBtn = $('.js-open-notif');
-  const $closeBtn = $('.js-close-notif');
-  const $markAllBtn = $('.js-mark-all');
-  const $badgeTop = $('.notif-count');
-  const $badgeHdr = $('.js-unread-badge');
-
-  function unreadCount() {
-    return $drawer.find('.notif-item.is-unread').length;
-  }
-  function syncBadges() {
-    const n = unreadCount();
-    if (n > 0) {
-      $badgeTop.text(n).show();
-      $badgeHdr.text(n + ' 則未讀').removeClass('bg-secondary').addClass('bg-danger');
-    } else {
-      $badgeTop.hide();
-      $badgeHdr.text('全部已讀').removeClass('bg-danger').addClass('bg-secondary');
-    }
-  }
-  function openDrawer() {
-    $drawer.addClass('is-open').attr('aria-hidden', 'false');
-    $backdrop.removeAttr('hidden').addClass('is-show');
-    $('body').addClass('overflow-hidden');
-  }
-  function closeDrawer() {
-    $drawer.removeClass('is-open').attr('aria-hidden', 'true');
-    $backdrop.removeClass('is-show').attr('hidden', true);
-    $('body').removeClass('overflow-hidden');
-  }
-
-  $openBtn.on('click', function (e) { e.preventDefault(); openDrawer(); });
-  $closeBtn.on('click', function () { closeDrawer(); });
-  $backdrop.on('click', function () { closeDrawer(); });
-  $(document).on('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
-
-  // 單筆已讀
-  $drawer.on('click', '.js-mark-read', function (e) {
-    e.preventDefault();
-    $(this).closest('.notif-item').removeClass('is-unread');
-    syncBadges();
-  });
-
-  // 全部已讀
-  $markAllBtn.on('click', function () {
-    $drawer.find('.notif-item').removeClass('is-unread');
-    syncBadges();
-  });
-
-  // 初始化徽章
-  syncBadges();
-});
-
-
-$(function () {
-  // 1) 把 label 文字塞進 tooltip（只做一次）
+  // 把 label 文案塞進 title，讓收合時能顯示 tooltip
   function prepareSidebarTitles() {
     $('.sidebar .menu .nav-link').each(function () {
       const $link = $(this);
-      // 如果沒有 title，就用 label 文字補上
       if (!$link.attr('title') && !$link.attr('data-bs-original-title')) {
         const txt = $.trim($link.find('.label').text());
         if (txt) $link.attr('title', txt);
       }
-      // 統一提示方向與容器
       $link.attr('data-bs-toggle', 'tooltip')
            .attr('data-bs-placement', 'right')
            .attr('data-bs-container', 'body');
     });
   }
 
-  // 2) 初始化或刷新 tooltip（在展開/收合切換時呼叫）
+  // 重新掛 Tooltip（避免重複）
   function refreshSidebarTooltips() {
-    // 先銷毀舊的，再重建（避免重複）
     $('.sidebar .menu .nav-link').each(function () {
       const t = bootstrap.Tooltip.getInstance(this);
       if (t) t.dispose();
@@ -112,9 +48,9 @@ $(function () {
     });
   }
 
-  // 3) 僅在「收合狀態」顯示 tooltip；展開時可選擇關掉（較乾淨）
+  // 只有「收合狀態」才啟用 tooltip，展開則停用
   function toggleTooltipsBySidebarState() {
-    const collapsed = $('#appLayout').hasClass('is-collapsed');
+    const collapsed = $layout.hasClass('is-collapsed');
     $('.sidebar .menu .nav-link').each(function () {
       const inst = bootstrap.Tooltip.getInstance(this);
       if (!inst) return;
@@ -123,30 +59,130 @@ $(function () {
     });
   }
 
-  // 一開始執行
-  prepareSidebarTitles();
-  refreshSidebarTooltips();
-  toggleTooltipsBySidebarState();
-
-  // 你的原本側欄記憶（沿用）
-  const $layout = $('#appLayout');
-  const SIDEBAR_KEY = 'admin_sidebar_collapsed';
-  const remembered = localStorage.getItem(SIDEBAR_KEY);
-  if (remembered === '1' || (!remembered && window.innerWidth < 1366)) {
-    $layout.addClass('is-collapsed');
-  }
-  // 切換側欄：記憶 + tooltip 狀態同步
+  // 切換側欄
   $('#toggleSidebar').on('click', function () {
     $layout.toggleClass('is-collapsed');
     localStorage.setItem(SIDEBAR_KEY, $layout.hasClass('is-collapsed') ? '1' : '0');
-    // 展開/收合後刷新與開關 tooltip
     refreshSidebarTooltips();
     toggleTooltipsBySidebarState();
   });
+
+  // 初始化
+  prepareSidebarTitles();
+  refreshSidebarTooltips();
+  toggleTooltipsBySidebarState();
+});
+
+/* ==============================
+   左側選單：導航與高亮
+============================== */
+$(function () {
+  // 點擊：只有假連結才阻擋導頁
+  $('.menu').on('click', '.nav-item:not(.is-disabled) .nav-link', function (e) {
+    const href = ($(this).attr('href') || '').trim();
+    const noNav = href === '' || href === '#' || href === 'javascript:;';
+    if (noNav) e.preventDefault();
+
+    // 先行切換高亮（即使導頁也先切，避免閃爍）
+    $('.menu .nav-item').removeClass('is-active');
+    $(this).closest('.nav-item').addClass('is-active');
+  });
+
+  // 載入時依目前網址自動高亮
+  (function setActiveByURL() {
+    const current = location.pathname.split('/').pop(); // 例如 page030.html
+    if (!current) return;
+    let activated = false;
+    $('.menu .nav-link').each(function () {
+      const href = ($(this).attr('href') || '').trim();
+      if (href && href === current) {
+        $('.menu .nav-item').removeClass('is-active');
+        $(this).closest('.nav-item').addClass('is-active');
+        activated = true;
+      }
+    });
+    // 若都沒比到，維持原本 HTML 設的 is-active
+    if (!activated) return;
+  })();
 
   // 禁用項目：阻擋點擊但允許 tooltip
   $('.sidebar').on('click', '.menu .is-disabled .nav-link', function (e) {
     e.preventDefault();
     e.stopPropagation();
   });
+});
+
+/* ==============================
+   通知抽屜（鈴鐺）
+============================== */
+$(function () {
+  const $drawer   = $('#notifDrawer');
+  const $backdrop = $('#notifBackdrop');
+  const $openBtn  = $('.js-open-notif');
+  const $closeBtn = $('.js-close-notif');
+  const $markAll  = $('.js-mark-all');
+  const $badgeTop = $('.notif-count');         // 頂欄紅點數字
+  const $badgeHdr = $('.js-unread-badge');     // 抽屜標題徽章（粉紅 / 全部已讀）
+
+  function unreadCount() {
+    return $drawer.find('.notif-item.is-unread').length;
+  }
+
+  function syncBadges() {
+    const n = unreadCount();
+    if (n > 0) {
+      $badgeTop.text(n).show();
+      $badgeHdr.text(n + '則未讀').removeClass('bg-secondary').addClass('bg-unread');
+    } else {
+      $badgeTop.hide();
+      $badgeHdr.text('全部已讀').removeClass('bg-unread').addClass('bg-secondary');
+    }
+  }
+
+  function openDrawer() {
+    $drawer.addClass('is-open').attr('aria-hidden', 'false');
+    $backdrop.removeAttr('hidden').addClass('is-show');
+    $('body').addClass('overflow-hidden');
+  }
+
+  function closeDrawer() {
+    $drawer.removeClass('is-open').attr('aria-hidden', 'true');
+    $backdrop.removeClass('is-show').attr('hidden', true);
+    $('body').removeClass('overflow-hidden');
+  }
+
+  // 開關
+  $openBtn.on('click', function (e) { e.preventDefault(); openDrawer(); });
+  $closeBtn.on('click', function () { closeDrawer(); });
+  $backdrop.on('click', function () { closeDrawer(); });
+  $(document).on('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+
+  // 單筆已讀：按鈕
+  $drawer.on('click', '.js-mark-read', function (e) {
+    e.preventDefault();
+    markItemRead($(this).closest('.notif-item'));
+  });
+
+  // 單筆已讀：點擊未讀卡片本身也可已讀（避免點到功能列）
+  $drawer.on('click', '.notif-item.is-unread', function (e) {
+    // 若點到可交互元素就不處理
+    const tag = (e.target.tagName || '').toLowerCase();
+    const isInteractive = $(e.target).is('a,button,[role="button"],input,textarea,select,.btn,.icon-btn');
+    if (isInteractive || tag === 'a' || tag === 'button') return;
+    markItemRead($(this));
+  });
+
+  function markItemRead($item) {
+    $item.removeClass('is-unread');
+    syncBadges();
+  }
+
+  // 全部已讀
+  $markAll.on('click', function () {
+    $drawer.find('.notif-item').removeClass('is-unread');
+    syncBadges();
+  });
+
+  // 初始徽章
+  syncBadges();
 });

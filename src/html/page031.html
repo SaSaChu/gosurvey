@@ -85,13 +85,97 @@
         </div>
       </header>
 
-      <!-- 頁面內容範例 -->
+      <!-- 中間內容 -->
       <section class="page p-4">
-        <div class="card shadow-sm">
-          <div class="card-body content-box">
-            <div class="placeholder-box">內容</div>
+<!-- 建立模板：頁首（返回列＋標題） -->
+<div class="page-head mb-4">
+  <a href="page030.html" class="back-link">
+    <i class="bi bi-arrow-left"></i>
+    <span>返回模板列表</span>
+  </a>
+
+  <h1 class="title">建立模板</h1>
+
+  <div class="subline">
+    <span class="subtitle">設計模板內容與格式</span>
+  </div>
+</div>
+
+<!-- 內容區（左右兩欄） -->
+<div class="create-tmpl row g-4">
+  <!-- 左：模板編輯器 -->
+  <div class="col-12 col-xl-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-white border-0 pt-3 pb-0">
+        <h6 class="mb-2 fw-bold text-orange">模板編輯器</h6>
+      </div>
+      <div class="card-body pt-3">
+        <!-- 模板類型 -->
+        <div class="mb-3">
+          <label class="form-label small text-muted">模板類型</label>
+          <select class="form-select">
+            <option>請選擇模板類型</option>
+            <option value="1">EDM</option>
+            <option value="2">SMS</option>
+            <option value="3">Line</option>
+            <option value="4">App Push</option>
+            <option value="5">輕鬆得點</option>
+          </select>
+        </div>
+
+        <!-- 模板名稱 -->
+        <div class="mb-3">
+          <label class="form-label small text-muted">模板名稱</label>
+          <input type="text" class="form-control" placeholder="請輸入模板名稱">
+        </div>
+
+        <!-- 內容（留白即可） -->
+        <div class="mb-3">
+          <label class="form-label small text-muted mb-1">內容</label>
+          <textarea class="form-control" rows="12" placeholder=""></textarea>
+        </div>
+
+        <!-- 可用參數（5 顆） -->
+        <div class="mb-4">
+          <label class="form-label small text-muted">可用參數</label>
+          <div class="param-chips d-flex flex-wrap gap-2">
+            <button type="button" class="chip btn btn-outline-secondary btn-sm js-param" data-idx="1">{{member_uid}}</button>
+            <button type="button" class="chip btn btn-outline-secondary btn-sm js-param" data-idx="2">{{member_name}}</button>
+            <button type="button" class="chip btn btn-outline-secondary btn-sm js-param" data-idx="3">{{survey_link}}</button>
+            <button type="button" class="chip btn btn-outline-secondary btn-sm js-param" data-idx="4">{{project_name}}</button>
+            <button type="button" class="chip btn btn-outline-secondary btn-sm js-param" data-idx="5">{{reward_points}}</button>
           </div>
         </div>
+
+        <!-- 底部操作 -->
+        <div class="d-flex gap-2 justify-content-end">
+          <button type="button" class="btn btn-secondary">取消</button>
+          <button type="button" class="btn btn-logout">建立模板</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右：即時預覽 -->
+  <div class="col-12 col-xl-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-white border-0 pt-3 pb-0">
+        <h6 class="mb-2 fw-bold text-orange">即時預覽</h6>
+      </div>
+      <div class="card-body">
+        <!-- 預覽畫布（留白） -->
+        <div class="preview-canvas rounded-3 border" id="livePreview" style="min-height:420px;background:#fff;"></div>
+
+        <!-- 預覽使用資料（起初留白；點參數才顯示） -->
+        <div class="preview-meta rounded-3 bg-light p-3 mt-3">
+          <div class="small text-muted mb-2">預覽使用資料</div>
+          <div id="previewData" class="small"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
       </section>
     </main>
   </div>

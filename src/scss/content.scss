@@ -1,0 +1,191 @@
+@use "sass:math";
+@import "_/_Lib";
+@import "_/Core";
+@import "Lalilo";
+@import "_/Bootstrap";
+
+/* ===== Variables ===== */
+$sidebar-w: 345px;
+$sidebar-w-sm: 90px;
+$drawer-w: 450px;
+
+$nav-bg: #062249;
+$nav-bg-dark: #062249;
+$nav-text: #e8eef6;
+$accent: #ff6b00;
+$border-light: #e9edf3;
+$light-grey: #F2F2F2;
+$min-grey:#A5A5A5;
+$bg-disabled:#dadada;
+$light-blue:#004E98;
+$pink:#E41669;
+$orange:#FF6721;
+
+/* ===== Page: 內容與模板管理 ===== */
+/* === 模組外框（白底 + 內距） === */
+.page {
+  .module-card {
+    background: #ffffff;
+    border-radius: .5rem;
+  }
+
+  .tmpl-grid {
+    /* 卡片 */
+    .tmpl-card {
+      border: 1px solid $border-light;
+      border-radius: .75rem;
+      overflow: hidden;
+      transition: box-shadow .15s ease, transform .1s ease;
+
+      &:hover { box-shadow: 0 6px 18px rgba(0,0,0,.08); transform: translateY(-2px); }
+
+      .img-wrap {
+        position: relative;
+
+        /* 覆蓋在圖片上的狀態徽章 */
+        .status-badges {
+          position: absolute;
+          top: .5rem;
+
+          .badge {
+            font-weight: 600;
+            border-radius: 999px;
+            padding: .35rem .6rem;
+          }
+
+          &.status-left  { left: .5rem;  display: flex; gap: .4rem; }
+          &.status-right { right: .5rem; }
+        }
+      }
+
+      .card-body {
+        .card-title { color: $nav-bg; } /* 深藍標題（配合你上方變數） */
+
+        /* === 3 顆操作鈕：左寬、右兩顆等寬 === */
+        .action-row {
+          display: grid;
+          grid-template-columns: 1fr 40px 40px; // 左邊撐滿、右兩顆 40px
+          gap: 8px;
+
+          .btn {
+            width: 100%;
+            height: 40px;
+            border-radius: .5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  .page-head {
+    display: block;
+    padding-top: 4px;
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: $nav-bg;
+      font-weight: 700;
+      text-decoration: none;
+      margin-bottom: 8px;
+
+      i { font-size: 1rem; line-height: 1; }
+      &:hover { text-decoration: underline; }
+    }
+
+    .title {
+      margin: 0 0 6px;
+      font-size: 1.5rem;      // 大標一行
+      font-weight: 800;
+      color: $nav-bg;
+      line-height: 1.2;
+    }
+
+    .subline {
+      display: flex;        // 小字 + 右側水平線
+      align-items: center;
+      gap: 12px;
+
+      .subtitle {
+        font-size: .875rem; // 比大標小
+        color: #7b8694;
+        white-space: nowrap;
+      }
+
+      &::after {
+        content: "";
+        flex: 1 1 auto;     // 從小字後面延伸到最右
+        height: 1px;
+        background: #e5e9ef;
+      }
+    }
+  }
+
+  .create-tmpl {
+    .card {
+      border-radius: .75rem;
+
+      .card-header {
+        h6 { letter-spacing: .5px; }
+      }
+
+      .card-body {
+        .editor-toolbar {
+          .btn {
+            border-radius: .5rem;
+            padding: .25rem .5rem;
+            i { font-size: .95rem; }
+          }
+        }
+
+        .param-chips {
+
+          .chip {
+          	color:$orange;
+          	border-color: $orange;
+            border-radius: 999px;
+            padding-inline: .75rem;
+
+            &:hover, &:focus {
+            	background-color: $orange;
+            	color: white;
+            }
+
+					  &:active {
+					    color: white !important;
+					    background-color: darken($orange, 10%) !important;
+					  }
+
+					  &:focus-visible {
+					    outline: none;
+					    box-shadow: 0 0 0 0.2rem rgba(6, 34, 73, 0.25);
+					    background-color: darken($orange, 10%);
+					  }
+
+            &.is-active {
+              background: $orange;
+              color: #fff;
+              border-color: $orange;
+            }
+          }
+        }
+
+        .preview-canvas {
+          border-color: $border-light !important;
+        }
+
+        .preview-meta {
+          border: 1px solid $border-light;
+        }
+      }
+    }
+  }
+
+}
+
