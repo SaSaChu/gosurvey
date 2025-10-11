@@ -3,25 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>Go Survey</title>
+  <title>GO SURVEY</title>
 
-  <!-- Bootstrap 5 + Icons -->
+  <!-- Bootstrap 5 與 Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- 編譯後的 CSS（由下方 SCSS 產生） -->
   <link rel="stylesheet" href="css/public.css">
 </head>
+
 <body>
   <div class="layout" id="appLayout">
-    <!-- 側欄 -->
+    <!-- 左邊側欄 -->
     <aside class="sidebar">
       <div class="brand d-flex align-items-center justify-content-between px-3">
         <div class="brand-name d-flex align-items-center gap-2">
-          <i class="bi bi-clipboard-check fs-5"></i>
-          <span class="label">GO SURVEY</span>
+          <span class="label"><img src="images/logo.svg"></span>
         </div>
-        <button class="btn btn-sm btn-outline-light menu-btn" id="toggleSidebar" aria-label="切換側欄">
+        <button class="btn btn-outline-light menu-btn" id="toggleSidebar" aria-label="切換側欄">
           <i class="bi bi-list"></i>
         </button>
       </div>
@@ -62,23 +61,30 @@
       </nav>
     </aside>
 
-    <!-- 主區 -->
+    <!-- 主內容 -->
     <main class="content">
+      <!-- 上面頂欄 -->
       <header class="topbar d-flex justify-content-end align-items-center px-3">
         <div class="d-flex align-items-center gap-3">
-          <!-- 通知鈴鐺：點擊開啟抽屜 -->
+          <!-- 鈴鐺：開啟通知抽屜 -->
           <a href="#" class="text-decoration-none text-body position-relative js-open-notif" aria-label="通知中心">
-            <i class="bi bi-bell fs-5"></i>
-            <span class="notif-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">5</span>
+            <i class="bi bi-bell-fill fs-5"></i>
+            <span class="notif-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">1</span>
           </a>
+
+          <div class="topbar-divider"></div>
+
           <div class="d-flex align-items-center gap-2">
-            <i class="bi bi-person-circle"></i>
+            <i class="bi bi-person fs-5"></i>
             <span>林小玲 Alma Lin</span>
           </div>
-          <a href="#" class="btn btn-sm btn-outline-secondary">登出</a>
+          <button type="button" class="btn btn-logout d-flex align-items-center gap-1">
+            <i class="bi bi-box-arrow-right"></i> 登出
+          </button>
         </div>
       </header>
 
+      <!-- 頁面內容範例 -->
       <section class="page p-4">
         <div class="card shadow-sm">
           <div class="card-body content-box">
@@ -89,10 +95,12 @@
     </main>
   </div>
 
-  <!-- 通知抽屜：寬 450px -->
+  <!-- 通知抽屜：遮罩 -->
   <div class="notif-backdrop" id="notifBackdrop" hidden></div>
 
+  <!-- 通知抽屜本體（寬 450px） -->
   <aside class="notif-drawer" id="notifDrawer" role="dialog" aria-label="通知中心" aria-hidden="true">
+    <!-- 深藍標題列 -->
     <div class="notif-header d-flex align-items-center justify-content-between px-3 py-2">
       <div class="d-flex align-items-center gap-2">
         <i class="bi bi-bell-fill"></i>
@@ -104,125 +112,148 @@
       </button>
     </div>
 
-    <div class="px-3 py-2">
-      <button class="btn btn-primary w-100 js-mark-all">全部標示為已讀</button>
+    <!-- 全幅按鈕 -->
+    <div class="notif-actions p-2">
+      <button class="btn btn-primary w-100 rounded-2 js-mark-all">全部標示為已讀</button>
     </div>
 
+    <!-- 通知清單 -->
     <div class="notif-list px-3 pb-3">
-      <!-- 1 專案更新（未讀） -->
-      <article class="notif-item is-unread">
-        <div class="d-flex align-items-start gap-2">
+
+      <!-- 1. 專案即將到期（未讀，頂部進度條 + 紅色提示） -->
+      <article class="notif-item type-danger is-unread">
+        <div class="item-progress">
+          <div class="progress" style="height:6px;">
+            <div class="progress-bar bg-warning" style="width:75%;" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="item-content d-flex align-items-start gap-2">
           <i class="bi bi-kanban fs-5 text-primary"></i>
           <div class="flex-grow-1">
-            <div class="d-flex justify-content-between align-items-center">
-              <h6 class="mb-1">專案狀態更新</h6>
+            <div class="item-head d-flex justify-content-between align-items-center">
+              <h6 class="mb-1">專案即將到期</h6>
               <small class="text-muted">2 小時前</small>
             </div>
             <p class="mb-2 text-muted">客戶滿意度調查 Q4 2024</p>
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <small class="text-muted">進度：85%</small>
-              <div class="progress flex-grow-1" style="height:6px;">
-                <div class="progress-bar" role="progressbar" style="width:85%;"></div>
-              </div>
-            </div>
-            <div class="d-flex justify-content-end">
-              <span class="badge bg-danger-subtle text-danger border">剩餘 1 天</span>
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <span class="tiny-dot bg-danger"></span>
+              <span class="text-danger fw-semibold">剩餘 1 天</span>
             </div>
           </div>
         </div>
-        <button class="btn btn-sm btn-link text-decoration-none js-mark-read">
-          <i class="bi bi-check2-circle"></i> 標示已讀
-        </button>
+        <div class="item-ops">
+          <button class="btn btn-sm btn-link text-decoration-none js-mark-read">
+            <i class="bi bi-check2-circle"></i> 標示已讀
+          </button>
+        </div>
       </article>
 
-      <!-- 2 專案更新（未讀） -->
-      <article class="notif-item is-unread">
-        <div class="d-flex align-items-start gap-2">
+      <!-- 2. 專案已結案（淡藍） -->
+      <article class="notif-item type-info">
+        <div class="item-content d-flex align-items-start gap-2">
           <i class="bi bi-kanban fs-5 text-primary"></i>
           <div class="flex-grow-1">
-            <div class="d-flex justify-content-between align-items-center">
-              <h6 class="mb-1">專案狀態更新</h6>
+            <div class="item-head d-flex justify-content-between align-items-center">
+              <h6 class="mb-1">專案已結案</h6>
               <small class="text-muted">1 小時前</small>
             </div>
-            <p class="mb-2 text-muted">客戶滿意度調查 Q3 2024</p>
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <small class="text-muted">進度：67%</small>
-              <div class="progress flex-grow-1" style="height:6px;">
-                <div class="progress-bar" role="progressbar" style="width:67%;"></div>
-              </div>
-            </div>
-            <div class="d-flex justify-content-end">
-              <span class="badge bg-danger-subtle text-danger border">剩餘 3 天</span>
-            </div>
+            <p class="mb-0 text-muted">客戶滿意度調查 Q4 2024</p>
           </div>
         </div>
-        <button class="btn btn-sm btn-link text-decoration-none js-mark-read">
-          <i class="bi bi-check2-circle"></i> 標示已讀
-        </button>
-      </article>
-
-      <!-- 3 成功訊息 -->
-      <article class="notif-item type-success">
-        <div class="d-flex align-items-start gap-2">
-          <i class="bi bi-check-circle fs-5"></i>
-          <div class="flex-grow-1">
-            <div class="d-flex justify-content-between align-items-center">
-              <h6 class="mb-1">登錄完成</h6>
-              <small class="text-muted">10 分鐘前</small>
-            </div>
-            <p class="mb-2 text-muted">嘉義會員回覆問卷姓名已更正完成</p>
-          </div>
+        <div class="item-ops">
+          <button class="btn btn-sm btn-link text-decoration-none js-mark-read">
+            <i class="bi bi-check2-circle"></i> 標示已讀
+          </button>
         </div>
-        <button class="btn btn-sm btn-link text-decoration-none js-mark-read">
-          <i class="bi bi-check2-circle"></i> 標示已讀
-        </button>
       </article>
 
-      <!-- 4 資訊訊息 -->
-      <article class="notif-item type-info">
-        <div class="d-flex align-items-start gap-2">
-          <i class="bi bi-info-circle fs-5"></i>
-          <div class="flex-grow-1">
-            <div class="d-flex justify-content-between align-items-center">
-              <h6 class="mb-1">生成完成</h6>
-              <small class="text-muted">5 分鐘前</small>
-            </div>
-            <p class="mb-2 text-muted">產出專案報表《客戶滿意度 Q4 2024》</p>
-          </div>
-        </div>
-        <button class="btn btn-sm btn-link text-decoration-none js-mark-read">
-          <i class="bi bi-check2-circle"></i> 標示已讀
-        </button>
-      </article>
-
-      <!-- 5 提醒（淺黃） -->
+      <!-- 3. 發送失敗（淺黃提醒） -->
       <article class="notif-item type-warning">
-        <div class="d-flex align-items-start gap-2">
+        <div class="item-content d-flex align-items-start gap-2">
           <i class="bi bi-exclamation-triangle fs-5"></i>
           <div class="flex-grow-1">
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="item-head d-flex justify-content-between align-items-center">
               <h6 class="mb-1">發送失敗</h6>
-              <small class="text-muted">4 小時前</small>
+              <small class="text-muted">15 分鐘前</small>
             </div>
-            <p class="mb-2 text-muted">EDM 發送異常，請重新排程</p>
+            <p class="mb-0 text-muted">員工問卷發送異常，請調整排程</p>
           </div>
         </div>
-        <button class="btn btn-sm btn-link text-decoration-none js-mark-read">
-          <i class="bi bi-check2-circle"></i> 標示已讀
-        </button>
+        <div class="item-ops">
+          <button class="btn btn-sm btn-link text-decoration-none js-mark-read">
+            <i class="bi bi-check2-circle"></i> 標示已讀
+          </button>
+        </div>
       </article>
+
+      <!-- 4. 發送完成（淡藍） -->
+      <article class="notif-item type-info">
+        <div class="item-content d-flex align-items-start gap-2">
+          <i class="bi bi-send fs-5"></i>
+          <div class="flex-grow-1">
+            <div class="item-head d-flex justify-content-between align-items-center">
+              <h6 class="mb-1">發送完成</h6>
+              <small class="text-muted">10 分鐘前</small>
+            </div>
+            <p class="mb-0 text-muted">客戶滿意度調查 Q4 2024 發送完成</p>
+          </div>
+        </div>
+        <div class="item-ops">
+          <button class="btn btn-sm btn-link text-decoration-none js-mark-read">
+            <i class="bi bi-check2-circle"></i> 標示已讀
+          </button>
+        </div>
+      </article>
+
+      <!-- 5. 邏輯檢查異常（淺黃提醒） -->
+      <article class="notif-item type-warning">
+        <div class="item-content d-flex align-items-start gap-2">
+          <i class="bi bi-bug fs-5"></i>
+          <div class="flex-grow-1">
+            <div class="item-head d-flex justify-content-between align-items-center">
+              <h6 class="mb-1">邏輯檢查異常</h6>
+              <small class="text-muted">5 分鐘前</small>
+            </div>
+            <p class="mb-0 text-muted">自訂問卷邏輯檢查出現異常，請聯絡管理員</p>
+          </div>
+        </div>
+        <div class="item-ops">
+          <button class="btn btn-sm btn-link text-decoration-none js-mark-read">
+            <i class="bi bi-check2-circle"></i> 標示已讀
+          </button>
+        </div>
+      </article>
+
+      <!-- 6. 邏輯檢查完成（淡藍） -->
+      <article class="notif-item type-info">
+        <div class="item-content d-flex align-items-start gap-2">
+          <i class="bi bi-check-circle fs-5"></i>
+          <div class="flex-grow-1">
+            <div class="item-head d-flex justify-content-between align-items-center">
+              <h6 class="mb-1">邏輯檢查完成</h6>
+              <small class="text-muted">3 分鐘前</small>
+            </div>
+            <p class="mb-0 text-muted">客戶滿意度調查 Q4 2024 邏輯檢查完成</p>
+          </div>
+        </div>
+        <div class="item-ops">
+          <button class="btn btn-sm btn-link text-decoration-none js-mark-read">
+            <i class="bi bi-check2-circle"></i> 標示已讀
+          </button>
+        </div>
+      </article>
+
     </div>
 
+    <!-- 底部 -->
     <div class="notif-footer p-3">
       <a href="#" class="btn btn-outline-secondary w-100">查看所有歷史通知</a>
     </div>
   </aside>
 
-  <!-- JS：jQuery + Bootstrap -->
+  <!-- 依序載入 JS -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- 自己的 jQuery 腳本（見下） -->
   <script src="js/public.js"></script>
 </body>
 </html>
