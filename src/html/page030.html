@@ -89,7 +89,7 @@
       <section class="page p-4">
         <div class="container-fluid page-content">
 
-          <!-- 標題列 + 新增按鈕 -->
+          <!-- 標題列 -->
           <div class="d-flex justify-content-between align-items-center mb-3">
             <div>
               <h2 class="h4 mb-0 fw-bold text-deep-blue">內容與模板管理</h2>
@@ -294,145 +294,145 @@
             </div>
           </div>
 
-<!-- 模組塊：問卷項目模板（表格） -->
-<div class="module-card module-nobg card border-0 mt-4">
-  <div class="card-body">
+          <!-- 模組塊：問卷項目模板（表格） -->
+          <div class="module-card module-nobg card border-0 mt-4">
+            <div class="card-body">
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h3 class="h5 mb-0 fw-bold text-orange">渠道頁面模板</h3>
-    </div>
-
-    <!-- 類別切換 + 右側新增 -->
-    <div class="gs-tabs-row d-flex align-items-center justify-content-between">
-      <ul class="nav nav-pills gs-tabs flex-wrap me-3" role="tablist">
-        <li class="nav-item"><button type="button" class="nav-link active" data-channel="all">全部</button></li>
-        <li class="nav-item"><button type="button" class="nav-link" data-channel="edm">EDM</button></li>
-        <li class="nav-item"><button type="button" class="nav-link" data-channel="sms">SMS</button></li>
-        <li class="nav-item"><button type="button" class="nav-link" data-channel="line">Line</button></li>
-        <li class="nav-item"><button type="button" class="nav-link" data-channel="push">APP Push</button></li>
-        <li class="nav-item"><button type="button" class="nav-link" data-channel="slogan">輕鬆得點</button></li>
-      </ul>
-
-      <a href="page031.html" class="btn btn-orange btn-sm d-flex align-items-center gap-1 ms-auto">
-        <i class="bi bi-plus-lg"></i> 新增模板
-      </a>
-    </div>
-
-    <!-- 表格 -->
-    <div class="table-responsive">
-      <table class="table align-middle gs-table mb-0">
-        <thead>
-          <tr>
-            <th style="width: 18%;">模板名稱</th>
-            <th>模板標題</th>
-            <th style="width: 90px;">渠道類型</th>
-            <th style="width: 90px;">狀態</th>
-            <th style="width: 160px;">最後編輯</th>
-            <th style="width: 120px;">操作</th>
-          </tr>
-        </thead>
-        <tbody class="gs-tbody">
-          <!-- row: EDM Active -->
-          <tr data-channel="edm">
-            <td>標準問卷標題</td>
-            <td class="text-muted">範例說明文字／關聯樣板：<span class="fw-semibold">結果頁樣板#01</span></td>
-            <td><span class="badge badge-chip">EDM</span></td>
-            <td><span class="badge badge-state bg-success">Active</span></td>
-            <td>2024-01-20 14:30 王小琴</td>
-            <td>
-              <div class="d-flex gap-2">
-                <a href="page031.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯"><i class="bi bi-pencil"></i></a>
-                <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製"><i class="bi bi-files"></i></button>
-                <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="刪除"><i class="bi bi-trash"></i></button>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="h5 mb-0 fw-bold text-orange">渠道頁面模板</h3>
               </div>
-            </td>
-          </tr>
 
-          <!-- row: SMS Draft -->
-          <tr data-channel="sms">
-            <td>簡訊邀請文案</td>
-            <td class="text-muted">範例說明文字／關聯樣板：<span class="fw-semibold">結果頁樣板#01</span></td>
-            <td><span class="badge badge-chip">SMS</span></td>
-            <td><span class="badge badge-state bg-warning text-dark">Draft</span></td>
-            <td>2024-01-20 15:05 王小琴</td>
-            <td>
-              <div class="d-flex gap-2">
-                <a href="page031.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯"><i class="bi bi-pencil"></i></a>
-                <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製"><i class="bi bi-files"></i></button>
-                <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="刪除"><i class="bi bi-trash"></i></button>
+              <!-- 類別切換 + 右側新增 -->
+              <div class="gs-tabs-row d-flex align-items-center justify-content-between">
+                <ul class="nav nav-pills gs-tabs flex-wrap me-3" role="tablist">
+                  <li class="nav-item"><button type="button" class="nav-link active" data-channel="all">全部</button></li>
+                  <li class="nav-item"><button type="button" class="nav-link" data-channel="edm">EDM</button></li>
+                  <li class="nav-item"><button type="button" class="nav-link" data-channel="sms">SMS</button></li>
+                  <li class="nav-item"><button type="button" class="nav-link" data-channel="line">Line</button></li>
+                  <li class="nav-item"><button type="button" class="nav-link" data-channel="push">APP Push</button></li>
+                  <li class="nav-item"><button type="button" class="nav-link" data-channel="slogan">輕鬆得點</button></li>
+                </ul>
+
+                <a href="page031.html" class="btn btn-orange btn-sm d-flex align-items-center gap-1 ms-auto">
+                  <i class="bi bi-plus-lg"></i> 新增模板
+                </a>
               </div>
-            </td>
-          </tr>
 
-          <!-- row: Line Active -->
-          <tr data-channel="line">
-            <td>Line 推播文案</td>
-            <td class="text-muted">範例說明文字／關聯樣板：<span class="fw-semibold">結果頁樣板#01</span></td>
-            <td><span class="badge badge-chip">Line</span></td>
-            <td><span class="badge badge-state bg-success">Active</span></td>
-            <td>2024-01-20 15:30 王小琴</td>
-            <td>
-              <div class="d-flex gap-2">
-                <a href="page031.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯"><i class="bi bi-pencil"></i></a>
-                <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製"><i class="bi bi-files"></i></button>
-                <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="刪除"><i class="bi bi-trash"></i></button>
+              <!-- 表格 -->
+              <div class="table-responsive">
+                <table class="table align-middle gs-table mb-0">
+                  <thead>
+                    <tr>
+                      <th style="width: 18%;">模板名稱</th>
+                      <th>模板標題</th>
+                      <th style="width: 90px;">渠道類型</th>
+                      <th style="width: 90px;">狀態</th>
+                      <th style="width: 160px;">最後編輯</th>
+                      <th style="width: 120px;">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody class="gs-tbody">
+                    <!-- row: EDM Active -->
+                    <tr data-channel="edm">
+                      <td>標準問卷標題</td>
+                      <td class="text-muted">範例說明文字／關聯樣板：<span class="fw-semibold">結果頁樣板#01</span></td>
+                      <td><span class="badge badge-chip">EDM</span></td>
+                      <td><span class="badge badge-state bg-success">Active</span></td>
+                      <td>2024-01-20 14:30 王小琴</td>
+                      <td>
+                        <div class="d-flex gap-2">
+                          <a href="page031.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯"><i class="bi bi-pencil"></i></a>
+                          <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製"><i class="bi bi-files"></i></button>
+                          <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="刪除"><i class="bi bi-trash"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <!-- row: SMS Draft -->
+                    <tr data-channel="sms">
+                      <td>簡訊邀請文案</td>
+                      <td class="text-muted">範例說明文字／關聯樣板：<span class="fw-semibold">結果頁樣板#01</span></td>
+                      <td><span class="badge badge-chip">SMS</span></td>
+                      <td><span class="badge badge-state bg-warning text-dark">Draft</span></td>
+                      <td>2024-01-20 15:05 王小琴</td>
+                      <td>
+                        <div class="d-flex gap-2">
+                          <a href="page031.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯"><i class="bi bi-pencil"></i></a>
+                          <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製"><i class="bi bi-files"></i></button>
+                          <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="刪除"><i class="bi bi-trash"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <!-- row: Line Active -->
+                    <tr data-channel="line">
+                      <td>Line 推播文案</td>
+                      <td class="text-muted">範例說明文字／關聯樣板：<span class="fw-semibold">結果頁樣板#01</span></td>
+                      <td><span class="badge badge-chip">Line</span></td>
+                      <td><span class="badge badge-state bg-success">Active</span></td>
+                      <td>2024-01-20 15:30 王小琴</td>
+                      <td>
+                        <div class="d-flex gap-2">
+                          <a href="page031.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯"><i class="bi bi-pencil"></i></a>
+                          <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製"><i class="bi bi-files"></i></button>
+                          <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="刪除"><i class="bi bi-trash"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <!-- row: Push Active -->
+                    <tr data-channel="push">
+                      <td>APP 推播文案</td>
+                      <td class="text-muted">範例說明文字／關聯樣板：<span class="fw-semibold">結果頁樣板#01</span></td>
+                      <td><span class="badge badge-chip">App Push</span></td>
+                      <td><span class="badge badge-state bg-success">Active</span></td>
+                      <td>2024-01-20 16:20 王小琴</td>
+                      <td>
+                        <div class="d-flex gap-2">
+                          <a href="page031.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯"><i class="bi bi-pencil"></i></a>
+                          <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製"><i class="bi bi-files"></i></button>
+                          <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="刪除"><i class="bi bi-trash"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <!-- row: 群組標語 Draft -->
+                    <tr data-channel="slogan">
+                      <td>群組標語範例</td>
+                      <td class="text-muted">範例說明文字／關聯樣板：<span class="fw-semibold">結果頁樣板#01</span></td>
+                      <td><span class="badge badge-chip">Slogan</span></td>
+                      <td><span class="badge badge-state bg-warning text-dark">Draft</span></td>
+                      <td>2024-01-20 17:10 王小琴</td>
+                      <td>
+                        <div class="d-flex gap-2">
+                          <a href="page031.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯"><i class="bi bi-pencil"></i></a>
+                          <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製"><i class="bi bi-files"></i></button>
+                          <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="刪除"><i class="bi bi-trash"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-            </td>
-          </tr>
 
-          <!-- row: Push Active -->
-          <tr data-channel="push">
-            <td>APP 推播文案</td>
-            <td class="text-muted">範例說明文字／關聯樣板：<span class="fw-semibold">結果頁樣板#01</span></td>
-            <td><span class="badge badge-chip">App Push</span></td>
-            <td><span class="badge badge-state bg-success">Active</span></td>
-            <td>2024-01-20 16:20 王小琴</td>
-            <td>
-              <div class="d-flex gap-2">
-                <a href="page031.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯"><i class="bi bi-pencil"></i></a>
-                <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製"><i class="bi bi-files"></i></button>
-                <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="刪除"><i class="bi bi-trash"></i></button>
+              <!-- 簡易分頁（樣式） -->
+              <div class="table-footer d-flex justify-content-center align-items-center gap-2 mt-3">
+                <span class="text-muted small">Page</span>
+                <div class="btn-group btn-group-sm" role="group">
+                  <button class="btn btn-outline-secondary">‹</button>
+                  <button class="btn btn-outline-secondary active">1</button>
+                  <button class="btn btn-outline-secondary">2</button>
+                  <button class="btn btn-outline-secondary">›</button>
+                </div>
+                <select class="form-select form-select-sm w-auto ms-2">
+                  <option>30</option>
+                  <option>50</option>
+                  <option>100</option>
+                </select>
               </div>
-            </td>
-          </tr>
 
-          <!-- row: 群組標語 Draft -->
-          <tr data-channel="slogan">
-            <td>群組標語範例</td>
-            <td class="text-muted">範例說明文字／關聯樣板：<span class="fw-semibold">結果頁樣板#01</span></td>
-            <td><span class="badge badge-chip">Slogan</span></td>
-            <td><span class="badge badge-state bg-warning text-dark">Draft</span></td>
-            <td>2024-01-20 17:10 王小琴</td>
-            <td>
-              <div class="d-flex gap-2">
-                <a href="page031.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯"><i class="bi bi-pencil"></i></a>
-                <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製"><i class="bi bi-files"></i></button>
-                <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="刪除"><i class="bi bi-trash"></i></button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- 簡易分頁（樣式） -->
-    <div class="table-footer d-flex justify-content-center align-items-center gap-2 mt-3">
-      <span class="text-muted small">Page</span>
-      <div class="btn-group btn-group-sm" role="group">
-        <button class="btn btn-outline-secondary">‹</button>
-        <button class="btn btn-outline-secondary active">1</button>
-        <button class="btn btn-outline-secondary">2</button>
-        <button class="btn btn-outline-secondary">›</button>
-      </div>
-      <select class="form-select form-select-sm w-auto ms-2">
-        <option>30</option>
-        <option>50</option>
-        <option>100</option>
-      </select>
-    </div>
-
-  </div>
-</div>
+            </div>
+          </div>
 
         </div>
 
@@ -455,6 +455,7 @@
           </div>
         </div>
       </section>
+      
     </main>
   </div>
 

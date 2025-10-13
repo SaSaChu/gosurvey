@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>GO SURVEY</title>
+
+  <!-- Bootstrap 5 與 Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/public.css">
+  <link rel="stylesheet" href="css/content.css">
+</head>
+
+<body>
+  <div class="layout" id="appLayout">
+    <!-- 左邊側欄 -->
+    <aside class="sidebar">
+      <div class="brand d-flex align-items-center justify-content-between px-3">
+        <div class="brand-name d-flex align-items-center gap-2">
+          <span class="label"><img src="images/logo.svg"></span>
+        </div>
+        <button class="btn btn-outline-light menu-btn" id="toggleSidebar" aria-label="切換側欄">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+
+      <nav class="menu pt-2">
+        <ul class="list-unstyled mb-0">
+          <li class="nav-item is-disabled">
+            <a class="nav-link" href="javascript:;" tabindex="-1" aria-disabled="true" data-bs-toggle="tooltip" title="儀表板（不可點）">
+              <i class="bi bi-grid-1x2"></i><span class="label">儀表板</span>
+            </a>
+          </li>
+          <li class="nav-item is-active">
+            <a class="nav-link" href="page020.html" data-bs-toggle="tooltip" title="專案與活動管理">
+              <i class="bi bi-folder2"></i><span class="label">專案與活動管理</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="page030.html" data-bs-toggle="tooltip" title="內容與媒體管理">
+              <i class="bi bi-file-earmark-text"></i><span class="label">內容與媒體管理</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="page040.html" data-bs-toggle="tooltip" title="發送與進度管理">
+              <i class="bi bi-send"></i><span class="label">發送與進度管理</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="page050.html" data-bs-toggle="tooltip" title="數據分析與報表管理">
+              <i class="bi bi-graph-up"></i><span class="label">數據分析與報表管理</span>
+            </a>
+          </li>
+          <li class="nav-item is-disabled">
+            <a class="nav-link" href="javascript:;" tabindex="-1" aria-disabled="true" data-bs-toggle="tooltip" title="系統與 API 管理（不可點）">
+              <i class="bi bi-gear"></i><span class="label">系統與 API 管理</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- 主內容 -->
+    <main class="content">
+      <!-- 上面頂欄 -->
+      <header class="topbar d-flex justify-content-end align-items-center px-3">
+        <div class="d-flex align-items-center gap-3">
+          <!-- 鈴鐺：開啟通知抽屜 -->
+          <a class="text-decoration-none text-body position-relative js-open-notif">
+            <i class="bi bi-bell-fill fs-5"></i>
+            <span class="notif-count">2</span>
+          </a>
+
+          <div class="topbar-divider"></div>
+
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-person fs-5"></i>
+            <span>林小玲 Alma Lin</span>
+          </div>
+          <button type="button" class="btn btn-logout d-flex align-items-center gap-1">
+            <i class="bi bi-box-arrow-right"></i> 登出
+          </button>
+        </div>
+      </header>
+
+      <!-- 中間內容 -->
+      <section class="page p-4">
+        <div class="container-fluid page-content">
+
+          <!-- 標題列 -->
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <h2 class="h4 mb-0 fw-bold text-deep-blue">內容與模板管理</h2>
+              <div class="text-muted small">管理問卷結果頁與選單模板</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 鈴鐺通知抽屜：遮罩 -->
+  <div class="notif-backdrop" id="notifBackdrop" hidden></div>
+
+  <!-- 鈴鐺通知抽屜本體（寬 450px） -->
+  <aside class="notif-drawer" id="notifDrawer" role="dialog" aria-label="通知中心" aria-hidden="true">
+    <!-- 深藍標題列 -->
+    <div class="notif-header d-flex align-items-center justify-content-between px-3 py-2">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-bell-fill"></i>
+        <strong>通知中心</strong>
+        <span class="badge bg-unread js-unread-badge">5則未讀</span>
+      </div>
+      <button class="btn text-white js-close-notif" aria-label="關閉">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+
+    <!-- 全幅按鈕 -->
+    <div class="notif-actions p-2">
+      <button class="btn btn-logout btn-center w-100 rounded-2 js-mark-all py-2">全部標示為已讀</button>
+    </div>
+
+    <!-- 通知清單 -->
+    <div class="notif-list px-3 pb-3">
+
+      <!-- 1. 專案即將到期（未讀，頂部進度條 + 紅色提示） -->
+      <article class="notif-item type-danger is-unread">
+        <!-- 頭部：標題 + 未讀點 + 時間 -->
+        <div class="item-head d-flex justify-content-between align-items-start">
+          <h6 class="mb-0 text-deep-blue">專案即將到期</h6>
+          <span class="dot-unread" aria-label="未讀"></span>
+          <!-- <small class="text-muted">2 小時前</small> -->
+        </div>
+
+        <!-- 副標 -->
+        <p class="mb-2 text-muted">客戶滿意度調查 Q4 2024</p>
+
+        <!-- 進度資訊列：左% 右剩餘天數 -->
+        <div class="item-meta d-flex justify-content-between align-items-center mb-2">
+          <div class="progress-text fw-semibold">進度：<span class="pct">75%</span></div>
+          <div class="remain text-danger fw-semibold">剩餘 1 天</div>
+        </div>
+
+        <!-- 進度條（置底） -->
+        <div class="progress progress-thin">
+          <div class="progress-bar progress-orange" style="width: 75%;" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </article>
+
+      <!-- 2. 專案已結案（淡藍） -->
+      <article class="notif-item type-danger is-unread">
+        <div class="item-content d-flex align-items-start gap-2">
+          <div class="flex-grow-1">
+            <div class="item-head d-flex justify-content-between align-items-center">
+              <h6 class="mb-1 text-deep-blue">專案已結案</h6>
+              <span class="dot-unread" aria-label="未讀"></span>
+              <!-- <small class="text-muted">1 小時前</small> -->
+            </div>
+            <p class="mb-0 text-muted">客戶滿意度調查 Q4 2024</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. 發送失敗（淺黃提醒） -->
+      <article class="notif-item type-warning">
+        <div class="item-content d-flex align-items-start gap-2">
+          <div class="flex-grow-1">
+            <div class="item-head d-flex justify-content-between align-items-center">
+              <h6 class="mb-1 text-deep-blue">發送異常</h6>
+            </div>
+            <p class="mb-0 text-muted">員工問卷專案  發送出現異常，請通知管理員</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. 發送完成（淡藍） -->
+      <article class="notif-item type-info">
+        <div class="item-content d-flex align-items-start gap-2">
+          <div class="flex-grow-1">
+            <div class="item-head d-flex justify-content-between align-items-center">
+              <h6 class="mb-1 text-deep-blue">發送完成</h6>
+            </div>
+            <p class="mb-0 text-muted">客戶滿意度調查 Q4 2024 發送完成</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. 邏輯檢查異常（淺黃提醒） -->
+      <article class="notif-item type-warning">
+        <div class="item-content d-flex align-items-start gap-2">
+          <div class="flex-grow-1">
+            <div class="item-head d-flex justify-content-between align-items-center">
+              <h6 class="mb-1">連結生成異常</h6>
+            </div>
+            <p class="mb-0 text-muted">員工問卷專案  連結生成出現異常，請通知管理員</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. 邏輯檢查完成（淡藍） -->
+      <article class="notif-item type-info">
+        <div class="item-content d-flex align-items-start gap-2">
+          <div class="flex-grow-1">
+            <div class="item-head d-flex justify-content-between align-items-center">
+              <h6 class="mb-1 text-deep-blue">連結生成完成</h6>
+            </div>
+            <p class="mb-0 text-muted">客戶滿意度調查Q4 2024  連結生成完成</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- 底部 -->
+    <div class="notif-footer p-3">
+      <a href="#" class="btn btn-outline-secondary w-100">查看所有歷史通知</a>
+    </div>
+  </aside>
+
+  <!-- 依序載入 JS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/public.js"></script>
+  <script src="js/content.js"></script>
+</body>
+</html>
