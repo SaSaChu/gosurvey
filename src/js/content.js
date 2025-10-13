@@ -60,3 +60,48 @@ $(function () {
     }
   });
 });
+
+
+// 問卷項目模板：tabs 篩選
+$(function () {
+  // 啟用 tooltip
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (el) {
+    new bootstrap.Tooltip(el, { container: 'body' });
+  });
+
+  // tabs
+  $('.gs-tabs .nav-link').on('click', function () {
+    $('.gs-tabs .nav-link').removeClass('active');
+    $(this).addClass('active');
+
+    const ch = $(this).data('channel');
+    if (ch === 'all') {
+      $('.gs-tbody tr').removeClass('d-none');
+    } else {
+      $('.gs-tbody tr').each(function () {
+        $(this).toggleClass('d-none', $(this).data('channel') !== ch);
+      });
+    }
+  });
+
+  // 刪除（沿用共用 Modal）
+  let $pendingRow = null;
+  $('.gs-table').on('click', '.js-row-delete', function () {
+    $pendingRow = $(this).closest('tr');
+    const modal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+    $('#confirmDeleteLabel').text('刪除確認');
+    $('#confirmDeleteModal .modal-body').text('你確定要刪除這個模板嗎？刪除後將無法復原。');
+    modal.show();
+  });
+
+  $('#confirmDeleteBtn').on('click', function () {
+    if ($pendingRow) {
+      $pendingRow.remove();
+      $pendingRow = null;
+    }
+    const inst = bootstrap.Modal.getInstance(document.getElementById('confirmDeleteModal'));
+    if (inst) inst.hide();
+  });
+});
+
+

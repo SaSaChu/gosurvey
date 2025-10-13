@@ -186,3 +186,72 @@ $(function () {
   // 初始徽章
   syncBadges();
 });
+
+
+// === 共用：水平拖拉捲動 for .table-responsive ===
+(function setupGlobalHorizontalDrag () {
+  const $wraps = $('.table-responsive');
+
+  $wraps.each(function () {
+    const $el = $(this);
+    const el = this;
+
+    // 若已初始化過就略過（避免重複綁定）
+    if ($el.data('drag-ready')) return;
+    $el.data('drag-ready', true);
+
+    let isDown = false;
+    let startX = 0;
+    let startScroll = 0;
+
+    function updateEdges() {
+      const has = el.scrollWidth > el.clientWidth + 1;
+      $el.toggleClass('has-scroll', has);
+      if (!has) { $el.removeClass('at-left at-right'); return; }
+      const max = el.scrollWidth - el.clientWidth;
+      const x = el.scrollLeft;
+      $el.toggleClass('at-left',  x <= 0);
+      $el.toggleClass('at-right', x >= max - 1);
+    }
+
+    // 滑鼠拖拉
+    $el.on('mousedown', function (e) {
+      if (e.button !== 0) return; // 只吃左鍵
+      isDown = true;
+      $el.addClass('is-dragging');
+      startX = e.pageX;
+      startScroll = el.scrollLeft;
+      e.preventDefault();
+    });
+
+    $(window).on('mouseup', function () {
+      isDown = false;
+      $el.removeClass('is-dragging');
+    });
+
+    $el.on('mouseleave', function () {
+      isDown = false;
+      $el.removeClass('is-dragging');
+    });
+
+    $el.on('mousemove', function (e) {
+      if (!isDown) return;
+      const dx = e.pageX - startX;
+      el.scrollLeft = startScroll - dx; // 反向拖移
+    });
+
+    // Shift + 滑輪 => 橫向捲動
+    $el.on('wheel', function (e) {
+      if (!e.shiftKey) return;
+      el.scrollLeft += e.originalEvent.deltaY;
+      e.preventDefault();
+    });
+
+    // 捲動/尺寸改變時更新陰影狀態
+    $el.on('scroll', updateEdges);
+    $(window).on('resize', updateEdges);
+
+    // 初始判斷
+    updateEdges();
+  });
+})();

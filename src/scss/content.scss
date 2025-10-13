@@ -16,21 +16,57 @@ $accent: #ff6b00;
 $border-light: #e9edf3;
 $light-grey: #F2F2F2;
 $min-grey:#A5A5A5;
+$dark-grey:#646464;
 $bg-disabled:#dadada;
 $light-blue:#004E98;
 $pink:#E41669;
 $orange:#FF6721;
 
 /* ===== Page: 內容與模板管理 ===== */
-/* === 模組外框（白底 + 內距） === */
 .page {
+  /* === 模組外框（白底 + 內距） === */
   .module-card {
     background: #ffffff;
     border-radius: .5rem;
+
+    &.module-nobg {
+      background: transparent !important;
+    }
+
+    /* --- 可橫向拖拉的表格容器 --- */
+    .table-responsive {
+      position: relative;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+
+      &.is-dragging { cursor: grabbing; }
+
+      /* 左右邊緣漸層提示（由 JS 加 .has-scroll / .at-left / .at-right） */
+      &.has-scroll {
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 16px;
+          pointer-events: none;
+          z-index: 2;
+          opacity: 0;
+          transition: opacity .2s ease;
+        }
+        &::before { left: 0;  background: linear-gradient(to right, rgba(255,255,255,.95), rgba(255,255,255,0)); }
+        &::after  { right: 0; background: linear-gradient(to left,  rgba(255,255,255,.95), rgba(255,255,255,0)); }
+
+        &:not(.at-left)::before  { opacity: 1; }
+        &:not(.at-right)::after  { opacity: 1; }
+      }
+    }
   }
 
+  /* ===== 卡片區 ===== */
   .tmpl-grid {
-    /* 卡片 */
     .tmpl-card {
       border: 1px solid $border-light;
       border-radius: .75rem;
@@ -42,7 +78,6 @@ $orange:#FF6721;
       .img-wrap {
         position: relative;
 
-        /* 覆蓋在圖片上的狀態徽章 */
         .status-badges {
           position: absolute;
           top: .5rem;
@@ -53,18 +88,18 @@ $orange:#FF6721;
             padding: .35rem .6rem;
           }
 
-          &.status-left  { left: .5rem;  display: flex; gap: .4rem; }
+          &.status-left  { left: .5rem; display: flex; gap: .4rem; }
           &.status-right { right: .5rem; }
         }
       }
 
       .card-body {
-        .card-title { color: $nav-bg; } /* 深藍標題（配合你上方變數） */
+        .card-title { color: $nav-bg; }
 
-        /* === 3 顆操作鈕：左寬、右兩顆等寬 === */
+        /* 三顆操作鈕：左撐滿、右兩顆 40px */
         .action-row {
           display: grid;
-          grid-template-columns: 1fr 40px 40px; // 左邊撐滿、右兩顆 40px
+          grid-template-columns: 1fr 40px 40px;
           gap: 8px;
 
           .btn {
@@ -82,6 +117,7 @@ $orange:#FF6721;
     }
   }
 
+  /* ===== 建立模板（上方導覽） ===== */
   .page-head {
     display: block;
     padding-top: 4px;
@@ -101,32 +137,33 @@ $orange:#FF6721;
 
     .title {
       margin: 0 0 6px;
-      font-size: 1.5rem;      // 大標一行
+      font-size: 1.5rem;
       font-weight: 800;
       color: $nav-bg;
       line-height: 1.2;
     }
 
     .subline {
-      display: flex;        // 小字 + 右側水平線
+      display: flex;
       align-items: center;
       gap: 12px;
 
       .subtitle {
-        font-size: .875rem; // 比大標小
+        font-size: .875rem;
         color: #7b8694;
         white-space: nowrap;
       }
 
       &::after {
         content: "";
-        flex: 1 1 auto;     // 從小字後面延伸到最右
+        flex: 1 1 auto;
         height: 1px;
         background: #e5e9ef;
       }
     }
   }
 
+  /* ===== 建立模板（左編輯右預覽） ===== */
   .create-tmpl {
     .card {
       border-radius: .75rem;
@@ -145,47 +182,200 @@ $orange:#FF6721;
         }
 
         .param-chips {
-
           .chip {
-          	color:$orange;
-          	border-color: $orange;
+            color: $orange;
+            border-color: $orange;
             border-radius: 999px;
             padding-inline: .75rem;
 
-            &:hover, &:focus {
-            	background-color: $orange;
-            	color: white;
+            &:hover, &:focus { background-color: $orange; color: #fff; }
+            &:active { color: #fff !important; background-color: darken($orange, 10%) !important; }
+            &:focus-visible {
+              outline: none;
+              box-shadow: 0 0 0 0.2rem rgba(6,34,73,.25);
+              background-color: darken($orange, 10%);
             }
-
-					  &:active {
-					    color: white !important;
-					    background-color: darken($orange, 10%) !important;
-					  }
-
-					  &:focus-visible {
-					    outline: none;
-					    box-shadow: 0 0 0 0.2rem rgba(6, 34, 73, 0.25);
-					    background-color: darken($orange, 10%);
-					  }
-
-            &.is-active {
-              background: $orange;
-              color: #fff;
-              border-color: $orange;
-            }
+            &.is-active { background: $orange; color: #fff; border-color: $orange; }
           }
         }
 
-        .preview-canvas {
-          border-color: $border-light !important;
-        }
-
-        .preview-meta {
-          border: 1px solid $border-light;
-        }
+        .preview-canvas { border-color: $border-light !important; }
+        .preview-meta   { border: 1px solid $border-light; }
       }
     }
   }
 
+  /* ===== 表格模組（渠道頁面模板） ===== */
+  .module-card {
+    /* 上方分頁標籤列 */
+    .gs-tabs-row {
+      padding-bottom: 0 !important;
+      border-bottom: 2px solid $border-light;
+
+      .gs-tabs {
+        display: flex;
+        gap: .8rem;
+
+        .nav-link {
+          border-radius: .5rem .5rem 0 0;
+          font-weight: 700;
+          padding: .45rem 1.2rem;
+          background: #e3e3e3;
+          color: #555;
+          border: none;
+          transition: all .15s ease;
+
+          &:hover { background: #d8d8d8; color: #222; }
+          &.active { background: $nav-bg; color: #fff; }
+        }
+      }
+
+      .btn-orange { white-space: nowrap; font-weight: 600; }
+    }
+
+    /* ==== 表格框架（間距 + R角策略） ==== */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 1rem;  /* 每列間距（讓 R 角能顯示） */
+
+      /* 表頭列：純文字，無底色、無陰影、無 hover */
+      thead {
+        tr {
+          background: none !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+        th {
+          font-weight: 700;
+          color: $nav-bg;
+          background: transparent;        /* 不要表頭底色 */
+          border: none;                    /* 不要表頭底線 */
+          white-space: nowrap;
+        }
+      }
+
+      /* 資料列：白底 + R角 + 邊框 + hover 陰影 */
+      tbody {
+        tr {
+          background: #fff;
+          box-shadow: 0 0 0 1px #dfdfdf;
+          /*border: 1px solid #dfdfdf;*/
+          border-radius: .25rem;          /* 行本身的圓角（有些瀏覽器不吃，下面 td 也會補） */
+          overflow: hidden;
+          transition: box-shadow .2s ease;
+
+          &:hover { box-shadow: 0 4px 10px rgba(0,0,0,.08); }
+
+          td {
+            vertical-align: middle;
+            padding: 1rem 1.25rem;
+            color: $nav-bg;
+            font-size: .95rem;
+            white-space: nowrap;          /* 預設不換行 */
+            border-top: 0;                /* 移除預設分隔線 */
+
+            &:first-child { font-weight: 600; }
+            &:last-child  { text-align: right; }
+          }
+
+          /* ★ 關鍵：用第一格/最後一格 td 做實體 R 角，確保各瀏覽器都能顯示 */
+          td:first-child  { border-radius: .25rem 0 0 .25rem; }
+          td:last-child   { border-radius: 0 .25rem .25rem 0; }
+        }
+      }
+    }
+
+    /* 規格化樣式（維持你的 class） */
+    .gs-table {
+      border-color: $border-light;
+
+      /* 讓表格寬度以內容為準（促發窄螢幕橫向滾動） */
+      table-layout: auto;
+      width: max-content;
+      min-width: 880px;
+
+      thead th, tbody td { white-space: nowrap; }   /* 預設不換行 */
+      .cell-wrap        { white-space: normal; }    /* 個別欄位要換行再加這個 */
+
+      /* 小膠囊 */
+      .badge-chip {
+        background: #B3B7C6;
+        color: $nav-bg-dark;
+        border-radius: 999px;
+        padding: .25rem .6rem;
+        font-weight: 700;
+      }
+      .badge-state {
+        border-radius: 999px;
+        padding: .25rem .6rem;
+        font-weight: 700;
+      }
+
+      /* 較小的操作鈕（如需要） */
+      .btn-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: .4rem;
+        background: $dark-grey;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid transparent;
+
+        &:hover,
+        &:focus {
+          background-color: darken($dark-grey, 5%);
+          color: #ffffff;
+          text-decoration: none;
+        }
+
+        &:active {
+          color: white !important;
+          background-color: darken($dark-grey, 10%) !important;
+        }
+
+        &:focus-visible {
+          outline: none;
+          box-shadow: 0 0 0 0.2rem rgba(6, 34, 73, 0.25);
+          background-color: darken($dark-grey, 10%);
+        }
+      }
+    }
+
+    .table-footer {
+      .btn-group .btn.active {
+        background: $nav-bg;
+        color: #fff;
+        border-color: $nav-bg;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gs-table { min-width: 960px; }  /* 窄螢幕確保可橫向拖拉 */
+    }
+  }
 }
 
+/* === 寬螢幕：表格寬度貼滿容器（保留窄版可拖拉能力） === */
+@media (min-width: 1200px) {
+  .page {
+    .module-card {
+      .table-responsive {
+        overflow-x: visible;
+        cursor: default;
+
+        &.has-scroll::before,
+        &.has-scroll::after { opacity: 0 !important; }
+      }
+
+      .gs-table {
+        width: 100% !important;
+        min-width: 100% !important;
+        table-layout: auto;
+        thead th, tbody td { white-space: nowrap; }
+      }
+    }
+  }
+}
