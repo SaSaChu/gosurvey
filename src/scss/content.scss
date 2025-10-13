@@ -1,10 +1,6 @@
-@use "sass:math";
-@import "_/_Lib";
-@import "_/Core";
-@import "Lalilo";
-@import "_/Bootstrap";
-
-/* ===== Variables ===== */
+/* =====================================================
+   Variables
+===================================================== */
 $sidebar-w: 345px;
 $sidebar-w-sm: 90px;
 $drawer-w: 450px;
@@ -22,18 +18,20 @@ $light-blue:#004E98;
 $pink:#E41669;
 $orange:#FF6721;
 
-/* ===== Page: 內容與模板管理 ===== */
+
+/* =====================================================
+   Page：共用模組外框 / 卡片 / 表格 / 頁頭 / 建立模板
+===================================================== */
 .page {
-  /* === 模組外框（白底 + 內距） === */
+
+  /* ---------- 模組外框（白底 + 內距） ---------- */
   .module-card {
     background: #ffffff;
     border-radius: .5rem;
 
-    &.module-nobg {
-      background: transparent !important;
-    }
+    &.module-nobg { background: transparent !important; }
 
-    /* --- 可橫向拖拉的表格容器 --- */
+    /* 可橫向拖拉的表格容器 */
     .table-responsive {
       position: relative;
       overflow-x: auto;
@@ -42,172 +40,23 @@ $orange:#FF6721;
 
       &.is-dragging { cursor: grabbing; }
 
-      /* 左右邊緣漸層提示（由 JS 加 .has-scroll / .at-left / .at-right） */
+      /* 左右漸層提示（JS 會加 .has-scroll / .at-left / .at-right） */
       &.has-scroll {
-        &::before,
-        &::after {
+        &::before, &::after {
           content: "";
           position: absolute;
-          top: 0;
-          bottom: 0;
-          width: 16px;
-          pointer-events: none;
-          z-index: 2;
-          opacity: 0;
+          top: 0; bottom: 0; width: 16px;
+          pointer-events: none; z-index: 2; opacity: 0;
           transition: opacity .2s ease;
         }
         &::before { left: 0;  background: linear-gradient(to right, rgba(255,255,255,.95), rgba(255,255,255,0)); }
         &::after  { right: 0; background: linear-gradient(to left,  rgba(255,255,255,.95), rgba(255,255,255,0)); }
-
         &:not(.at-left)::before  { opacity: 1; }
         &:not(.at-right)::after  { opacity: 1; }
       }
     }
-  }
 
-  /* ===== 卡片區 ===== */
-  .tmpl-grid {
-    .tmpl-card {
-      border: 1px solid $border-light;
-      border-radius: .75rem;
-      overflow: hidden;
-      transition: box-shadow .15s ease, transform .1s ease;
-
-      &:hover { box-shadow: 0 6px 18px rgba(0,0,0,.08); transform: translateY(-2px); }
-
-      .img-wrap {
-        position: relative;
-
-        .status-badges {
-          position: absolute;
-          top: .5rem;
-
-          .badge {
-            font-weight: 600;
-            border-radius: 999px;
-            padding: .35rem .6rem;
-          }
-
-          &.status-left  { left: .5rem; display: flex; gap: .4rem; }
-          &.status-right { right: .5rem; }
-        }
-      }
-
-      .card-body {
-        .card-title { color: $nav-bg; }
-
-        /* 三顆操作鈕：左撐滿、右兩顆 40px */
-        .action-row {
-          display: grid;
-          grid-template-columns: 1fr 40px 40px;
-          gap: 8px;
-
-          .btn {
-            width: 100%;
-            height: 40px;
-            border-radius: .5rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            font-weight: 600;
-          }
-        }
-      }
-    }
-  }
-
-  /* ===== 建立模板（上方導覽） ===== */
-  .page-head {
-    display: block;
-    padding-top: 4px;
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: $nav-bg;
-      font-weight: 700;
-      text-decoration: none;
-      margin-bottom: 8px;
-
-      i { font-size: 1rem; line-height: 1; }
-      &:hover { text-decoration: underline; }
-    }
-
-    .title {
-      margin: 0 0 6px;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: $nav-bg;
-      line-height: 1.2;
-    }
-
-    .subline {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      .subtitle {
-        font-size: .875rem;
-        color: #7b8694;
-        white-space: nowrap;
-      }
-
-      &::after {
-        content: "";
-        flex: 1 1 auto;
-        height: 1px;
-        background: #e5e9ef;
-      }
-    }
-  }
-
-  /* ===== 建立模板（左編輯右預覽） ===== */
-  .create-tmpl {
-    .card {
-      border-radius: .75rem;
-
-      .card-header {
-        h6 { letter-spacing: .5px; }
-      }
-
-      .card-body {
-        .editor-toolbar {
-          .btn {
-            border-radius: .5rem;
-            padding: .25rem .5rem;
-            i { font-size: .95rem; }
-          }
-        }
-
-        .param-chips {
-          .chip {
-            color: $orange;
-            border-color: $orange;
-            border-radius: 999px;
-            padding-inline: .75rem;
-
-            &:hover, &:focus { background-color: $orange; color: #fff; }
-            &:active { color: #fff !important; background-color: darken($orange, 10%) !important; }
-            &:focus-visible {
-              outline: none;
-              box-shadow: 0 0 0 0.2rem rgba(6,34,73,.25);
-              background-color: darken($orange, 10%);
-            }
-            &.is-active { background: $orange; color: #fff; border-color: $orange; }
-          }
-        }
-
-        .preview-canvas { border-color: $border-light !important; }
-        .preview-meta   { border: 1px solid $border-light; }
-      }
-    }
-  }
-
-  /* ===== 表格模組（渠道頁面模板） ===== */
-  .module-card {
-    /* 上方分頁標籤列 */
+    /* 上方 Tabs（page03/page04 共用） */
     .gs-tabs-row {
       padding-bottom: 0 !important;
       border-bottom: 2px solid $border-light;
@@ -228,40 +77,47 @@ $orange:#FF6721;
           &:hover { background: #d8d8d8; color: #222; }
           &.active { background: $nav-bg; color: #fff; }
         }
+
+        /* 禁用 Tab */
+        &.gs-tabs-top {
+          .nav-link.disabled,
+          .nav-link[aria-disabled="true"] {
+            background-color: transparent !important;
+            color: #adb5bd !important;
+            border-color: transparent !important;
+            opacity: .7;
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+            box-shadow: none !important;
+          }
+        }
       }
 
       .btn-orange { white-space: nowrap; font-weight: 600; }
     }
 
-    /* ==== 表格框架（間距 + R角策略） ==== */
+    /* 表格規格（統一） */
     table {
       width: 100%;
       border-collapse: separate;
-      border-spacing: 0 1rem;  /* 每列間距（讓 R 角能顯示） */
+      border-spacing: 0 1rem;
 
-      /* 表頭列：純文字，無底色、無陰影、無 hover */
       thead {
-        tr {
-          background: none !important;
-          box-shadow: none !important;
-          border: none !important;
-        }
+        tr { background: none !important; box-shadow: none !important; border: none !important; }
         th {
           font-weight: 700;
           color: $nav-bg;
-          background: transparent;        /* 不要表頭底色 */
-          border: none;                    /* 不要表頭底線 */
+          background: transparent;
+          border: none;
           white-space: nowrap;
         }
       }
 
-      /* 資料列：白底 + R角 + 邊框 + hover 陰影 */
       tbody {
         tr {
           background: #fff;
           box-shadow: 0 0 0 1px #dfdfdf;
-          /*border: 1px solid #dfdfdf;*/
-          border-radius: .25rem;          /* 行本身的圓角（有些瀏覽器不吃，下面 td 也會補） */
+          border-radius: .25rem;
           overflow: hidden;
           transition: box-shadow .2s ease;
 
@@ -272,33 +128,29 @@ $orange:#FF6721;
             padding: 1rem 1.25rem;
             color: $nav-bg;
             font-size: .95rem;
-            white-space: nowrap;          /* 預設不換行 */
-            border-top: 0;                /* 移除預設分隔線 */
+            white-space: nowrap;
+            border-top: 0;
 
             &:first-child { font-weight: 600; }
             &:last-child  { text-align: right; }
           }
 
-          /* ★ 關鍵：用第一格/最後一格 td 做實體 R 角，確保各瀏覽器都能顯示 */
           td:first-child  { border-radius: .25rem 0 0 .25rem; }
           td:last-child   { border-radius: 0 .25rem .25rem 0; }
         }
       }
     }
 
-    /* 規格化樣式（維持你的 class） */
+    /* 表格語彙：gs-table（可拖拉寬版） */
     .gs-table {
       border-color: $border-light;
-
-      /* 讓表格寬度以內容為準（促發窄螢幕橫向滾動） */
       table-layout: auto;
       width: max-content;
       min-width: 880px;
 
-      thead th, tbody td { white-space: nowrap; }   /* 預設不換行 */
-      .cell-wrap        { white-space: normal; }    /* 個別欄位要換行再加這個 */
+      thead th, tbody td { white-space: nowrap; }
+      .cell-wrap { white-space: normal; }
 
-      /* 小膠囊 */
       .badge-chip {
         background: #B3B7C6;
         color: $nav-bg-dark;
@@ -312,35 +164,17 @@ $orange:#FF6721;
         font-weight: 700;
       }
 
-      /* 較小的操作鈕（如需要） */
       .btn-icon {
-        width: 32px;
-        height: 32px;
+        width: 32px; height: 32px;
         border-radius: .4rem;
         background: $dark-grey;
-        color: white;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        color: #fff;
+        display: inline-flex; align-items: center; justify-content: center;
         border: 1px solid transparent;
 
-        &:hover,
-        &:focus {
-          background-color: darken($dark-grey, 5%);
-          color: #ffffff;
-          text-decoration: none;
-        }
-
-        &:active {
-          color: white !important;
-          background-color: darken($dark-grey, 10%) !important;
-        }
-
-        &:focus-visible {
-          outline: none;
-          box-shadow: 0 0 0 0.2rem rgba(6, 34, 73, 0.25);
-          background-color: darken($dark-grey, 10%);
-        }
+        &:hover, &:focus { background-color: darken($dark-grey, 5%); color: #fff; }
+        &:active { background-color: darken($dark-grey, 10%) !important; color: #fff !important; }
+        &:focus-visible { outline: none; box-shadow: 0 0 0 0.2rem rgba(6,34,73,.25); }
       }
     }
 
@@ -353,29 +187,592 @@ $orange:#FF6721;
     }
 
     @media (max-width: 768px) {
-      .gs-table { min-width: 960px; }  /* 窄螢幕確保可橫向拖拉 */
+      .gs-table { min-width: 960px; }
+    }
+  }
+
+  /* ---------- 卡片區（模板卡） ---------- */
+  .tmpl-grid {
+    .tmpl-card {
+      border: 1px solid $border-light;
+      border-radius: .75rem;
+      overflow: hidden;
+      transition: box-shadow .15s ease, transform .1s ease;
+
+      &:hover { box-shadow: 0 6px 18px rgba(0,0,0,.08); transform: translateY(-2px); }
+
+      .img-wrap {
+        position: relative;
+
+        .status-badges {
+          position: absolute; top: .5rem;
+
+          .badge { font-weight: 600; border-radius: 999px; padding: .35rem .6rem; }
+          &.status-left  { left: .5rem; display: flex; gap: .4rem; }
+          &.status-right { right: .5rem; }
+        }
+      }
+
+      .card-body {
+        .card-title { color: $nav-bg; text-align: left; }
+
+        .action-row {
+          display: grid;
+          grid-template-columns: 1fr 40px 40px;
+          gap: 8px;
+
+          .btn {
+            width: 100%; height: 40px; border-radius: .5rem;
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  /* ---------- 頁頭 ---------- */
+  .page-head {
+    display: block; padding-top: 4px; text-align: left;
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: $nav-bg; font-weight: 700; text-decoration: none; margin-bottom: 8px;
+      i { font-size: 1rem; line-height: 1; }
+      &:hover { text-decoration: underline; }
+    }
+
+    .title { margin: 0 0 6px; font-size: 1.5rem; font-weight: 800; color: $nav-bg; line-height: 1.2; }
+
+    .subline {
+      display: flex; align-items: center; gap: 12px;
+
+      .subtitle { font-size: .875rem; color: #7b8694; white-space: nowrap; }
+
+      &::after { content: ""; flex: 1 1 auto; height: 1px; background: #e5e9ef; }
+    }
+  }
+
+  /* ---------- 建立模板（左編輯右預覽） ---------- */
+  .create-tmpl {
+    .card {
+      text-align: left; border-radius: .75rem;
+
+      .card-header { h6 { letter-spacing: .5px; } }
+
+      .card-body {
+        .editor-toolbar {
+          .btn { border-radius: .5rem; padding: .25rem .5rem; i { font-size: .95rem; } }
+        }
+
+        .param-chips {
+          .chip {
+            color: $orange; border-color: $orange; border-radius: 999px; padding-inline: .75rem;
+
+            &:hover, &:focus { background-color: $orange; color: #fff; }
+            &:active { color: #fff !important; background-color: darken($orange, 10%) !important; }
+            &:focus-visible { outline: none; box-shadow: 0 0 0 0.2rem rgba(6,34,73,.25); background-color: darken($orange, 10%); }
+            &.is-active { background: $orange; color: #fff; border-color: $orange; }
+          }
+        }
+
+        .preview-canvas { border-color: $border-light !important; }
+        .preview-meta   { border: 1px solid $border-light; }
+      }
     }
   }
 }
 
-/* === 寬螢幕：表格寬度貼滿容器（保留窄版可拖拉能力） === */
+/* 寬螢幕：表格貼滿容器（仍保留窄版可拖拉能力） */
 @media (min-width: 1200px) {
-  .page {
-    .module-card {
-      .table-responsive {
-        overflow-x: visible;
-        cursor: default;
-
-        &.has-scroll::before,
-        &.has-scroll::after { opacity: 0 !important; }
-      }
-
-      .gs-table {
-        width: 100% !important;
-        min-width: 100% !important;
-        table-layout: auto;
-        thead th, tbody td { white-space: nowrap; }
-      }
+  .page .module-card {
+    .table-responsive { overflow-x: visible; cursor: default;
+      &.has-scroll::before, &.has-scroll::after { opacity: 0 !important; }
+    }
+    .gs-table { width: 100% !important; min-width: 100% !important; table-layout: auto;
+      thead th, tbody td { white-space: nowrap; }
     }
   }
 }
+
+
+/* =====================================================
+   發送列表：三層樹狀 send-tree（含表頭/欄位對齊修正）
+===================================================== */
+.send-tree {
+  display: grid; gap: 1rem;
+
+  .send-node {
+    background: #fff;
+    border: 1px solid $border-light;
+    border-radius: .5rem;
+    box-shadow: 0 1px 0 rgba(0,0,0,.02);
+    overflow: hidden;
+
+    .node-head {
+      position: relative;
+      text-align: left;
+      justify-content: flex-start;
+      padding: .9rem 1rem;
+      min-height: 56px;
+      background: #fff;
+      border-bottom: 1px solid rgba($border-light, .6);
+
+      .btn.btn-icon.btn-toggle {
+        width: 30px; height: 30px; border-radius: .4rem;
+        color: #fff; background: $dark-grey;
+        display: inline-flex; align-items: center; justify-content: center;
+
+        i { font-size: 1rem; line-height: 1; }
+        &:hover, &:active { background: $dark-grey; }
+      }
+
+      .flex-grow-1 { min-width: 0; } /* 避免壓縮重疊 */
+      .text-deep-blue { color: $nav-bg; }
+      .badge-state { border-radius: 999px; padding: .25rem .6rem; font-weight: 700; }
+
+      .progress.progress-thin {
+        height: 8px; background-color: #eef2f7; border-radius: 999px;
+        .progress-bar.progress-orange { background-color: $orange; border-radius: 999px; }
+      }
+    }
+
+    .node-children {
+      padding: 1rem; background: #fbfcfe;
+      &.d-none { display: none !important; }
+    }
+
+    &.is-open > .node-head { border-bottom-color: transparent; }
+  }
+
+  .node-l1 {
+    border-width: 1px;
+    .node-head { padding-left: .75rem; padding-right: 1rem; }
+    .node-children { padding: 1rem; }
+  }
+
+  /* ---------- L2 對齊（以 Grid 精準對齊表頭六欄） ---------- */
+  .node-l2 {
+    /* 不再用自己的白底邊框，避免雙層白框 */
+    background: transparent !important;
+    border: 0 !important;
+    margin: 0 12px !important;
+
+    /* 列距 */
+    & + .node-l2 { margin-top: 12px !important; }
+
+    .node-head {
+      margin: 0 !important;
+      padding: 12px 16px;
+      display: grid;
+      grid-template-columns:
+        44px                 /* 1. 展開箭頭 */
+        minmax(220px, 1fr)   /* 2. 名單名稱 */
+        280px                /* 3. 發送進度 */
+        160px                /* 4. 已回收/目標 */
+        200px                /* 5. 開始時間 */
+        200px;               /* 6. 完成時間 */
+      column-gap: 12px; align-items: center;
+      border: 1px solid rgba(#e9edf3, .8);
+      border-radius: .5rem;
+
+      .btn-toggle {
+        position: static !important; transform: none !important;
+        justify-self: start; width: 32px; height: 32px;
+      }
+
+      /* 你在 HTML 加上的對應欄位 */
+      .col-name     { grid-column: 2; }
+      .col-progress { grid-column: 3;
+        .progress { min-width: 180px; height: 8px; border-radius: 999px;
+          .progress-bar.progress-orange { background-color: $orange; border-radius: 999px; }
+        }
+      }
+      .col-collect  { grid-column: 4; }
+      .col-start    { grid-column: 5; }
+      .col-end      { grid-column: 6; }
+    }
+  }
+
+  .node-l3 {
+    margin: .25rem .5rem 0 3.25rem;
+    border-style: dashed;
+    border-color: rgba($border-light, .9);
+
+    .node-head { background: #fff; }
+    .node-children { padding: .75rem 1rem 1rem 16px; } /* 回到一般內距 */
+  }
+
+  .send-node:hover > .node-head { background: #fdfefe; }
+  .send-node .node-head .btn-icon { color: $dark-grey; }
+  .send-node .node-head .btn-icon:hover { color: #000; }
+
+  /* 右側 meta：進度在上、進度條在下 */
+  .node-meta {
+    .progress-block {
+      display: flex; flex-direction: column; align-items: flex-start; min-width: 220px;
+      .progress { width: 220px; height: 8px; background-color: #eef2f7; border-radius: 999px;
+        .progress-bar.progress-orange { background-color: $orange; border-radius: 999px; }
+      }
+    }
+  }
+
+  /* L2 表頭列（與列對齊，最前預留 44px 箭頭欄） */
+  .l2-headrow {
+    position: relative;
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px;
+    margin: 8px 12px 12px !important;
+    background: #f7f9fc;
+    border-top: 1px solid #e6ecf3;
+    border-bottom: 1px solid #e6ecf3;
+    color: #6a7a90; font-weight: 700; letter-spacing: .2px;
+
+    &::before { content: ""; flex: 0 0 44px; } /* 箭頭欄 */
+    .cell { white-space: nowrap; }
+    .w-name     { flex: 1 1 auto; }
+    .w-progress { flex: 0 0 280px; }
+    .w-collect  { flex: 0 0 160px; }
+    .w-start    { flex: 0 0 200px; }
+    .w-end      { flex: 0 0 200px; }
+
+    @media (max-width: 1200px) { margin-right: 0; margin-left: 0; }
+  }
+
+  /* 小螢幕：維持可 X 軸拖拉 */
+  #tab-send & .node-children { overflow-x: auto; }
+}
+
+
+/* =====================================================
+   方形控制按鈕（暫停 / 停止 / 恢復）
+===================================================== */
+.btn-icon.btn-square {
+  width: 32px; height: 32px; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: .4rem !important; border: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  color: #fff !important;
+}
+
+.btn-pause  { background-color: #FFA106; color: #212529;
+  &:hover { background-color: #e0a800; color: #fff; }
+  &:active { background-color: #c69500 !important; color: #fff; }
+}
+.btn-stop   { background-color: #E41669; color: #fff;
+  &:hover { background-color: darken(#E41669, 5%); }
+  &:active { background-color: darken(#E41669, 10%) !important; }
+}
+.btn-resume { background-color: #198754; color: #fff;
+  &:hover { background-color: darken(#198754, 5%) !important; }
+  &:active { background-color: darken(#198754, 10%) !important; }
+}
+/* 設定（灰色） */
+.btn-gear {
+  background-color: $dark-grey;
+  color: #fff;
+  &:hover  { background-color: darken($dark-grey, 5%); }
+  &:active { background-color: darken($dark-grey, 10%) !important; }
+}
+
+/* =====================================================
+   通用橫向滾動容器（供樹狀/表格）
+===================================================== */
+.h-scroll {
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+
+  &.is-dragging { cursor: grabbing; }
+
+  &.has-scroll {
+    &::before, &::after {
+      content: "";
+      position: absolute; top: 0; bottom: 0; width: 16px;
+      pointer-events: none; z-index: 2; opacity: 0; transition: opacity .2s;
+    }
+    &::before { left: 0;  background: linear-gradient(to right, rgba(255,255,255,.95), rgba(255,255,255,0)); }
+    &::after  { right: 0; background: linear-gradient(to left,  rgba(255,255,255,.95), rgba(255,255,255,0)); }
+    &:not(.at-left)::before  { opacity: 1; }
+    &:not(.at-right)::after  { opacity: 1; }
+  }
+}
+@media (max-width: 1200px) { .h-scroll > .send-tree { min-width: 1080px; } }
+@media (min-width: 1201px) {
+  .h-scroll { overflow-x: visible; cursor: default; }
+  .h-scroll.has-scroll::before, .h-scroll.has-scroll::after { opacity: 0 !important; }
+  .h-scroll > .send-tree { min-width: 100%; }
+}
+
+/* L3 Grid 表格（發送列表的 L3 明細） */
+.l3-wrap {
+  overflow-x: auto;             /* 不夠寬就出現 X 軸拉霸 */
+  -webkit-overflow-scrolling: touch;
+
+  /* 拖拉時游標（可省略） */
+  cursor: grab;
+  &.is-dragging { cursor: grabbing; }
+}
+
+/* 依照欄位配置給最小寬度，避免擠爆 */
+.l3-table {
+  /* 欄位： 渠道 | 狀態 | 數量 | 結果 | 進度 | 優先度 | 更新 | 操作 */
+  --w-chan: 64px;
+  --w-count: 110px;
+  --w-result: 120px;
+  --w-progress: 220px;
+  --w-priority: 110px;
+  --w-updated: 170px;
+  --w-actions: 110px;
+
+  min-width: calc(
+    var(--w-chan) +  /* 渠道 */
+    320px +          /* 狀態說明（彈性，給個基準） */
+    var(--w-count) +
+    var(--w-result) +
+    var(--w-progress) +
+    var(--w-priority) +
+    var(--w-updated) +
+    var(--w-actions) + 48px /* 欄間距預留 */
+  );
+
+  display: grid;
+  row-gap: 12px;
+}
+
+/* 表頭與資料列使用相同的欄位 Grid */
+.l3-head,
+.l3-row {
+  display: grid;
+  grid-template-columns:
+    var(--w-chan)
+    minmax(240px, 1fr)
+    var(--w-count)
+    var(--w-result)
+    var(--w-progress)
+    var(--w-priority)
+    var(--w-updated)
+    var(--w-actions);
+  column-gap: 12px;
+  align-items: center;
+}
+
+.l3-head {
+  padding: 10px 12px;
+  background: #f7f9fc;
+  border: 1px solid #e6ecf3;
+  border-radius: .75rem;
+  color: #6a7a90;
+  font-weight: 700;
+}
+
+.l3-row {
+  padding: 14px 12px;
+  background: #fff;
+  border: 1px solid #e6ecf3;
+  border-radius: .75rem;
+}
+
+/* 進度欄位限制寬度，避免撐出容器 */
+.l3-row .col-progress .progress {
+  width: 100%;
+  max-width: var(--w-progress);
+  height: 8px;
+}
+
+/* 保證渠道徽章會顯示 */
+.l3-row .col-chan .badge-chip {
+  display: inline-block;
+}
+
+/* 操作區按鈕群不換行、靠右 */
+.l3-row .col-actions {
+  white-space: nowrap;
+}
+
+/* ---------- 全域：小膠囊（不再只限 gs-table） ---------- */
+.badge-chip {
+  display: inline-block;
+  background: #B3B7C6;
+  color: $nav-bg-dark;
+  border-radius: 999px;
+  padding: .25rem .6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ---------- L3 Grid 調整：避免溢出、讓渠道與操作穩定顯示 ---------- */
+
+/* 讓每格包含內距計算寬度，避免看起來「出框」 */
+.l3-head,
+.l3-row { box-sizing: border-box; }
+
+/* 某些欄位允許縮排並截斷，避免把整列撐爆 */
+.l3-row > div { min-width: 0; }             /* 關鍵：Grid 子項可縮 */
+.l3-row .col-desc,
+.l3-row .col-priority,
+.l3-row .col-updated {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 調整欄寬：渠道更寬一點；操作加寬到可放三顆 32px 鈕 */
+.l3-table {
+  --w-chan: 80px;        /* 原 64 → 80，保證看得到徽章 */
+  --w-actions: 152px;    /* 原 110 → 152，32*3 + gap(8*2) + 餘量 */
+}
+
+/* 渠道置中、確保顯示 */
+.l3-row .col-chan {
+  text-align: center;
+}
+
+/* 操作區：不換行、靠右，按鈕群寬度剛好 */
+.l3-row .col-actions {
+  white-space: nowrap;
+  text-align: right;
+}
+.l3-row .col-actions .d-inline-flex {
+  gap: 8px;
+}
+.l3-row .col-actions .btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 進度條維持在欄位內 */
+.l3-row .col-progress .progress {
+  width: 100%;
+  max-width: var(--w-progress); /* 你原本的數值 */
+  height: 8px;
+}
+
+
+/*page05標題*/
+.modal-dialog {
+  text-align: left;
+}
+.btn-deep-blue {
+  background-color: $light-blue;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  border-radius: .25rem;
+  padding: .45rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  transition: background-color .2s ease;
+
+  &:hover  { background-color: darken($light-blue, 5%); }
+  &:active { background-color: darken($light-blue, 10%) !important; }
+}
+
+/* 搜尋欄細節 */
+.form-control {
+  border-radius: .25rem;
+  border-color: #dee2e6;
+  &:focus { box-shadow: 0 0 0 .2rem rgba($light-blue, .25); border-color: $light-blue; }
+}
+
+.bi-search {
+  pointer-events: none;
+}
+
+/* 篩選鈕：hover/active 也保持白字 */
+.btn-filter { color:#fff !important; }
+.btn-filter:hover,
+.btn-filter:active,
+.btn-filter:focus { color:#fff !important; }
+
+/* Modal 樣式微調 */
+#filterModal .modal-content { border-radius: .75rem; }
+#filterModal .modal-header { border-bottom: 1px solid #e6ecf3; }
+#filterModal .modal-footer { border-top: 1px solid #e6ecf3; }
+
+/* 日期輸入 + icon */
+#filterModal .date-field .input-group-text {
+  background: #f6f7fb;
+  border-color: #dee2e6;
+}
+#filterModal .date-field .form-control {
+  border-right: 0;
+}
+#filterModal .date-field .input-group-text i {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+/* 只顯示自訂的日曆按鈕，隱藏原生圖示 */
+#filterModal input[type="date"] {
+  /* 讓文字和自訂圖示排版正常 */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Chrome/Safari */
+#filterModal input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Firefox（不會出現原生 icon，這段只是保險）*/
+#filterModal input[type="date"]::-moz-focus-inner { border: 0; }
+
+/* Edge/舊版 IE 清除鈕（若有） */
+#filterModal input[type="date"]::-ms-clear { display: none; }
+
+
+/* 專案報表列表：列表標頭 */
+.list-head {
+  .h6 { letter-spacing: .2px; }
+  .small span { color: #0a213f; }
+}
+
+/* 表格的灰底方形小按鈕（下載） */
+.btn-dark-ghost {
+  width: 36px; height: 36px; padding: 0;
+  border-radius: .5rem;
+  background: #6c757d; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid transparent;
+  i { font-size: 1rem; line-height: 1; }
+  &:hover { background: #5f676e; color: #fff; }
+  &:active { background: #4e565c !important; color: #fff !important; }
+}
+
+/* Modal：匯出報表 */
+.export-modal {
+  .modal-header { border-bottom-color: #edf1f6; }
+  .modal-footer { border-top-color: #edf1f6; }
+
+  .form-label { color: #0a213f; }
+  .form-select, .form-control { border-radius: .5rem; }
+
+  /* 下拉 caret（和設計稿一致） */
+  .select-caret {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    font-size: .85rem; color: #6c757d; pointer-events: none;
+  }
+
+  /* 柔和警示 */
+  .alert-warning-soft {
+    --bs-alert-bg: #fff7e6;
+    --bs-alert-border-color: #ffe6b8;
+    --bs-alert-color: #7a5a00;
+    background: var(--bs-alert-bg);
+    border: 1px solid var(--bs-alert-border-color);
+    color: var(--bs-alert-color);
+    border-radius: .5rem;
+    font-size: .95rem;
+  }
+}
+
+/* 表頭換行時：讓多行th好看些（和你的 gs-table 相容） */
+.gs-table thead th { vertical-align: bottom; }
+

@@ -183,6 +183,25 @@ $(function () {
     syncBadges();
   });
 
+  // === 為所有通知加上日期（如果未存在） ===
+  $drawer.find('.notif-item .item-head').each(function () {
+  const $head = $(this);
+  if ($head.find('.date-label').length) return; // 已加過就略過
+
+  // 產出今日日期 yyyy/mm/dd
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  const dateStr = `${y}/${m}/${d}`;
+
+  // 在 dot-unread 前插入日期（靠右顯示）
+  const $dot = $head.find('.dot-unread');
+  if ($dot.length) {
+    $('<small class="date-label text-muted me-2">' + dateStr + '</small>').insertBefore($dot);
+  }
+  });
+  
   // 初始徽章
   syncBadges();
 });
@@ -190,7 +209,7 @@ $(function () {
 
 // === 共用：水平拖拉捲動 for .table-responsive ===
 (function setupGlobalHorizontalDrag () {
-  const $wraps = $('.table-responsive');
+  const $wraps = $('.table-responsive, .h-scroll');
 
   $wraps.each(function () {
     const $el = $(this);

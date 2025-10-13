@@ -1,8 +1,20 @@
 @use "sass:math";
-@import "_/_Lib";
-@import "_/Core";
-@import "Lalilo";
-@import "_/Bootstrap";
+
+body {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+
+  margin: 0;
+  padding: 0 0 0 0;
+  color: #393636;
+
+  font-size: 16px;
+  text-align: center;
+  font-family: "Noto Sans TC", "Roboto", "Helvetica Neue", "HelveticaNeue",
+    Helvetica, Arial, sans-serif;
+}
+
 
 /* ===== Variables ===== */
 $sidebar-w: 345px;
@@ -22,8 +34,16 @@ $light-blue:#004E98;
 $pink:#E41669;
 $orange:#FF6721;
 
+/* ===== bg ===== */
+.bg-pink {
+  background-color: $pink;
+}
 
-/* ===== Button (通用 a / button) ===== */
+/* ===== text ===== */
+.text-muted {
+  text-align: left;
+}
+
 .text-deep-blue {
   color: $nav-bg !important;
 }
@@ -260,11 +280,12 @@ button.btn-logout,
     }
     .is-disabled {
       background-color: $bg-disabled;
-
+      
       .nav-link {
         color: $min-grey;
         cursor: not-allowed;
         pointer-events:auto;
+        background-color: $bg-disabled  !important;
       }
     }
   }
@@ -412,11 +433,37 @@ button.btn-logout,
     margin-bottom: .25rem;
   }
 
-  .item-head { margin-bottom: .25rem; }
+  .item-head {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .date-label {
+      font-size: .75rem;
+      color: #999;
+      line-height: 1;
+/*      margin-top: 2px;
+      display: inline-block;*/
+
+      font-size: .75rem;
+      color: #999;
+      flex-shrink: 0;
+      order: 2;
+    }
+
+    .dot-unread {
+      flex-shrink: 0;
+      order: 3;
+    }
+  }
   .item-meta { margin-bottom: .25rem; }
 
   .item-head h6 {
     font-weight: 700;
+    flex: 1 1 auto;
+    margin-right: 0.5rem;
+    text-align: left;
   }
 
   .item-ops .btn-link {
@@ -449,7 +496,7 @@ button.btn-logout,
 /* 進度條：細條、圓角、底色淡灰 */
 .progress-thin {
   height: 10px !important;
-  background-color: #e9eef5;
+  background-color: $bg-disabled;
   border-radius: 6px;
   overflow: hidden;
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>GO SURVEY</title>
+  <title>GO SURVEY｜發送與進度管理</title>
 
   <!-- Bootstrap 5 與 Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -92,8 +92,523 @@
           <!-- 標題列 -->
           <div class="d-flex justify-content-between align-items-center mb-3">
             <div>
-              <h2 class="h4 mb-0 fw-bold text-deep-blue">內容與模板管理</h2>
-              <div class="text-muted small">管理問卷結果頁與選單模板</div>
+              <h2 class="h4 mb-0 fw-bold text-deep-blue">發送與進度管理</h2>
+              <div class="text-muted small">監控和管理訊息發送系統</div>
+            </div>
+          </div>
+
+          <!-- 模組塊：問卷項目模板（表格） -->
+          <div class="module-card module-nobg card border-0 mt-4">
+            <div class="card-body px-0">
+
+              <!-- 類別切換 + 右側新增 -->
+              <div class="gs-tabs-row d-flex align-items-center justify-content-between">
+                <ul class="nav nav-pills gs-tabs gs-tabs-top flex-wrap me-3" role="tablist">
+                  <li class="nav-item">
+                    <button type="button" class="nav-link disabled" aria-disabled="true" aria-selected="false" data-target="#tab-dashboard">總覽儀表板</button>
+                  </li>
+                  <li class="nav-item">
+                    <button type="button" class="nav-link active" aria-selected="true" data-target="#tab-send">發送列表</button>
+                  </li>
+                  <li class="nav-item">
+                    <button type="button" class="nav-link" aria-selected="false" data-target="#tab-issues">發送異常</button>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- 面板容器：id 必須對到上面的 data-target -->
+              <div id="tab-dashboard" class="tab-panel d-none" role="tabpanel">
+                <div class="h-scroll">
+                  
+                </div>
+              </div>
+
+              <!-- 發送列表 -->
+<div id="tab-send" class="tab-panel mt-3" role="tabpanel">
+  <div class="h-scroll">
+    <section class="send-tree">
+      <!-- =========================
+           L1：列表 01（展開中）
+           ========================= -->
+      <article class="send-node node-l1 is-open">
+        <header class="node-head d-flex align-items-center gap-3">
+          <!-- 展開/收合 -->
+          <button type="button"
+                  class="btn btn-icon btn-toggle js-node-toggle"
+                  aria-expanded="true"
+                  aria-controls="l1-01">
+            <i class="bi bi-caret-down-fill"></i>
+          </button>
+
+          <!-- 左側：標題 & 副標 -->
+          <div class="flex-grow-1">
+            <div class="fw-bold text-deep-blue">產品意見回饋問卷</div>
+            <div class="text-muted small">專案ID：PROJ-2024-02</div>
+          </div>
+
+          <!-- 右側：進度 + 狀態 + 操作 -->
+          <div class="d-flex align-items-center gap-3">
+            <!-- 進度：文字在上、進度條在下 -->
+            <div class="progress-block me-2">
+              <div class="small text-deep-blue fw-semibold mb-1">
+                總回收進度：<span class="text-body">300/500</span>
+              </div>
+              <div class="progress progress-thin" aria-label="進度">
+                <div class="progress-bar progress-orange" style="width: 70%"></div>
+              </div>
+            </div>
+
+            <span class="badge badge-state bg-success">進行中</span>
+
+            <!-- 操作（僅樣式佔位，可接事件） -->
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn btn-icon btn-square btn-pause js-toggle-run"
+                      type="button" aria-pressed="false"
+                      data-bs-toggle="tooltip" title="暫停">
+                <i class="bi bi-pause"></i>
+              </button>
+
+              <button class="btn btn-icon btn-square btn-stop"
+                      type="button" data-bs-toggle="tooltip" title="停止">
+                <i class="bi bi-stop"></i>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <!-- L2 容器（先放兩個可展開的節點，內容之後再塞表單列表） -->
+        <div class="node-children px-0" id="l1-01">
+
+          <!-- 表頭列 ── -->
+          <div class="l2-headrow">
+            <div class="cell w-name">名單名稱</div>
+            <div class="cell w-progress">發送進度</div>
+            <div class="cell w-collect">已回收/目標</div>
+            <div class="cell w-start">開始時間</div>
+            <div class="cell w-end">完成時間</div>
+          </div>
+
+          <!-- L2：列表 01-1（預設收合） -->
+          <article class="send-node node-l2">
+            <header class="node-head l2-grid align-items-center">
+              <!-- 1. 展開/收合 -->
+              <button type="button"
+                      class="btn btn-icon btn-toggle js-node-toggle"
+                      aria-expanded="false"
+                      aria-controls="l2-01-1">
+                <i class="bi bi-caret-right-fill"></i>
+              </button>
+
+              <!-- 2. 名單名稱（對應「名單名稱」欄） -->
+              <div class="col-name fw-semibold text-deep-blue">主會員名單</div>
+
+              <!-- 3. 發送進度（對應「發送進度」欄） -->
+              <div class="col-progress">
+                <div class="d-flex align-items-center justify-content-between gap-3">
+                  <div class="text-deep-blue fw-semibold">7000/7500</div>
+                  <div class="text-muted small">93%</div>
+                </div>
+                <div class="progress progress-thin mt-1" style="min-width:180px">
+                  <div class="progress-bar progress-orange" style="width: 93%"></div>
+                </div>
+              </div>
+
+              <!-- 4. 已回收/目標 （對應欄位） -->
+              <div class="col-collect fw-semibold text-deep-blue">280/600</div>
+
+              <!-- 5. 開始時間（對應欄位） -->
+              <div class="col-start text-muted">2024-01-20 14:30</div>
+
+              <!-- 6. 完成時間（對應欄位） -->
+              <div class="col-end text-muted">—</div>
+            </header>
+
+            <!-- L3 容器（之後放表格；先隱藏） -->
+            <div class="node-children d-none" id="l2-01-1">
+<!-- L3 明細（新版：Grid + 可水平捲動） -->
+<div class="l3-wrap h-scroll">
+  <div class="l3-table">
+
+    <!-- 表頭 -->
+    <div class="l3-head">
+      <div class="col-chan">渠道</div>
+      <div class="col-desc">狀態說明</div>
+      <div class="col-count">發送數量</div>
+      <div class="col-result">發送結果</div>
+      <div class="col-progress">進度</div>
+      <div class="col-priority">優先度</div>
+      <div class="col-updated">最後更新時間</div>
+      <div class="col-actions text-end">操作</div>
+    </div>
+
+    <!-- 列 1 -->
+    <div class="l3-row">
+      <div class="col-chan"><span class="badge badge-chip">SMS</span></div>
+      <div class="col-desc small text-muted">
+        <div>已發送(24hrs)：1,000</div>
+        <div>已驗證：562</div>
+      </div>
+      <div class="col-count text-deep-blue fw-semibold">9,500</div>
+      <div class="col-result"><span class="badge badge-state bg-success">進行中</span></div>
+      <div class="col-progress">
+        <div class="d-flex align-items-center justify-content-between mb-1">
+          <small class="text-muted">完成：65%</small>
+          <i class="bi bi-dot text-info fs-4 lh-1"></i>
+        </div>
+        <div class="progress progress-thin">
+          <div class="progress-bar progress-orange" style="width:65%"></div>
+        </div>
+      </div>
+      <div class="col-priority"><i class="bi bi-1-circle-fill text-warning fs-4 lh-1"></i> 優先度：3</div>
+      <div class="col-updated text-muted">2024-01-20 14:30</div>
+      <div class="col-actions text-end">
+        <div class="d-inline-flex align-items-center gap-2">
+          <!-- 設定 -->
+          <button type="button"
+                  class="btn btn-icon btn-square btn-gear js-l3-settings"
+                  data-bs-toggle="tooltip" title="設定">
+            <i class="bi bi-gear"></i>
+          </button>
+
+          <!-- 暫停 ↔ 恢復 -->
+          <button type="button"
+                  class="btn btn-icon btn-square btn-pause js-l3-toggle"
+                  aria-pressed="false"
+                  data-bs-toggle="tooltip" title="暫停">
+            <i class="bi bi-pause"></i>
+          </button>
+
+          <!-- 停止 -->
+          <button type="button"
+                  class="btn btn-icon btn-square btn-stop"
+                  data-bs-toggle="tooltip" title="停止">
+            <i class="bi bi-stop"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 列 2 -->
+    <div class="l3-row">
+      <div class="col-chan"><span class="badge badge-chip">SMS</span></div>
+      <div class="col-desc small text-muted">
+        <div>已發送(24hrs)：1,000</div>
+        <div>已驗證：562</div>
+      </div>
+      <div class="col-count text-deep-blue fw-semibold">12,500</div>
+      <div class="col-result"><span class="badge badge-state bg-success">進行中</span></div>
+      <div class="col-progress">
+        <div class="d-flex align-items-center justify-content-between mb-1">
+          <small class="text-muted">完成：65%</small>
+          <i class="bi bi-dot text-info fs-4 lh-1"></i>
+        </div>
+        <div class="progress progress-thin">
+          <div class="progress-bar progress-orange" style="width:65%"></div>
+        </div>
+      </div>
+      <div class="col-priority"><i class="bi bi-dot text-warning fs-4 lh-1"></i> 優先度：1</div>
+      <div class="col-updated text-muted">2024-01-20 15:45</div>
+      <div class="col-actions text-end">
+        <div class="d-inline-flex gap-2">
+          <button class="btn btn-icon" data-bs-toggle="tooltip" title="重整"><i class="bi bi-arrow-clockwise"></i></button>
+          <button class="btn btn-icon" data-bs-toggle="tooltip" title="暫停"><i class="bi bi-pause"></i></button>
+          <button class="btn btn-icon btn-red" data-bs-toggle="tooltip" title="停止"><i class="bi bi-stop"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 列 3 -->
+    <div class="l3-row">
+      <div class="col-chan"><span class="badge badge-chip">SMS</span></div>
+      <div class="col-desc small text-muted">
+        <div>已發送(24hrs)：1,000</div>
+        <div>已驗證：562</div>
+      </div>
+      <div class="col-count text-deep-blue fw-semibold">800</div>
+      <div class="col-result"><span class="badge badge-state bg-info text-dark">已寄送</span></div>
+      <div class="col-progress">
+        <div class="d-flex align-items-center justify-content-between mb-1">
+          <small class="text-muted">完成：100%</small>
+          <i class="bi bi-dot text-warning fs-4 lh-1"></i>
+        </div>
+        <div class="progress progress-thin">
+          <div class="progress-bar progress-orange" style="width:100%"></div>
+        </div>
+      </div>
+      <div class="col-priority"><i class="bi bi-dot text-warning fs-4 lh-1"></i> 優先度：4</div>
+      <div class="col-updated text-muted">2024-01-20 16:20</div>
+      <div class="col-actions text-end">
+        <div class="d-inline-flex gap-2">
+          <button class="btn btn-icon" data-bs-toggle="tooltip" title="重整"><i class="bi bi-arrow-clockwise"></i></button>
+          <button class="btn btn-icon" data-bs-toggle="tooltip" title="暫停"><i class="bi bi-pause"></i></button>
+          <button class="btn btn-icon btn-red" data-bs-toggle="tooltip" title="停止"><i class="bi bi-stop"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 列 4 -->
+    <div class="l3-row">
+      <div class="col-chan"><span class="badge badge-chip">SMS</span></div>
+      <div class="col-desc small text-muted">
+        <div>已發送(24hrs)：1,000</div>
+        <div>已驗證：562</div>
+      </div>
+      <div class="col-count text-deep-blue fw-semibold">1,800</div>
+      <div class="col-result"><span class="badge badge-state bg-warning text-dark">已暫停</span></div>
+      <div class="col-progress">
+        <div class="d-flex align-items-center justify-content-between mb-1">
+          <small class="text-muted">完成：42%</small>
+          <i class="bi bi-dot text-info fs-4 lh-1"></i>
+        </div>
+        <div class="progress progress-thin">
+          <div class="progress-bar progress-orange" style="width:42%"></div>
+        </div>
+      </div>
+      <div class="col-priority"><i class="bi bi-dot text-warning fs-4 lh-1"></i> 優先度：2</div>
+      <div class="col-updated text-muted">2024-01-20 16:20</div>
+      <div class="col-actions text-end">
+        <div class="d-inline-flex gap-2">
+          <button class="btn btn-icon" data-bs-toggle="tooltip" title="重整"><i class="bi bi-arrow-clockwise"></i></button>
+          <button class="btn btn-icon" data-bs-toggle="tooltip" title="暫停"><i class="bi bi-pause"></i></button>
+          <button class="btn btn-icon btn-red" data-bs-toggle="tooltip" title="停止"><i class="bi bi-stop"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 列 5 -->
+    <div class="l3-row">
+      <div class="col-chan"><span class="badge badge-chip">SMS</span></div>
+      <div class="col-desc small text-muted">
+        <div>已發送(24hrs)：1,000</div>
+        <div>已驗證：562</div>
+      </div>
+      <div class="col-count text-deep-blue fw-semibold">9,500</div>
+      <div class="col-result"><span class="badge badge-state bg-pink">失敗</span></div>
+      <div class="col-progress">
+        <div class="d-flex align-items-center justify-content-between mb-1">
+          <small class="text-muted">—</small>
+          <i class="bi bi-dot text-warning fs-4 lh-1"></i>
+        </div>
+        <div class="progress progress-thin">
+          <div class="progress-bar progress-orange" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="col-priority"><i class="bi bi-dot text-warning fs-4 lh-1"></i> 優先度：3</div>
+      <div class="col-updated text-muted">2024-01-20 14:30</div>
+      <div class="col-actions text-end">
+        <div class="d-inline-flex gap-2">
+          <button class="btn btn-icon" data-bs-toggle="tooltip" title="重整"><i class="bi bi-arrow-clockwise"></i></button>
+          <button class="btn btn-icon" data-bs-toggle="tooltip" title="暫停"><i class="bi bi-pause"></i></button>
+          <button class="btn btn-icon btn-red" data-bs-toggle="tooltip" title="停止"><i class="bi bi-stop"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 列 6 -->
+    <div class="l3-row">
+      <div class="col-chan"><span class="badge badge-chip">SMS</span></div>
+      <div class="col-desc small text-muted">
+        <div>已發送(24hrs)：1,000</div>
+        <div>已驗證：562</div>
+      </div>
+      <div class="col-count text-deep-blue fw-semibold">9,500</div>
+      <div class="col-result"><span class="badge badge-state bg-secondary">等待發送</span></div>
+      <div class="col-progress">
+        <div class="d-flex align-items-center justify-content-between mb-1">
+          <small class="text-muted">—</small>
+          <i class="bi bi-dot text-warning fs-4 lh-1"></i>
+        </div>
+        <div class="progress progress-thin">
+          <div class="progress-bar progress-orange" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="col-priority"><i class="bi bi-dot text-warning fs-4 lh-1"></i> 優先度：3</div>
+      <div class="col-updated text-muted">2024-01-20 14:30</div>
+      <div class="col-actions text-end">
+        <div class="d-inline-flex gap-2">
+          <button class="btn btn-icon" data-bs-toggle="tooltip" title="重整"><i class="bi bi-arrow-clockwise"></i></button>
+          <button class="btn btn-icon" data-bs-toggle="tooltip" title="暫停"><i class="bi bi-pause"></i></button>
+          <button class="btn btn-icon btn-red" data-bs-toggle="tooltip" title="停止"><i class="bi bi-stop"></i></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- /L3 明細 -->
+
+
+            </div>
+          </article>
+
+          <!-- L2：列表 01-2（預設收合） -->
+          <article class="send-node node-l2">
+            <header class="node-head l2-grid align-items-center">
+              <button type="button"
+                      class="btn btn-icon btn-toggle js-node-toggle"
+                      aria-expanded="false"
+                      aria-controls="l2-01-2">
+                <i class="bi bi-caret-right-fill"></i>
+              </button>
+
+              <div class="col-name fw-semibold text-deep-blue">主會員名單（二）</div>
+
+              <div class="col-progress">
+                <div class="d-flex align-items-center justify-content-between gap-3">
+                  <div class="text-deep-blue fw-semibold">7000/7000</div>
+                  <div class="text-muted small">100%</div>
+                </div>
+                <div class="progress progress-thin mt-1" style="min-width:180px">
+                  <div class="progress-bar progress-orange" style="width: 100%"></div>
+                </div>
+              </div>
+
+              <div class="col-collect fw-semibold text-deep-blue">280/600</div>
+              <div class="col-start text-muted">2024-01-20 14:30</div>
+              <div class="col-end text-muted">—</div>
+            </header>
+
+            <div class="node-children d-none" id="l2-01-2"></div>
+          </article>
+
+        </div>
+      </article>
+
+      <!-- =========================
+           L1：列表 02（預設收合）
+           ========================= -->
+      <article class="send-node node-l1">
+        <header class="node-head d-flex align-items-center gap-2">
+          <button type="button"
+                  class="btn btn-icon btn-toggle js-node-toggle"
+                  aria-expanded="false"
+                  aria-controls="l1-02">
+            <i class="bi bi-caret-right-fill"></i>
+          </button>
+
+          <div class="flex-grow-1">
+            <div class="fw-bold text-deep-blue">第二項專案名稱</div>
+            <div class="text-muted small">專案ID：PROJ-2024-03</div>
+          </div>
+
+          <!-- 右側：進度 + 狀態 + 操作 -->
+          <div class="d-flex align-items-center gap-3">
+            <!-- 進度：文字在上、進度條在下 -->
+            <div class="progress-block me-2">
+              <div class="small text-deep-blue fw-semibold mb-1">
+                總回收進度：<span class="text-body">300/500</span>
+              </div>
+              <div class="progress progress-thin" aria-label="進度">
+                <div class="progress-bar progress-orange" style="width: 70%"></div>
+              </div>
+            </div>
+
+            <span class="badge badge-state bg-success">進行中</span>
+
+            <!-- 操作（僅樣式佔位，可接事件） -->
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn btn-icon btn-square btn-pause js-toggle-run"
+                      type="button" aria-pressed="false"
+                      data-bs-toggle="tooltip" title="暫停">
+                <i class="bi bi-pause"></i>
+              </button>
+
+              <button class="btn btn-icon btn-square btn-stop"
+                      type="button" data-bs-toggle="tooltip" title="停止">
+                <i class="bi bi-stop"></i>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="node-children d-none" id="l1-02">
+          <!-- 之後可放 L2 內容 -->
+        </div>
+      </article>
+    </section>
+  </div>
+</div>
+
+
+              <!-- 發送異常內容 -->
+              <div id="tab-issues" class="tab-panel d-none" role="tabpanel">
+                <div class="h-scroll">
+                  <div class="card-body px-0">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h3 class="h5 mb-0 fw-bold text-orange">發送異常紀錄</h3>
+                    </div>
+
+                    <hr class="mt-3 mb-0 text-muted" style="border-color:#dee2e6; opacity:1;">
+
+                    <!-- 表格 -->
+                    <div class="table-responsive">
+                      <table class="table align-middle gs-table mb-0">
+                        <thead>
+                          <tr>
+                            <th style="width: 18%;">專案名稱</th>
+                            <th>名稱單位</th>
+                            <th style="width: 90px;">問題渠道</th>
+                            <th style="width: 90px;">錯誤訊息</th>
+                            <th style="width: 160px;">失效時間</th>
+                            <th style="width: 90px;">狀態</th>
+                            <th style="width: 90px;">操作</th>
+                          </tr>
+                        </thead>
+                        <tbody class="gs-tbody">
+                          <!-- row: EDM Active -->
+                          <tr data-channel="edm">
+                            <td>客戶滿意度調查Q4 2004</td>
+                            <td class="text-muted">主會員名單</td>
+                            <td><span class="badge badge-chip">EDM</span></td>
+                            <td class="text-muted">SMS閘道連結超時</td>
+                            <td class="text-muted">2024-01-20 14:30</td>
+                            <td><span class="badge badge-state bg-success">待處理</span></td>
+                            <td>
+                              <div class="d-flex gap-2">
+                                <button class="btn btn-icon" data-bs-toggle="tooltip" title="重整"><i class="bi bi-arrow-clockwise"></i></button>
+                                <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="停止"><i class="bi bi-stop"></i></button>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <!-- row: EDM Active -->
+                          <tr data-channel="edm">
+                            <td>客戶滿意度調查Q4 2004</td>
+                            <td class="text-muted">主會員名單</td>
+                            <td><span class="badge badge-chip">EDM</span></td>
+                            <td class="text-muted">SMS閘道連結超時</td>
+                            <td class="text-muted">2024-01-20 14:30</td>
+                            <td><span class="badge badge-state bg-pink">已停止</span></td>
+                            <td>
+                              <div class="d-flex gap-2">
+                                <button class="btn btn-icon" data-bs-toggle="tooltip" title="重整"><i class="bi bi-arrow-clockwise"></i></button>
+                                <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="停止"><i class="bi bi-stop"></i></button>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <!-- row: EDM Active -->
+                          <tr data-channel="edm">
+                            <td>客戶滿意度調查Q4 2004</td>
+                            <td class="text-muted">主會員名單</td>
+                            <td><span class="badge badge-chip">EDM</span></td>
+                            <td class="text-muted">SMS閘道連結超時</td>
+                            <td class="text-muted">2024-01-20 14:30</td>
+                            <td><span class="badge badge-state bg-warning">待處理</span></td>
+                            <td>
+                              <div class="d-flex gap-2">
+                                <button class="btn btn-icon" data-bs-toggle="tooltip" title="重整"><i class="bi bi-arrow-clockwise"></i></button>
+                                <button class="btn btn-red btn-sm js-card-delete" data-bs-toggle="tooltip" title="停止"><i class="bi bi-stop"></i></button>
+                              </div>
+                            </td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -132,8 +647,8 @@
         <!-- 頭部：標題 + 未讀點 + 時間 -->
         <div class="item-head d-flex justify-content-between align-items-start">
           <h6 class="mb-0 text-deep-blue">專案即將到期</h6>
+          <small class="date-label text-muted me-2">2025/10/13</small>
           <span class="dot-unread" aria-label="未讀"></span>
-          <!-- <small class="text-muted">2 小時前</small> -->
         </div>
 
         <!-- 副標 -->
@@ -157,8 +672,8 @@
           <div class="flex-grow-1">
             <div class="item-head d-flex justify-content-between align-items-center">
               <h6 class="mb-1 text-deep-blue">專案已結案</h6>
+              <small class="date-label text-muted me-2">2025/10/13</small>
               <span class="dot-unread" aria-label="未讀"></span>
-              <!-- <small class="text-muted">1 小時前</small> -->
             </div>
             <p class="mb-0 text-muted">客戶滿意度調查 Q4 2024</p>
           </div>
@@ -171,6 +686,7 @@
           <div class="flex-grow-1">
             <div class="item-head d-flex justify-content-between align-items-center">
               <h6 class="mb-1 text-deep-blue">發送異常</h6>
+              <small class="date-label text-muted me-2">2025/10/13</small>
             </div>
             <p class="mb-0 text-muted">員工問卷專案  發送出現異常，請通知管理員</p>
           </div>
@@ -183,6 +699,7 @@
           <div class="flex-grow-1">
             <div class="item-head d-flex justify-content-between align-items-center">
               <h6 class="mb-1 text-deep-blue">發送完成</h6>
+              <small class="date-label text-muted me-2">2025/10/13</small>
             </div>
             <p class="mb-0 text-muted">客戶滿意度調查 Q4 2024 發送完成</p>
           </div>
@@ -195,6 +712,7 @@
           <div class="flex-grow-1">
             <div class="item-head d-flex justify-content-between align-items-center">
               <h6 class="mb-1">連結生成異常</h6>
+              <small class="date-label text-muted me-2">2025/10/13</small>
             </div>
             <p class="mb-0 text-muted">員工問卷專案  連結生成出現異常，請通知管理員</p>
           </div>
@@ -207,6 +725,7 @@
           <div class="flex-grow-1">
             <div class="item-head d-flex justify-content-between align-items-center">
               <h6 class="mb-1 text-deep-blue">連結生成完成</h6>
+              <small class="date-label text-muted me-2">2025/10/13</small>
             </div>
             <p class="mb-0 text-muted">客戶滿意度調查Q4 2024  連結生成完成</p>
           </div>
@@ -220,6 +739,26 @@
       <a href="#" class="btn btn-outline-secondary w-100">查看所有歷史通知</a>
     </div>
   </aside>
+
+  <!-- L3 設定光箱 -->
+  <div class="modal fade" id="l3SettingsModal" tabindex="-1" aria-labelledby="l3SettingsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="l3SettingsLabel">列表設定</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
+        </div>
+        <div class="modal-body">
+          這裡放你的設定內容（之後可改為動態載入選項）
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">儲存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- 依序載入 JS -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
