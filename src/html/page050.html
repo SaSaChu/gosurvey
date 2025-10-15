@@ -139,8 +139,8 @@
 
               <div id="tab-prolist" class="tab-panel" role="tabpanel">
                 <!-- 列表標頭：左文字、右時間 -->
-                <div class="list-head d-flex justify-content-between align-items-center mb-2">
-                  <h3 class="h6 mb-0 fw-bold text-deep-blue">專案報表列表</h3>
+                <div class="list-head d-flex justify-content-between align-items-center align-items-center mb-2 py-3 border-bottom">
+                  <h3 class="h5 mb-0 fw-bold text-deep-blue">專案報表列表</h3>
                   <div class="text-muted small">最後更新時間：<span class="fw-semibold">2025/12/01 22:22:22</span></div>
                 </div>
 
@@ -151,20 +151,21 @@
                       <thead>
                         <tr>
                           <th style="width: 80px;">操作</th>
-                          <th style="width: 24%;">專案名稱</th>
-                          <th style="width: 120px;">專案ID</th>
+                          <th class="text-start"  style="width: 16%;">專案名稱</th>
+                          <th class="text-start"  style="width: 120px;">專案ID</th>
                           <th style="width: 100px;">狀態</th>
                           <th style="width: 120px;">總發送</th>
-                          <th style="width: 120px;">總回收</th>
-                          <th style="width: 90px;">總回收率</th>
-                          <th style="width: 90px;">App Push<br>點擊率</th>
-                          <th style="width: 90px;">App Push<br>完成率</th>
-                          <th style="width: 90px;">EDM<br>開啟率</th>
-                          <th style="width: 90px;">EDM<br>完成率</th>
-                          <th style="width: 90px;">Line<br>點擊率</th>
-                          <th style="width: 90px;">Line<br>完成率</th>
-                          <th style="width: 90px;">SMS<br>點擊率</th>
-                          <th style="width: 90px;">SMS<br>完成率</th>
+                          <th style="width: 120px;">總回應</th>
+                          <th class="text-start"  style="width: 90px;">整體<br>完成率</th>
+                          <th class="text-start" style="width: 90px;">App Push<br>點擊率</th>
+                          <th class="text-start" style="width: 90px;">App Push<br>完成率</th>
+                          <th class="text-start" style="width: 90px;">EDM<br>開啟率</th>
+                          <th class="text-start" style="width: 90px;">EDM<br>點擊率</th>
+                          <th class="text-start" style="width: 90px;">EDM<br>完成率</th>
+                          <th class="text-start" style="width: 90px;">Line<br>點擊率</th>
+                          <th class="text-start" style="width: 90px;">Line<br>完成率</th>
+                          <th class="text-start" style="width: 90px;">SMS<br>點擊率</th>
+                          <th class="text-start" style="width: 90px;">SMS<br>完成率</th>
                         </tr>
                       </thead>
 
@@ -177,29 +178,241 @@
                               <i class="bi bi-download"></i>
                             </button>
                           </td>
-                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
-                          <td class="text-muted">PEOJ-2024-001</td>
-                          <td><span class="badge badge-state bg-success">進行中</span></td>
-                          <td>15,000</td>
-                          <td>3,750</td>
-                          <td>25%</td>
-                          <td>22.4%</td>
-                          <td>18.5%</td>
-                          <td>45.2%</td>
-                          <td>12.8%</td>
-                          <td>28.5%</td>
-                          <td>15.3%</td>
-                          <td>19.4%</td>
-                          <td>31.2%</td>
+                          <td class="text-deep-blue fw-semibold text-start ps-0">客戶滿意度調查Q42024</td>
+                          <td class="text-start ps-0">PEOJ-2024-001</td>
+                          <td><span class="w-100 badge badge-state bg-success">進行中</span></td>
+                          <td class="ps-0">15,000</td>
+                          <td class="ps-0">3,750</td>
+                          <td class="ps-0 text-orange">25%</td>
+                          <td class="ps-0">22.4%</td>
+                          <td class="ps-0">18.5%</td>
+                          <td class="ps-0">45.2%</td>
+                          <td class="ps-0 ">12.8%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">15.3%</td>
+                          <td class="ps-0">19.4%</td>
+                          <td class="ps-0">31.2%</td>
                         </tr>
 
-                        <!-- 再複製多列即可 -->
+                        <tr>
+                          <td>
+                            <button class="btn btn-icon btn-square btn-dark-ghost js-open-export"
+                                    data-bs-toggle="tooltip" title="匯出報表">
+                              <i class="bi bi-download"></i>
+                            </button>
+                          </td>
+                          <td class="text-deep-blue fw-semibold text-start ps-0">客戶滿意度調查Q42024</td>
+                          <td class="text-start ps-0">PEOJ-2024-001</td>
+                          <td><span class="w-100 badge badge-state bg-primary">已完成</span></td>
+                          <td class="ps-0">15,000</td>
+                          <td class="ps-0">3,750</td>
+                          <td class="ps-0 text-orange">25%</td>
+                          <td class="ps-0">22.4%</td>
+                          <td class="ps-0">18.5%</td>
+                          <td class="ps-0">45.2%</td>
+                          <td class="ps-0">12.8%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">15.3%</td>
+                          <td class="ps-0">19.4%</td>
+                          <td class="ps-0">31.2%</td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <button class="btn btn-icon btn-square btn-dark-ghost js-open-export"
+                                    data-bs-toggle="tooltip" title="匯出報表">
+                              <i class="bi bi-download"></i>
+                            </button>
+                          </td>
+                          <td class="text-deep-blue fw-semibold text-start ps-0">客戶滿意度調查Q42024</td>
+                          <td class="text-start ps-0">PEOJ-2024-001</td>
+                          <td><span class="w-100 badge badge-state bg-secondary">草稿</span></td>
+                          <td class="ps-0">15,000</td>
+                          <td class="ps-0">3,750</td>
+                          <td class="ps-0 text-orange">25%</td>
+                          <td class="ps-0">22.4%</td>
+                          <td class="ps-0">18.5%</td>
+                          <td class="ps-0">45.2%</td>
+                          <td class="ps-0">12.8%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">15.3%</td>
+                          <td class="ps-0">19.4%</td>
+                          <td class="ps-0">31.2%</td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <button class="btn btn-icon btn-square btn-dark-ghost js-open-export"
+                                    data-bs-toggle="tooltip" title="匯出報表">
+                              <i class="bi bi-download"></i>
+                            </button>
+                          </td>
+                          <td class="text-deep-blue fw-semibold text-start ps-0">客戶滿意度調查Q42024</td>
+                          <td class="text-start ps-0">PEOJ-2024-001</td>
+                          <td><span class="w-100 badge badge-state bg-secondary">草稿</span></td>
+                          <td class="ps-0">15,000</td>
+                          <td class="ps-0">3,750</td>
+                          <td class="ps-0 text-orange">25%</td>
+                          <td class="ps-0">22.4%</td>
+                          <td class="ps-0">18.5%</td>
+                          <td class="ps-0">45.2%</td>
+                          <td class="ps-0">12.8%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">15.3%</td>
+                          <td class="ps-0">19.4%</td>
+                          <td class="ps-0">31.2%</td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <button class="btn btn-icon btn-square btn-dark-ghost js-open-export"
+                                    data-bs-toggle="tooltip" title="匯出報表">
+                              <i class="bi bi-download"></i>
+                            </button>
+                          </td>
+                          <td class="text-deep-blue fw-semibold text-start ps-0">客戶滿意度調查Q42024</td>
+                          <td class="text-start ps-0">PEOJ-2024-001</td>
+                          <td><span class="w-100 badge badge-state bg-secondary">草稿</span></td>
+                          <td class="ps-0">15,000</td>
+                          <td class="ps-0">3,750</td>
+                          <td class="ps-0 text-orange">25%</td>
+                          <td class="ps-0">22.4%</td>
+                          <td class="ps-0">18.5%</td>
+                          <td class="ps-0">45.2%</td>
+                          <td class="ps-0">12.8%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">15.3%</td>
+                          <td class="ps-0">19.4%</td>
+                          <td class="ps-0">31.2%</td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <button class="btn btn-icon btn-square btn-dark-ghost js-open-export"
+                                    data-bs-toggle="tooltip" title="匯出報表">
+                              <i class="bi bi-download"></i>
+                            </button>
+                          </td>
+                          <td class="text-deep-blue fw-semibold text-start ps-0">客戶滿意度調查Q42024</td>
+                          <td class="text-start ps-0">PEOJ-2024-001</td>
+                          <td><span class="w-100 badge badge-state bg-success">進行中</span></td>
+                          <td class="ps-0">15,000</td>
+                          <td class="ps-0">3,750</td>
+                          <td class="ps-0 text-orange">25%</td>
+                          <td class="ps-0">22.4%</td>
+                          <td class="ps-0">18.5%</td>
+                          <td class="ps-0">45.2%</td>
+                          <td class="ps-0 ">12.8%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">15.3%</td>
+                          <td class="ps-0">19.4%</td>
+                          <td class="ps-0">31.2%</td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <button class="btn btn-icon btn-square btn-dark-ghost js-open-export"
+                                    data-bs-toggle="tooltip" title="匯出報表">
+                              <i class="bi bi-download"></i>
+                            </button>
+                          </td>
+                          <td class="text-deep-blue fw-semibold text-start ps-0">客戶滿意度調查Q42024</td>
+                          <td class="text-start ps-0">PEOJ-2024-001</td>
+                          <td><span class="w-100 badge badge-state bg-primary">已完成</span></td>
+                          <td class="ps-0">15,000</td>
+                          <td class="ps-0">3,750</td>
+                          <td class="ps-0 text-orange">25%</td>
+                          <td class="ps-0">22.4%</td>
+                          <td class="ps-0">18.5%</td>
+                          <td class="ps-0">45.2%</td>
+                          <td class="ps-0">12.8%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">15.3%</td>
+                          <td class="ps-0">19.4%</td>
+                          <td class="ps-0">31.2%</td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <button class="btn btn-icon btn-square btn-dark-ghost js-open-export"
+                                    data-bs-toggle="tooltip" title="匯出報表">
+                              <i class="bi bi-download"></i>
+                            </button>
+                          </td>
+                          <td class="text-deep-blue fw-semibold text-start ps-0">客戶滿意度調查Q42024</td>
+                          <td class="text-start ps-0">PEOJ-2024-001</td>
+                          <td><span class="w-100 badge badge-state bg-secondary">草稿</span></td>
+                          <td class="ps-0">15,000</td>
+                          <td class="ps-0">3,750</td>
+                          <td class="ps-0 text-orange">25%</td>
+                          <td class="ps-0">22.4%</td>
+                          <td class="ps-0">18.5%</td>
+                          <td class="ps-0">45.2%</td>
+                          <td class="ps-0">12.8%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">15.3%</td>
+                          <td class="ps-0">19.4%</td>
+                          <td class="ps-0">31.2%</td>
+                        </tr>
+                        
+                        <tr>
+                          <td>
+                            <button class="btn btn-icon btn-square btn-dark-ghost js-open-export"
+                                    data-bs-toggle="tooltip" title="匯出報表">
+                              <i class="bi bi-download"></i>
+                            </button>
+                          </td>
+                          <td class="text-deep-blue fw-semibold text-start ps-0">客戶滿意度調查Q42024</td>
+                          <td class="text-start ps-0">PEOJ-2024-001</td>
+                          <td><span class="w-100 badge badge-state bg-secondary">草稿</span></td>
+                          <td class="ps-0">15,000</td>
+                          <td class="ps-0">3,750</td>
+                          <td class="ps-0 text-orange">25%</td>
+                          <td class="ps-0">22.4%</td>
+                          <td class="ps-0">18.5%</td>
+                          <td class="ps-0">45.2%</td>
+                          <td class="ps-0">12.8%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">15.3%</td>
+                          <td class="ps-0">19.4%</td>
+                          <td class="ps-0">31.2%</td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <button class="btn btn-icon btn-square btn-dark-ghost js-open-export"
+                                    data-bs-toggle="tooltip" title="匯出報表">
+                              <i class="bi bi-download"></i>
+                            </button>
+                          </td>
+                          <td class="text-deep-blue fw-semibold text-start ps-0">客戶滿意度調查Q42024</td>
+                          <td class="text-start ps-0">PEOJ-2024-001</td>
+                          <td><span class="w-100 badge badge-state bg-secondary">草稿</span></td>
+                          <td class="ps-0">15,000</td>
+                          <td class="ps-0">3,750</td>
+                          <td class="ps-0 text-orange">25%</td>
+                          <td class="ps-0">22.4%</td>
+                          <td class="ps-0">18.5%</td>
+                          <td class="ps-0">45.2%</td>
+                          <td class="ps-0">12.8%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">28.5%</td>
+                          <td class="ps-0">15.3%</td>
+                          <td class="ps-0">19.4%</td>
+                          <td class="ps-0">31.2%</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
-
-                  
-
                 </div>
 
                 <!-- 簡易分頁（樣式） -->

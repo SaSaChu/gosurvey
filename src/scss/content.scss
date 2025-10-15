@@ -50,7 +50,7 @@ $orange:#FF6721;
           transition: opacity .2s ease;
         }
         &::before { left: 0;  background: linear-gradient(to right, rgba(255,255,255,.95), rgba(255,255,255,0)); }
-        &::after  { right: 0; background: linear-gradient(to left,  rgba(255,255,255,.95), rgba(255,255,255,0)); }
+        /*&::after  { right: 0; background: linear-gradient(to left,  rgba(255,255,255,.95), rgba(255,255,255,0)); }*/
         &:not(.at-left)::before  { opacity: 1; }
         &:not(.at-right)::after  { opacity: 1; }
       }
@@ -284,7 +284,7 @@ $orange:#FF6721;
 }
 
 /* 寬螢幕：表格貼滿容器（仍保留窄版可拖拉能力） */
-@media (min-width: 1200px) {
+@media (min-width: 1800px) {
   .page .module-card {
     .table-responsive { overflow-x: visible; cursor: default;
       &.has-scroll::before, &.has-scroll::after { opacity: 0 !important; }
@@ -493,13 +493,14 @@ $orange:#FF6721;
       pointer-events: none; z-index: 2; opacity: 0; transition: opacity .2s;
     }
     &::before { left: 0;  background: linear-gradient(to right, rgba(255,255,255,.95), rgba(255,255,255,0)); }
-    &::after  { right: 0; background: linear-gradient(to left,  rgba(255,255,255,.95), rgba(255,255,255,0)); }
+    /*&::after  { right: 0; background: linear-gradient(to left,  rgba(255,255,255,.95), rgba(255,255,255,0)); }*/
+    &::after  { right: 0;}
     &:not(.at-left)::before  { opacity: 1; }
     &:not(.at-right)::after  { opacity: 1; }
   }
 }
 @media (max-width: 1200px) { .h-scroll > .send-tree { min-width: 1080px; } }
-@media (min-width: 1201px) {
+@media (min-width: 1800px) {
   .h-scroll { overflow-x: visible; cursor: default; }
   .h-scroll.has-scroll::before, .h-scroll.has-scroll::after { opacity: 0 !important; }
   .h-scroll > .send-tree { min-width: 100%; }
@@ -694,8 +695,8 @@ $orange:#FF6721;
 /* Modal 樣式微調 */
 #filterModal .modal-content { border-radius: .75rem; }
 #filterModal .modal-header { border-bottom: 1px solid #e6ecf3; }
-#filterModal .modal-footer { border-top: 1px solid #e6ecf3; }
-
+#filterModal .modal-footer { border-top:  0 !important; }
+.modal-footer { border-top: 0 !important; }
 /* 日期輸入 + icon */
 #filterModal .date-field .input-group-text {
   background: #f6f7fb;
@@ -776,3 +777,27 @@ $orange:#FF6721;
 /* 表頭換行時：讓多行th好看些（和你的 gs-table 相容） */
 .gs-table thead th { vertical-align: bottom; }
 
+/* 讓特定表格撐滿容器（不受 max-content 影響） */
+.gs-table.is-fluid {
+  width: 100% !important;
+  min-width: 100% !important;
+  table-layout: auto;
+}
+
+/* 確保列能放絕對定位的偽元素 */
+#tab-prolist .gs-table tbody tr {
+  position: relative;
+  border-radius: .25rem; /* 跟原本一致 */
+  overflow: hidden;      /* 讓圓角生效 */
+}
+
+/* 在每列裡面畫一個 1px 的內框（不會被外層遮掉） */
+#tab-prolist .gs-table tbody tr::after {
+  content: "";
+  position: absolute;
+  inset: 0;                       /* top/right/bottom/left 全貼 */
+  border-left: 1px solid #e6ecf3;      /* 那條灰線 */
+  border-right: 1px solid #e6ecf3;      /* 那條灰線 */
+  border-radius: .75rem;
+  pointer-events: none;
+}

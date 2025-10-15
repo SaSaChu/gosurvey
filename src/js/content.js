@@ -337,3 +337,34 @@ $(function () {
     new bootstrap.Tooltip(el, { container: 'body' });
   });
 });
+
+
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.js-l3-settings');
+  if (!btn) return;
+  const m = new bootstrap.Modal(document.getElementById('priorityModal'));
+  m.show();
+});
+
+
+// 頁面載入後自動展開第一層與第一個子層
+$(document).ready(function () {
+  // 第一層（L1）展開
+  const $firstL1 = $('.send-node.node-l1').first();
+  $firstL1.addClass('is-open');
+  $firstL1.find('.js-node-toggle')
+          .attr('aria-expanded', 'true')
+          .find('i')
+          .removeClass('bi-caret-right-fill')
+          .addClass('bi-caret-down-fill');
+  $firstL1.find('.node-children').first().removeClass('d-none');
+
+  // 第一層中的第一個 L2 也展開
+  const $firstL2 = $firstL1.find('.send-node.node-l2').first();
+  $firstL2.find('.js-node-toggle')
+          .attr('aria-expanded', 'true')
+          .find('i')
+          .removeClass('bi-caret-right-fill')
+          .addClass('bi-caret-down-fill');
+  $firstL2.find('.node-children').removeClass('d-none');
+});

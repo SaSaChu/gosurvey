@@ -35,9 +35,17 @@ $pink:#E41669;
 $orange:#FF6721;
 
 /* ===== bg ===== */
+.bg-light-pink {
+  background-color: #FADFEA;
+}
+
 .bg-pink {
   background-color: $pink;
 }
+.bg-orange {
+  background-color: $orange;
+}
+
 
 /* ===== text ===== */
 .text-muted {
@@ -46,6 +54,10 @@ $orange:#FF6721;
 
 .text-deep-blue {
   color: $nav-bg !important;
+}
+
+.text-pink {
+  color: $pink !important;
 }
 
 .text-orange {
