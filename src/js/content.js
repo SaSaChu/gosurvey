@@ -451,3 +451,124 @@ $(document).on('click', '.js-toggle-status', function () {
   }
 });
 
+
+// ========= 建立新專案：互動 =========
+
+// 1) 點日曆 icon -> 觸發對應的 date input
+document.querySelectorAll('.project-form .js-open-date').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const input = btn.closest('.date-field')?.querySelector('input[type="date"]');
+    if (input) input.showPicker ? input.showPicker() : input.focus();
+  });
+});
+
+// 2) 單筆複製
+function copyTextFromInput(selector) {
+  const el = document.querySelector(selector);
+  if (!el) return;
+  el.select();
+  el.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(el.value).then(() => {
+    // 簡易提示（可換成 Toast）
+    const old = el.value;
+    el.blur();
+  });
+}
+document.querySelectorAll('.project-form .btn-copy').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.getAttribute('data-target');
+    if (target) copyTextFromInput(target);
+  });
+});
+
+// 3) 一鍵複製全部
+const copyAllBtn = document.getElementById('copyAllBtn');
+if (copyAllBtn) {
+  copyAllBtn.addEventListener('click', () => {
+    const ids = ['#urlDone', '#urlThanks', '#urlReject'];
+    const lines = ids
+      .map(sel => (document.querySelector(sel)?.value || '').trim())
+      .filter(Boolean)
+      .join('\n');
+    if (!lines) return;
+    navigator.clipboard.writeText(lines).then(() => {
+      const original = copyAllBtn.innerText;
+      copyAllBtn.innerText = '已複製！';
+      setTimeout(() => (copyAllBtn.innerText = original), 1200);
+    });
+  });
+}
+
+
+
+// 單一欄位複製
+function copyBySelector(selector, btn) {
+  const el = document.querySelector(selector);
+  if (!el) return;
+
+  const text = el.value ?? el.textContent ?? '';
+  // 先用 Clipboard API（支援佳）
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text).then(() => copiedFeedback(btn));
+  } else {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    copiedFeedback(btn);
+  }
+}
+
+// 成功後按鈕變色＋icon 變勾，1.2 秒恢復
+function copiedFeedback(btn) {
+  if (!btn) return;
+  btn.classList.add('copied');
+  const old = btn.innerHTML;
+  btn.innerHTML = '<i class="bi bi-copy"></i>';
+  setTimeout(() => {
+    btn.classList.remove('copied');
+    btn.innerHTML = old;
+  }, 1200);
+}
+
+// 事件代理：點複製按鈕
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.btn-copy');
+  if (btn) {
+    const target = btn.getAttribute('data-copy-target');
+    if (target) copyBySelector(target, btn);
+  }
+});
+
+// 一鍵複製全部（可選）
+document.addEventListener('click', (e) => {
+  const allBtn = e.target.closest('.js-copy-all');
+  if (!allBtn) return;
+
+  const selectors = ['#linkDone', '#linkFull', '#linkReject'];
+  let combined = '';
+  selectors.forEach((sel) => {
+    const el = document.querySelector(sel);
+    if (el) combined += (el.value || '') + '\n';
+  });
+
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(combined.trim()).then(() => copiedFeedback(allBtn));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = combined.trim();
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    copiedFeedback(allBtn);
+  }
+});
+
