@@ -801,3 +801,54 @@ $orange:#FF6721;
   border-radius: .75rem;
   pointer-events: none;
 }
+
+
+
+/* ===== KPI Cards ===== */
+.kpi-row { margin-top: .25rem; }
+
+.kpi-card {
+  background: #fff;
+  border: 1px solid #e9edf3;
+  border-radius: .9rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,.04);
+  transition: box-shadow .2s ease, transform .1s ease;
+  position: relative;
+  height: 100%;
+
+  &:hover { box-shadow: 0 8px 24px rgba(0,0,0,.08); transform: translateY(-2px); }
+}
+
+.kpi-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .5rem;
+}
+
+.kpi-title {
+  font-weight: 700;
+  color: $dark-grey; /* 你前面變數已定義 */
+  font-size: 1rem;
+}
+
+.kpi-icon {
+  width: 56px; height: 56px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 16px;
+  i { font-size: 1.35rem; }
+  &--orange { background: #fdebd8; color: #ff8a1f; }
+  &--cyan   { background: #e3f6fb; color: #35b8d0; }
+  &--teal   { background: #e4f2ef; color: #1f8a78; }
+  &--pink   { background: #fde4ee; color: #e55b94; }
+}
+
+.kpi-value {
+  font-weight: 800;
+  color: $nav-bg;    /* 深藍 */
+  line-height: 1.1;
+  font-size: clamp(2rem, 3.6vw, 3.25rem); /* 會隨寬度適度縮放 */
+  letter-spacing: .5px;
+}
+

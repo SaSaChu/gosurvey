@@ -87,9 +87,1365 @@
 
       <!-- 頁面內容範例 -->
       <section class="page p-4">
-        <div class="card shadow-sm">
-          <div class="card-body content-box">
-            <div class="placeholder-box">內容</div>
+        <div class="container-fluid page-content">
+
+          <!-- 標題列 -->
+          <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+            <!-- 左側標題 -->
+            <div class="mb-2 mb-md-0">
+              <h2 class="h4 mb-0 fw-bold text-deep-blue">專案與活動管理</h2>
+              <div class="text-muted small">管理問卷調查專案與活動</div>
+            </div>
+
+            <!-- 右側搜尋與篩選 -->
+            <div class="d-flex align-items-center gap-2">
+              <!-- 搜尋欄 -->
+              <div class="position-relative">
+                <input type="text" class="form-control ps-4 pe-5" placeholder="搜尋專案">
+                <i class="bi bi-search position-absolute top-50 end-0 translate-middle-y me-3 text-muted"></i>
+              </div>
+
+              <!-- 篩選按鈕：保持白字 + 觸發光箱 -->
+              <button type="button"
+                      class="btn btn-deep-blue text-white"
+                      data-bs-toggle="modal"
+                      data-bs-target="#filterModal">
+                <i class="bi bi-funnel me-1"></i> 篩選
+              </button>
+
+              <!-- 篩選按鈕：保持白字 + 觸發光箱 -->
+              <a href="page021.html" class="btn btn-orange align-items-center">
+                <i class="bi bi-plus-lg"></i> 建立新專案
+              </a>
+            </div>
+          </div>
+
+          <!-- KPI Cards -->
+          <div class="row g-3 kpi-row mb-4">
+            <!-- 進行中活動數 -->
+            <div class="col-12 col-md-6 col-xl-3">
+              <div class="kpi-card">
+                <div class="kpi-head align-items-start">
+                  <span class="kpi-title">進行中活動數</span>
+                  <span class="kpi-icon kpi-icon--orange">
+                    <i class="bi bi-calendar3"></i>
+                  </span>
+                </div>
+                <div class="kpi-value"
+                     data-count="12"
+                     data-decimals="0"
+                     data-suffix=""
+                     data-format="comma">0</div>
+              </div>
+            </div>
+
+            <!-- 總發送量 -->
+            <div class="col-12 col-md-6 col-xl-3">
+              <div class="kpi-card">
+                <div class="kpi-head align-items-start">
+                  <span class="kpi-title">總發送量</span>
+                  <span class="kpi-icon kpi-icon--cyan">
+                    <i class="bi bi-send"></i>
+                  </span>
+                </div>
+                <div class="kpi-value"
+                     data-count="248567"
+                     data-decimals="0"
+                     data-suffix=""
+                     data-format="comma">0</div>
+              </div>
+            </div>
+
+            <!-- 總有效回收數 -->
+            <div class="col-12 col-md-6 col-xl-3">
+              <div class="kpi-card">
+                <div class="kpi-head align-items-start">
+                  <span class="kpi-title">總有效回收數</span>
+                  <span class="kpi-icon kpi-icon--teal">
+                    <i class="bi bi-mailbox-flag"></i>
+                  </span>
+                </div>
+                <div class="kpi-value"
+                     data-count="45231"
+                     data-decimals="0"
+                     data-suffix=""
+                     data-format="comma">0</div>
+              </div>
+            </div>
+
+            <!-- 平均互動率 -->
+            <div class="col-12 col-md-6 col-xl-3">
+              <div class="kpi-card">
+                <div class="kpi-head align-items-start">
+                  <span class="kpi-title">平均互動率</span>
+                  <span class="kpi-icon kpi-icon--pink">
+                    <i class="bi bi-chat-quote"></i>
+                  </span>
+                </div>
+                <div class="kpi-value"
+                     data-count="18.2"
+                     data-decimals="1"
+                     data-suffix="%"
+                     data-format="comma">0</div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="module-card module-nobg card border-0 mt-4">
+            <div class="card-body px-0">
+
+              <!-- 類別切換 + 右側新增 -->
+              <div class="gs-tabs-row d-flex align-items-center justify-content-between">
+                <ul class="nav nav-pills gs-tabs gs-tabs-top flex-wrap me-3" role="tablist">
+                  <li class="nav-item">
+                    <button type="button" class="nav-link active" aria-selected="true" data-target="#tab-prolist">專案列表</button>
+                  </li>
+                  <li class="nav-item">
+                    <button type="button" class="nav-link" aria-selected="true" data-target="#tab-close">封存列表</button>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- 專案列表 -->
+              <div id="tab-prolist" class="tab-panel" role="tabpanel">
+                <div class="h-scroll">
+                  <!-- 專案列表 Table -->
+                  <div class="table-responsive">
+                    <table class="table align-middle gs-table mb-0">
+                      <thead>
+                        <tr>
+                          <th class="text-start" style="width:18%;">客戶名稱</th>
+                          <th class="text-start" style="width:18%;">專案名稱</th>
+                          <th class="text-start" style="width:120px;">專案ID</th>
+                          <th class="text-start" style="width:90px;">狀態</th>
+                          <th style="width:150px;">目標發送／回收</th>
+                          <th style="width:170px;">發送進度</th>
+                          <th style="width:170px;">回收進度</th>
+                          <th style="width:160px;">開始／結束日期</th>
+                          <th class="text-start" style="width:160px;">最後編輯</th>
+                          <th class="text-start" style="width:32%;">操作</th>
+                        </tr>
+                      </thead>
+
+                      <tbody class="gs-tbody">
+
+                        <!-- row 1 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-success">進行中</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯">
+                                <i class="bi bi-pencil"></i>
+                              </a>
+                              <!-- <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a> -->
+                              
+                              <a href="page040.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看進度">
+                                <i class="bi bi-list-ul"></i>
+                              </a>
+                              <a href="page050.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看報表">
+                                <i class="bi bi-clipboard-data"></i>
+                              </a>
+                              <button class="btn btn-icon js-toggle-status" data-bs-toggle="tooltip" title="問卷停用">
+                                <i class="bi bi-stop"></i>
+                              </button>
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="結案">
+                                <i class="bi bi-slash-circle"></i>
+                              </button>
+                              <!-- <button class="btn btn-icon" data-bs-toggle="tooltip" title="封存">
+                                <i class="bi bi-box-seam"></i>
+                              </button> -->
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 2 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="專案資訊">
+                              <i class="bi bi-clipboard"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-info">已結案</span></td>
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin"><div class="progress-bar progress-orange" style="width:75%"></div></div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin"><div class="progress-bar progress-orange" style="width:45%"></div></div>
+                          </td>
+                          <td class="small text-muted"><div>2024-01-15</div><div>2024-02-15</div></td>
+                          <td class="small text-muted"><div>2024-01-20 14:30</div><div>王小華</div></td>
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                              <a href="page050.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看報表">
+                                <i class="bi bi-clipboard-data"></i>
+                              </a>
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="封存">
+                                <i class="bi bi-box-seam"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 3-->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-light-pink text-pink">進行中</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯">
+                                <i class="bi bi-pencil"></i>
+                              </a>
+                              <!-- <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a> -->
+                              
+                              <a href="page040.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看進度">
+                                <i class="bi bi-list-ul"></i>
+                              </a>
+                              <a href="page050.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看報表">
+                                <i class="bi bi-clipboard-data"></i>
+                              </a>
+                              <button class="btn btn-icon js-toggle-status" data-bs-toggle="tooltip" title="問卷停用">
+                                <i class="bi bi-stop"></i>
+                              </button>
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="結案">
+                                <i class="bi bi-slash-circle"></i>
+                              </button>
+                              <!-- <button class="btn btn-icon" data-bs-toggle="tooltip" title="封存">
+                                <i class="bi bi-box-seam"></i>
+                              </button> -->
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 4-->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-secondary">草稿</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯">
+                                <i class="bi bi-pencil"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 5-->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-secondary">草稿</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯">
+                                <i class="bi bi-pencil"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 6-->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-warning">問卷停用</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="編輯">
+                                <i class="bi bi-pencil"></i>
+                              </a>
+                              <!-- <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a> -->
+                              
+                              <a href="page040.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看進度">
+                                <i class="bi bi-list-ul"></i>
+                              </a>
+                              <a href="page050.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看報表">
+                                <i class="bi bi-clipboard-data"></i>
+                              </a>
+                              <button class="btn btn-icon js-toggle-status" data-bs-toggle="tooltip" title="問卷停用">
+                                <i class="bi bi-stop"></i>
+                              </button>
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="結案">
+                                <i class="bi bi-slash-circle"></i>
+                              </button>
+                              <!-- <button class="btn btn-icon" data-bs-toggle="tooltip" title="封存">
+                                <i class="bi bi-box-seam"></i>
+                              </button> -->
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 7 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="專案資訊">
+                              <i class="bi bi-clipboard"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-info">已結案</span></td>
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin"><div class="progress-bar progress-orange" style="width:75%"></div></div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin"><div class="progress-bar progress-orange" style="width:45%"></div></div>
+                          </td>
+                          <td class="small text-muted"><div>2024-01-15</div><div>2024-02-15</div></td>
+                          <td class="small text-muted"><div>2024-01-20 14:30</div><div>王小華</div></td>
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                              <a href="page050.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看報表">
+                                <i class="bi bi-clipboard-data"></i>
+                              </a>
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="封存">
+                                <i class="bi bi-box-seam"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 8 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="專案資訊">
+                              <i class="bi bi-clipboard"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-info">已結案</span></td>
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin"><div class="progress-bar progress-orange" style="width:75%"></div></div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin"><div class="progress-bar progress-orange" style="width:45%"></div></div>
+                          </td>
+                          <td class="small text-muted"><div>2024-01-15</div><div>2024-02-15</div></td>
+                          <td class="small text-muted"><div>2024-01-20 14:30</div><div>王小華</div></td>
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                              <a href="page050.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看報表">
+                                <i class="bi bi-clipboard-data"></i>
+                              </a>
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="封存">
+                                <i class="bi bi-box-seam"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 9 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="專案資訊">
+                              <i class="bi bi-clipboard"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-info">已結案</span></td>
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin"><div class="progress-bar progress-orange" style="width:75%"></div></div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin"><div class="progress-bar progress-orange" style="width:45%"></div></div>
+                          </td>
+                          <td class="small text-muted"><div>2024-01-15</div><div>2024-02-15</div></td>
+                          <td class="small text-muted"><div>2024-01-20 14:30</div><div>王小華</div></td>
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                              <a href="page050.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看報表">
+                                <i class="bi bi-clipboard-data"></i>
+                              </a>
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="封存">
+                                <i class="bi bi-box-seam"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 10 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="專案資訊">
+                              <i class="bi bi-clipboard"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-info">已結案</span></td>
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin"><div class="progress-bar progress-orange" style="width:75%"></div></div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin"><div class="progress-bar progress-orange" style="width:45%"></div></div>
+                          </td>
+                          <td class="small text-muted"><div>2024-01-15</div><div>2024-02-15</div></td>
+                          <td class="small text-muted"><div>2024-01-20 14:30</div><div>王小華</div></td>
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                              <a href="page050.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看報表">
+                                <i class="bi bi-clipboard-data"></i>
+                              </a>
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="封存">
+                                <i class="bi bi-box-seam"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!-- 簡易分頁（樣式） -->
+                  <div class="table-footer d-flex justify-content-center align-items-center gap-2 mt-3">
+                    <span class="text-muted small">Page</span>
+                    <div class="btn-group btn-group-sm" role="group">
+                      <button class="btn btn-outline-secondary">‹</button>
+                      <button class="btn btn-outline-secondary active">1</button>
+                      <button class="btn btn-outline-secondary">2</button>
+                      <button class="btn btn-outline-secondary">›</button>
+                    </div>
+                    <select class="form-select form-select-sm w-auto ms-2">
+                      <option>30</option>
+                      <option>50</option>
+                      <option>100</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 封存列表 -->
+              <div id="tab-close" class="tab-panel d-none" role="tabpanel">
+                <div class="h-scroll">
+                  <!-- 專案列表 Table -->
+                  <div class="table-responsive">
+                    <table class="table align-middle gs-table mb-0">
+                      <thead>
+                        <tr>
+                          <th class="text-start" style="width:18%;">客戶名稱</th>
+                          <th class="text-start" style="width:18%;">專案名稱</th>
+                          <th class="text-start" style="width:120px;">專案ID</th>
+                          <th class="text-start" style="width:90px;">狀態</th>
+                          <th style="width:150px;">目標發送／回收</th>
+                          <th style="width:170px;">發送進度</th>
+                          <th style="width:170px;">回收進度</th>
+                          <th style="width:160px;">開始／結束日期</th>
+                          <th class="text-start" style="width:160px;">最後編輯</th>
+                          <th style="width:32%;">操作</th>
+                        </tr>
+                      </thead>
+
+                      <tbody class="gs-tbody">
+
+                        <!-- row 1 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-dark">封存</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 2 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-dark">封存</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 3 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-dark">封存</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+                        
+                        <!-- row 4 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-dark">封存</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 5 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-dark">封存</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 6 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-dark">封存</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 7 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-dark">封存</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 8 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-dark">封存</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+                        
+                        <!-- row 9 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-dark">封存</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <!-- row 10 -->
+                        <tr>
+                          <td class="text-deep-blue fw-semibold">客戶名稱名稱01</td>
+                          <td class="text-deep-blue fw-semibold">客戶滿意度調查Q42024</td>
+                          <td class="text-muted">
+                            <span class="btn btn-icon me-1" data-bs-toggle="tooltip" title="複製">
+                              <i class="bi bi-files"></i>
+                            </span>
+                            PEOJ-2024-001
+                          </td>
+                          <td><span class="w-100 badge badge-state bg-dark">封存</span></td>
+
+                          <td class="small text-muted">
+                            <div>發送：<span class="text-deep-blue fw-semibold">10,000</span></div>
+                            <div>回收：<span class="text-deep-blue fw-semibold">1,000</span></div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span>完成：75%</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:75%"></div>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div class="d-flex align-items-center justify-content-between small text-muted mb-1">
+                              <span class="text-deep-blue fw-semibold">45/1000</span>
+                            </div>
+                            <div class="progress progress-thin">
+                              <div class="progress-bar progress-orange" style="width:45%"></div>
+                            </div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-15</div>
+                            <div>2024-02-15</div>
+                          </td>
+
+                          <td class="small text-muted">
+                            <div>2024-01-20 14:30</div>
+                            <div>王小華</div>
+                          </td>
+
+                          <td style="white-space: nowrap;">
+                            <div class="d-flex justify-content-start gap-2 flex-nowrap">
+                              <button class="btn btn-icon" data-bs-toggle="tooltip" title="複製">
+                                <i class="bi bi-files"></i>
+                              </button>
+                              <a href="page021.html" class="btn btn-icon" data-bs-toggle="tooltip" title="查看">
+                                <i class="bi bi-eye"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+
+
+                  <!-- 簡易分頁（樣式） -->
+                  <div class="table-footer d-flex justify-content-center align-items-center gap-2 mt-3">
+                    <span class="text-muted small">Page</span>
+                    <div class="btn-group btn-group-sm" role="group">
+                      <button class="btn btn-outline-secondary">‹</button>
+                      <button class="btn btn-outline-secondary active">1</button>
+                      <button class="btn btn-outline-secondary">2</button>
+                      <button class="btn btn-outline-secondary">›</button>
+                    </div>
+                    <select class="form-select form-select-sm w-auto ms-2">
+                      <option>30</option>
+                      <option>50</option>
+                      <option>100</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
           </div>
         </div>
       </section>
@@ -218,6 +1574,84 @@
       <a href="#" class="btn btn-outline-secondary w-100">查看所有歷史通知</a>
     </div>
   </aside>
+
+  <!-- 篩選光箱 -->
+  <div class="modal fade" id="filterModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold">篩選</h5>
+          <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <form id="filterForm">
+            <div class="row g-4">
+              <!-- 專案 ID -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">專案 ID</label>
+                <input type="text" class="form-control" placeholder="請輸入">
+              </div>
+
+              <!-- 客戶名稱 -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">客戶名稱</label>
+                <input type="text" class="form-control" placeholder="請輸入">
+              </div>
+
+              <!-- 專案名稱 -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">專案名稱</label>
+                <input type="text" class="form-control" placeholder="請輸入">
+              </div>
+
+              <!-- 狀態 -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">狀態</label>
+                <div class="position-relative">
+                  <select class="form-select">
+                    <option selected>選擇回應狀態</option>
+                    <option>全部</option>
+                    <option>已完成</option>
+                    <option>未完成</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 開始日期 -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">開始日期</label>
+                <div class="input-group date-field">
+                  <input type="date" class="form-control" placeholder="年/月/日">
+                  <span class="input-group-text"><i class="bi bi-calendar-event"></i></span>
+                </div>
+              </div>
+
+              <!-- 結束日期 -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">結束日期</label>
+                <div class="input-group date-field">
+                  <input type="date" class="form-control" placeholder="年/月/日">
+                  <span class="input-group-text"><i class="bi bi-calendar-event"></i></span>
+                </div>
+              </div>
+
+              <!-- 建立帳號 -->
+              <div class="col-12">
+                <label class="form-label fw-semibold">建立帳號</label>
+                <input type="text" class="form-control" placeholder="請輸入">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary px-4" data-bs-dismiss="modal">取消</button>
+          <button class="btn-deep-blue px-4">搜尋</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- 依序載入 JS -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

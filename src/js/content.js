@@ -368,3 +368,86 @@ $(document).ready(function () {
           .addClass('bi-caret-down-fill');
   $firstL2.find('.node-children').removeClass('d-none');
 });
+
+
+// ===== KPI 數字進場動畫 =====
+(function () {
+  function formatNumber(n, decimals, useComma) {
+    const num = Number(n);
+    return useComma
+      ? num.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
+      : num.toFixed(decimals);
+  }
+
+  function countUp(el, opts) {
+    const target = parseFloat(opts.count);
+    const decimals = parseInt(opts.decimals || 0, 10);
+    const suffix = opts.suffix || '';
+    const useComma = (opts.format || '').toLowerCase() === 'comma';
+
+    const duration = 1500; // ms
+    const start = performance.now();
+
+    function step(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const value = target * p;
+      el.textContent = formatNumber(value, decimals, useComma) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function initKpiCounter() {
+    const els = document.querySelectorAll('.kpi-value[data-count]');
+    if (!els.length) return;
+
+    // 用 IntersectionObserver 只動畫一次，且在可視區才跑
+    const seen = new WeakSet();
+    const run = el => {
+      if (seen.has(el)) return;
+      seen.add(el);
+      countUp(el, {
+        count: el.dataset.count,
+        decimals: el.dataset.decimals,
+        suffix: el.dataset.suffix,
+        format: el.dataset.format
+      });
+    };
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) run(e.target); });
+      }, { threshold: 0.4 });
+      els.forEach(el => io.observe(el));
+    } else {
+      // fallback
+      els.forEach(run);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initKpiCounter);
+})();
+
+
+// 問卷啟用／停用 切換
+$(document).on('click', '.js-toggle-status', function () {
+  const $btn = $(this);
+  const $icon = $btn.find('i');
+
+  if ($icon.hasClass('bi-stop')) {
+    // 從 停用 → 啟用
+    $icon.removeClass('bi-stop').addClass('bi-play');
+    $btn.attr('title', '問卷啟用');
+  } else {
+    // 從 啟用 → 停用
+    $icon.removeClass('bi-play').addClass('bi-stop');
+    $btn.attr('title', '問卷停用');
+  }
+
+  // 更新 Bootstrap Tooltip 的內容（即時刷新 title）
+  const tooltip = bootstrap.Tooltip.getInstance($btn[0]);
+  if (tooltip) {
+    tooltip.setContent({ '.tooltip-inner': $btn.attr('title') });
+  }
+});
+
