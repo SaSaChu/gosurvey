@@ -72,6 +72,10 @@ $orange:#FF6721;
 }
 
 /* ===== Button (通用 a / button) ===== */
+.btn-secondary {
+  border-radius: .25rem !important;
+}
+
 a.btn-orange,
 button.btn-orange,
 .btn-orange {
@@ -98,6 +102,11 @@ button.btn-orange,
   }
 }
 
+.btn {
+  &:hover, :active {
+    color: white !important;
+  }
+}
 
 a.btn-red,
 button.btn-red,

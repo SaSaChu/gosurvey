@@ -115,176 +115,201 @@
               </button>
             </div>
 
-          <!-- 名單列表 -->
-          <div class="module-card card border-0 mt-2">
-            <div class="card-body px-0">
 
-              <!-- 標題 + 新增 -->
-              <div class="d-flex justify-content-between align-items-center px-3 py-3 mb-2 border-bottom">
-                <h3 class="h5 fw-bold text-orange mb-0">名單列表</h3>
-                <a href="page023.html" class="btn btn-orange d-inline-flex align-items-center gap-1">
-                  <i class="bi bi-plus-lg"></i> 新增名單
-                </a>
+<form id="projectBasicForm" class="project-form card border-0 shadow-sm">
+  <div class="card-body rounded-2 p-4">
+
+    <!-- 選擇發送渠道 -->
+    <div class="form-section">
+      <h5 class="section-title mb-3">選擇發送渠道</h5>
+
+      <div class="row g-3 channel-grid">
+
+        <!-- EDM -->
+        <div class="col-12">
+          <div class="send-channel no-b d-flex align-items-center gap-3">
+            <div class="form-check m-0">
+              <input class="form-check-input is-round" type="checkbox" id="chEdm">
+            </div>
+            <div>
+              <label class="channel-title" for="chEdm">EDM</label>
+              <div class="channel-subtitle">電子郵件行銷</div>
+            </div>
+
+            <div class="channel-controls">
+              <div class="select-wrap w-260">
+                <select class="form-select">
+                  <option>選擇EDM模板</option>
+                </select>
               </div>
+            </div>
 
-              <div class="table-responsive">
-                <table class="table align-middle gs-table list-table mb-0">
-                  <thead>
-                    <tr>
-                      <th class="w-name">名單名稱</th>
-                      <th class="w-qty">總數量</th>
-                      <th class="w-qty">有效數量</th>
-                      <th class="w-wide">失效數量</th>
-                      <th class="w-wide">編碼類型</th>
-                      <th class="w-wide">已產生連結</th>
-                      <th class="w-wide">渠道</th>
-                      <th class="w-state">狀態</th>
-                      <th class="w-updated">最後編輯</th>
-                      <th class="w-actions">操作</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+            <div class="channel-extra w-320">
+              <input type="text" class="form-control" placeholder="請輸入EDM標題">
+            </div>
+          </div>
+        </div>
 
-                    <!-- row #1 -->
-                    <tr>
-                      <td class="text-deep-blue fw-semibold">主會員名單</td>
-                      <td>10,000</td>
-                      <td>9,500</td>
-                      <td class="text-muted">黑名單：500</td>
-                      <td>
-                        <span class="pill pill-outline">系統</span>
-                      </td>
-                      <td class="col-generated">
-                        <span class="fw-semibold text-deep-blue js-link-count">9,500</span>
-                      </td>
-                      <!-- 渠道（顯示 pill + ＋ 按鈕。按鈕會開新視窗） -->
-                      <td class="col-channels ps-2">
-                        <a href="page024.html" class="btn btn-round-sm ms-0 me-2 js-open-links" title="新增渠道">
-                          <i class="bi bi-plus-lg"></i>
-                        </a>
-                        <!-- <span class="badge badge-chip">Line</span>
-                        <span class="badge badge-chip ms-1">App Push</span> -->
-                      </td>
-                      <td><span class="badge badge-state bg-info text-white">已完成</span></td>
-                      <td class="text-muted">
-                        <div>2024-01-20 14:30</div>
-                        <div>王小華</div>
-                      </td>
-                      <td class="ps-2">
-                        <div class="d-flex gap-2">
-                          <a href="page023.html" class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-eye"></i></a>
-                        </div>
-                      </td>
-                    </tr>
+        <!-- SMS + Line（同列左右兩塊） -->
+        <div class="col-xl-4">
+          <div class="send-channel no-b d-flex align-items-center gap-3">
+            <div class="form-check m-0">
+              <input class="form-check-input is-round" type="checkbox" id="chSms">
+            </div>
+            <div>
+              <label class="channel-title" for="chSms">SMS</label>
+              <div class="channel-subtitle">簡訊發送 &nbsp; &nbsp; &nbsp; &nbsp;</div>
+            </div>
+            <div class="select-wrap w-260">
+              <select class="form-select">
+                <option>選擇SMS模板</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-                    <!-- row #2 -->
-                    <tr>
-                      <td class="text-deep-blue fw-semibold">主會員名單</td>
-                      <td>10,000</td>
-                      <td>9,500</td>
-                      <td class="text-muted">黑名單：500</td>
-                      <td>
-                        <span class="pill pill-outline">系統</span>
-                      </td>
-                      <td class="col-generated">
-                        <span class="fw-semibold text-deep-blue js-link-count">9,500</span>
-                      </td>
-                      <!-- 渠道（顯示 pill + ＋ 按鈕。按鈕會開新視窗） -->
-                      <td class="col-channels ps-2">
-                        <a href="page024.html" class="btn btn-round-sm ms-0 me-2 js-open-links" title="新增渠道">
-                          <i class="bi bi-plus-lg"></i>
-                        </a>
-                        <span class="badge badge-chip">Line</span>
-                        <span class="badge badge-chip ms-1">App Push</span>
-                      </td>
-                      <td><span class="badge badge-state bg-warning text-white">部分失敗</span></td>
-                      <td class="text-muted">
-                        <div>2024-01-20 14:30</div>
-                        <div>王小華</div>
-                      </td>
-                      <td class="ps-2">
-                        <div class="d-flex gap-2">
-                          <a href="page023.html" class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-pencil"></i></a>
-                        </div>
-                      </td>
-                    </tr>
+        <div class="col-xl-6">
+          <div class="send-channel no-b d-flex align-items-center gap-3">
+            <div class="form-check m-0">
+              <input class="form-check-input is-round" type="checkbox" id="chLine">
+            </div>
+            <div>
+              <label class="channel-title" for="chLine">Line</label>
+              <div class="channel-subtitle">Line推播 &nbsp; &nbsp; &nbsp; &nbsp;</div>
+            </div>
+            <div class="select-wrap w-260">
+              <select class="form-select">
+                <option>選擇Line模板</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-                    <!-- row #3 -->
-                    <tr>
-                      <td class="text-deep-blue fw-semibold">主會員名單</td>
-                      <td>10,000</td>
-                      <td>9,500</td>
-                      <td class="text-muted">黑名單：500</td>
-                      <td>
-                        <span class="pill pill-outline">系統</span>
-                      </td>
-                      <td class="col-generated">
-                        <span class="fw-semibold text-deep-blue js-link-count">9,500</span>
-                      </td>
-                      <!-- 渠道（顯示 pill + ＋ 按鈕。按鈕會開新視窗） -->
-                      <td class="col-channels ps-2">
-                        <a href="page024.html" class="btn btn-round-sm ms-0 me-2 js-open-links" title="新增渠道">
-                          <i class="bi bi-plus-lg"></i>
-                        </a>
-                        <span class="badge badge-chip">Line</span>
-                        <span class="badge badge-chip ms-1">App Push</span>
-                      </td>
-                      <td><span class="badge badge-state bg-success text-white">生成中</span></td>
-                      <td class="text-muted">
-                        <div>2024-01-20 14:30</div>
-                        <div>王小華</div>
-                      </td>
-                      <td class="ps-2">
-                        <div class="d-flex gap-2">
-                         <!--  <button class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-eye"></i></button>
-                          <button class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-eye"></i></button> -->
-                        </div>
-                      </td>
-                    </tr>
+        <!-- App Push + 輕鬆得點 -->
+        <div class="col-xl-4">
+          <div class="send-channel no-b d-flex align-items-center gap-3">
+            <div class="form-check m-0">
+              <input class="form-check-input is-round" type="checkbox" id="chApp">
+            </div>
+            <div>
+              <label class="channel-title" for="chApp">App Push</label>
+              <div class="channel-subtitle">應用程式推播</div>
+            </div>
+            <div class="select-wrap w-260">
+              <select class="form-select">
+                <option>選擇App Push模板</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-                    <!-- row #4 -->
-                    <tr>
-                      <td class="text-deep-blue fw-semibold">主會員名單</td>
-                      <td>10,000</td>
-                      <td>9,500</td>
-                      <td class="text-muted">黑名單：500</td>
-                      <td>
-                        <span class="pill pill-outline">系統</span>
-                      </td>
-                      <td class="col-generated">
-                        <span class="fw-semibold text-deep-blue js-link-count">9,500</span>
-                      </td>
-                      <!-- 渠道（顯示 pill + ＋ 按鈕。按鈕會開新視窗） -->
-                      <td class="col-channels ps-2">
-                        <span class="badge badge-chip">實體</span>
-                      </td>
-                      <td><span class="badge badge-state bg-success text-white">生成中</span></td>
-                      <td class="text-muted">
-                        <div>2024-01-20 14:30</div>
-                        <div>王小華</div>
-                      </td>
-                      <td class="ps-2">
-                        <div class="d-flex gap-2">
-                          <a href="page023.html" class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-eye"></i></a>
-                          <button class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-download"></i></button>
-                        </div>
-                      </td>
-                    </tr>
+        <div class="col-xl-6">
+          <div class="send-channel no-b d-flex align-items-center gap-3">
+            <div class="form-check m-0">
+              <input class="form-check-input is-round" type="checkbox" id="chEasy">
+            </div>
+            <div>
+              <label class="channel-title" for="chEasy">輕鬆得點</label>
+              <div class="channel-subtitle">積點獎勵問卷</div>
+            </div>
+            <div class="select-wrap w-260">
+              <select class="form-select">
+                <option>選擇輕鬆得點模板</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-                  </tbody>
-                </table>
-              </div>
+      </div>
+    </div>
 
-              <!-- 底部動作 -->
-              <div class="d-flex justify-content-between align-items-center px-0 mt-4">
-                <a href="page021.html" class="btn btn-deep-blue px-4">回上一步</a>
-                <a href="page020.html" class="btn-deep-blue px-4">完成名單設定</a>
-              </div>
+    <!-- 發送排程設定 -->
+    <div class="form-section">
+      <h5 class="section-title mb-3">發送排程設定</h5>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+          <label class="form-label">開始日期</label>
+          <div class="input-group date-field">
+            <input type="date" class="form-control">
+            <span class="input-group-text js-open-date" role="button" aria-label="選擇日期">
+              <i class="bi bi-calendar-event"></i>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <label class="form-label">開始時間</label>
+          <div class="input-group time-field">
+            <input type="time" class="form-control no-native-picker" value="09:00" aria-label="開始時間">
+            <span class="input-group-text js-open-time" role="button" aria-label="選擇時間">
+              <i class="bi bi-clock"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 獎勵點數設定 -->
+    <div class="form-section">
+      <h5 class="section-title">獎勵點數設定</h5>
+      <div class="text-muted small mb-2">根據填寫狀態設定對應的點數獎勵</div>
+      <div class="row g-3">
+        <div class="col-lg-4 col-md-6">
+          <label class="form-label">已完成</label>
+          <input type="number" class="form-control" value="10" min="0">
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <label class="form-label">額滿</label>
+          <input type="number" class="form-control" value="5" min="0">
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <label class="form-label">不符合資格</label>
+          <input type="number" class="form-control" value="0" min="0">
+        </div>
+      </div>
+    </div>
+
+    <!-- 再次提醒設定 -->
+    <div class="form-section">
+      <h5 class="section-title mb-3">再次提醒設定</h5>
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+          <label class="form-label">提醒間隔</label>
+          <div class="select-wrap">
+            <select class="form-select">
+              <option>選擇間隔</option>
+              <option>1 天</option>
+              <option>3 天</option>
+              <option>1 週</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <label class="form-label">重發次數</label>
+          <div class="select-wrap">
+            <select class="form-select">
+              <option>選擇次數</option>
+              <option>1 次</option>
+              <option>2 次</option>
+              <option>3 次</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form>
+
+
+
+            <!-- 送出 -->
+            <div class="d-flex justify-content-between align-items-center px-0 mt-4">
+              <a href="page024.html" class="btn btn-deep-blue px-4">回上一步</a>
+              <a href="page022.html" class="btn-deep-blue px-4">完成發送控管</a>
             </div>
           </div>
 
 
-          </div>
         </div>
       </section>
 

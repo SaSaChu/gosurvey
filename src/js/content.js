@@ -572,3 +572,145 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// ===== 名單建立互動 =====
+$(function () {
+  const $pkgWrap   = $('.pkg-wrap');         // 名單包清單整塊
+  const $pkgGrid   = $('#pkgGrid');          // chip 容器
+  const $sasSelect = $('#sasSelect');
+  const $btnAddPkg = $('#btnAddPkg');
+
+  // --- A. 資料來源切換：只有選 SAS 時才顯示清單 + 解鎖控制 ---
+  function refreshSourceUI() {
+    const useSas = $('#srcSas').is(':checked');
+    // 顯示/隱藏「名單包清單」
+    $pkgWrap.toggleClass('d-none', !useSas);
+    // 啟用/停用 下拉與加入按鈕
+    $sasSelect.prop('disabled', !useSas);
+    $btnAddPkg.prop('disabled', !useSas);
+  }
+
+  // 初始化（頁面剛載入時判斷一次）
+  refreshSourceUI();
+
+  // 監聽資料來源三個 radio
+  $('input[name="srcType"]').on('change', refreshSourceUI);
+
+  // --- B. 加入「名單包」 chip（沿用你原本邏輯） ---
+  $btnAddPkg.on('click', function () {
+    const txt = $sasSelect.find('option:selected').text().trim();
+    const val = $sasSelect.val();
+    if (!val) return;
+
+    // 去重：同名只加一次
+    const exists = $pkgGrid.find('.pkg-chip').filter(function () {
+      return $(this).data('name') === txt;
+    }).length;
+    if (exists) return;
+
+    const chip = $(`
+      <div class="pkg-chip" data-name="${txt}">
+        <span>${txt}</span>
+        <button type="button" class="btn-del" aria-label="刪除">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    `);
+    $pkgGrid.append(chip);
+  });
+
+  // 刪除 chip
+  $pkgGrid.on('click', '.btn-del', function () {
+    $(this).closest('.pkg-chip').remove();
+  });
+
+  // --- C. 狀態列顯示（沿用你原本的鉤子） ---
+  const showStatus = () => $('#statusRow').removeClass('d-none');
+
+  // 上傳名單
+  $('.js-upload-file').on('click', function () {
+    $('#srcUpload').prop('checked', true).trigger('change'); // 觸發 UI 鎖定/隱藏
+    // TODO: 真實上傳成功後再呼叫
+    showStatus();
+  });
+
+  // 客戶編碼：上傳批次
+  $('.js-upload-batch').on('click', function () {
+    $('#encClient').prop('checked', true);
+    // TODO: 真實上傳成功後再呼叫
+    showStatus();
+  });
+});
+
+
+
+// 限制「發送渠道」只能單選，其餘自動鎖定
+$(function () {
+  const $channels = $('.form-check-input.is-round');
+
+  $channels.on('change', function () {
+    if (this.checked) {
+      // 鎖住其他選項
+      $channels.not(this).prop('disabled', true);
+    } else {
+      // 若取消勾選，全部解鎖
+      $channels.prop('disabled', false);
+    }
+  });
+});
+
+// 限制「發送渠道」只能單選，未選的會整列反灰
+$(function () {
+  const $channels = $('.send-channel'); // 每一列
+  const $inputs = $('.form-check-input.is-round'); // 各列的checkbox
+
+  $inputs.on('change', function () {
+    const $this = $(this);
+
+    if ($this.is(':checked')) {
+      // 鎖定其他渠道
+      $channels.not($this.closest('.send-channel')).addClass('is-disabled');
+      $channels.not($this.closest('.send-channel'))
+        .find('input, select')
+        .prop('disabled', true)
+        .prop('checked', false);
+    } else {
+      // 若取消勾選，全部解鎖
+      $channels.removeClass('is-disabled');
+      $channels.find('input, select').prop('disabled', false);
+    }
+  });
+});
+
+$(function () {
+  $('.js-open-time').on('click', function () {
+    $(this).closest('.input-group').find('input[type="time"]').trigger('focus');
+  });
+});
+
+$(function () {
+  // 編碼類型切換
+  const $encSys    = $('#encSys');
+  const $encClient = $('#encClient');
+  const $uploadBtn = $('.js-upload-batch'); // 上傳按鈕
+  const $uploadNote = $uploadBtn.next('.text-muted'); // 說明文字
+
+  function updateEncodeUI() {
+    if ($encSys.is(':checked')) {
+      // 系統編碼 → 隱藏上傳按鈕與文字
+      $uploadBtn.hide();
+      $uploadNote.hide();
+    } else {
+      // 客戶編碼 → 顯示
+      $uploadBtn.show();
+      $uploadNote.show();
+    }
+  }
+
+  // 初始執行一次
+  updateEncodeUI();
+
+  // 監聽切換
+  $('input[name="encType"]').on('change', updateEncodeUI);
+});
+
+

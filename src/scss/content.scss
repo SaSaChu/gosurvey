@@ -10,7 +10,7 @@ $nav-bg-dark: #062249;
 $nav-text: #e8eef6;
 $accent: #ff6b00;
 $border-light: #e9edf3;
-$light-grey: #F2F2F2;
+$light-grey:#F2F2F2;
 $min-grey:#A5A5A5;
 $dark-grey:#646464;
 $bg-disabled:#dadada;
@@ -20,27 +20,24 @@ $orange:#FF6721;
 
 
 /* =====================================================
-   Page：共用模組外框 / 卡片 / 表格 / 頁頭 / 建立模板
+   Page：共用模組外框 / 表格 / 頁頭 / 建立模板
 ===================================================== */
 .page {
 
-  /* ---------- 模組外框（白底 + 內距） ---------- */
+  /* ---------- 模組卡 ---------- */
   .module-card {
     background: transparent;
     border-radius: .5rem;
 
     &.module-nobg { background: transparent !important; }
 
-    /* 可橫向拖拉的表格容器 */
     .table-responsive {
       position: relative;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       cursor: grab;
-
       &.is-dragging { cursor: grabbing; }
 
-      /* 左右漸層提示（JS 會加 .has-scroll / .at-left / .at-right） */
       &.has-scroll {
         &::before, &::after {
           content: "";
@@ -50,13 +47,12 @@ $orange:#FF6721;
           transition: opacity .2s ease;
         }
         &::before { left: 0;  background: linear-gradient(to right, rgba(255,255,255,.95), rgba(255,255,255,0)); }
-        /*&::after  { right: 0; background: linear-gradient(to left,  rgba(255,255,255,.95), rgba(255,255,255,0)); }*/
         &:not(.at-left)::before  { opacity: 1; }
         &:not(.at-right)::after  { opacity: 1; }
       }
     }
 
-    /* 上方 Tabs（page03/page04 共用） */
+    /* Tabs（page03/page04 共用） */
     .gs-tabs-row {
       padding-bottom: 0 !important;
       border-bottom: 2px solid $border-light;
@@ -78,7 +74,6 @@ $orange:#FF6721;
           &.active { background: $nav-bg; color: #fff; }
         }
 
-        /* 禁用 Tab */
         &.gs-tabs-top {
           .nav-link.disabled,
           .nav-link[aria-disabled="true"] {
@@ -96,7 +91,7 @@ $orange:#FF6721;
       .btn-orange { white-space: nowrap; font-weight: 600; }
     }
 
-    /* 表格規格（統一） */
+    /* 表格統一規格 */
     table {
       width: 100%;
       border-collapse: separate;
@@ -141,7 +136,7 @@ $orange:#FF6721;
       }
     }
 
-    /* 表格語彙：gs-table（可拖拉寬版） */
+    /* 可拖拉寬表格 */
     .gs-table {
       border-color: $border-light;
       table-layout: auto;
@@ -191,46 +186,6 @@ $orange:#FF6721;
     }
   }
 
-  /* ---------- 卡片區（模板卡） ---------- */
-  .tmpl-grid {
-    .tmpl-card {
-      border: 1px solid $border-light;
-      border-radius: .75rem;
-      overflow: hidden;
-      transition: box-shadow .15s ease, transform .1s ease;
-
-      &:hover { box-shadow: 0 6px 18px rgba(0,0,0,.08); transform: translateY(-2px); }
-
-      .img-wrap {
-        position: relative;
-
-        .status-badges {
-          position: absolute; top: .5rem;
-
-          .badge { font-weight: 600; border-radius: 999px; padding: .35rem .6rem; }
-          &.status-left  { left: .5rem; display: flex; gap: .4rem; }
-          &.status-right { right: .5rem; }
-        }
-      }
-
-      .card-body {
-        .card-title { color: $nav-bg; text-align: left; }
-
-        .action-row {
-          display: grid;
-          grid-template-columns: 1fr 40px 40px;
-          gap: 8px;
-
-          .btn {
-            width: 100%; height: 40px; border-radius: .5rem;
-            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-            font-weight: 600;
-          }
-        }
-      }
-    }
-  }
-
   /* ---------- 頁頭 ---------- */
   .page-head {
     display: block; padding-top: 4px; text-align: left;
@@ -253,29 +208,19 @@ $orange:#FF6721;
     }
   }
 
-  /* ---------- 建立模板（左編輯右預覽） ---------- */
+  /* ---------- 建立模板 ---------- */
   .create-tmpl {
     .card {
       text-align: left; border-radius: .75rem;
 
-      .card-header { h6 { letter-spacing: .5px; } }
-
       .card-body {
-        .editor-toolbar {
-          .btn { border-radius: .5rem; padding: .25rem .5rem; i { font-size: .95rem; } }
+        .param-chips .chip {
+          color: $orange; border-color: $orange; border-radius: 999px; padding-inline: .75rem;
+          &:hover, &:focus { background-color: $orange; color: #fff; }
+          &:active { color: #fff !important; background-color: darken($orange, 10%) !important; }
+          &:focus-visible { outline: none; box-shadow: 0 0 0 0.2rem rgba(6,34,73,.25); background-color: darken($orange, 10%); }
+          &.is-active { background: $orange; color: #fff; border-color: $orange; }
         }
-
-        .param-chips {
-          .chip {
-            color: $orange; border-color: $orange; border-radius: 999px; padding-inline: .75rem;
-
-            &:hover, &:focus { background-color: $orange; color: #fff; }
-            &:active { color: #fff !important; background-color: darken($orange, 10%) !important; }
-            &:focus-visible { outline: none; box-shadow: 0 0 0 0.2rem rgba(6,34,73,.25); background-color: darken($orange, 10%); }
-            &.is-active { background: $orange; color: #fff; border-color: $orange; }
-          }
-        }
-
         .preview-canvas { border-color: $border-light !important; }
         .preview-meta   { border: 1px solid $border-light; }
       }
@@ -283,21 +228,19 @@ $orange:#FF6721;
   }
 }
 
-/* 寬螢幕：表格貼滿容器（仍保留窄版可拖拉能力） */
+/* 寬螢幕：表格貼滿容器 */
 @media (min-width: 1800px) {
   .page .module-card {
     .table-responsive { overflow-x: visible; cursor: default;
       &.has-scroll::before, &.has-scroll::after { opacity: 0 !important; }
     }
-    .gs-table { width: 100% !important; min-width: 100% !important; table-layout: auto;
-      thead th, tbody td { white-space: nowrap; }
-    }
+    .gs-table { width: 100% !important; min-width: 100% !important; table-layout: auto; }
   }
 }
 
 
 /* =====================================================
-   發送列表：三層樹狀 send-tree（含表頭/欄位對齊修正）
+   Send Tree（發送列表樹狀）
 ===================================================== */
 .send-tree {
   display: grid; gap: 1rem;
@@ -322,12 +265,11 @@ $orange:#FF6721;
         width: 30px; height: 30px; border-radius: .4rem;
         color: #fff; background: $dark-grey;
         display: inline-flex; align-items: center; justify-content: center;
-
         i { font-size: 1rem; line-height: 1; }
         &:hover, &:active { background: $dark-grey; }
       }
 
-      .flex-grow-1 { min-width: 0; } /* 避免壓縮重疊 */
+      .flex-grow-1 { min-width: 0; }
       .text-deep-blue { color: $nav-bg; }
       .badge-state { border-radius: 999px; padding: .25rem .6rem; font-weight: 700; }
 
@@ -351,14 +293,11 @@ $orange:#FF6721;
     .node-children { padding: 1rem; }
   }
 
-  /* ---------- L2 對齊（以 Grid 精準對齊表頭六欄） ---------- */
   .node-l2 {
-    /* 不再用自己的白底邊框，避免雙層白框 */
     background: transparent !important;
     border: 0 !important;
     margin: 0 12px !important;
 
-    /* 列距 */
     & + .node-l2 { margin-top: 12px !important; }
 
     .node-head {
@@ -366,12 +305,12 @@ $orange:#FF6721;
       padding: 12px 16px;
       display: grid;
       grid-template-columns:
-        44px                 /* 1. 展開箭頭 */
-        minmax(220px, 1fr)   /* 2. 名單名稱 */
-        280px                /* 3. 發送進度 */
-        160px                /* 4. 已回收/目標 */
-        200px                /* 5. 開始時間 */
-        200px;               /* 6. 完成時間 */
+        44px
+        minmax(220px, 1fr)
+        280px
+        160px
+        200px
+        200px;
       column-gap: 12px; align-items: center;
       border: 1px solid rgba(#e9edf3, .8);
       border-radius: .5rem;
@@ -381,7 +320,6 @@ $orange:#FF6721;
         justify-self: start; width: 32px; height: 32px;
       }
 
-      /* 你在 HTML 加上的對應欄位 */
       .col-name     { grid-column: 2; }
       .col-progress { grid-column: 3;
         .progress { min-width: 180px; height: 8px; border-radius: 999px;
@@ -400,24 +338,20 @@ $orange:#FF6721;
     border-color: rgba($border-light, .9);
 
     .node-head { background: #fff; }
-    .node-children { padding: .75rem 1rem 1rem 16px; } /* 回到一般內距 */
+    .node-children { padding: .75rem 1rem 1rem 16px; }
   }
 
   .send-node:hover > .node-head { background: #fdfefe; }
   .send-node .node-head .btn-icon { color: $dark-grey; }
   .send-node .node-head .btn-icon:hover { color: #000; }
 
-  /* 右側 meta：進度在上、進度條在下 */
-  .node-meta {
-    .progress-block {
-      display: flex; flex-direction: column; align-items: flex-start; min-width: 220px;
-      .progress { width: 220px; height: 8px; background-color: #eef2f7; border-radius: 999px;
-        .progress-bar.progress-orange { background-color: $orange; border-radius: 999px; }
-      }
+  .node-meta .progress-block {
+    display: flex; flex-direction: column; align-items: flex-start; min-width: 220px;
+    .progress { width: 220px; height: 8px; background-color: #eef2f7; border-radius: 999px;
+      .progress-bar.progress-orange { background-color: $orange; border-radius: 999px; }
     }
   }
 
-  /* L2 表頭列（與列對齊，最前預留 44px 箭頭欄） */
   .l2-headrow {
     position: relative;
     display: flex; align-items: center; gap: 12px;
@@ -428,7 +362,7 @@ $orange:#FF6721;
     border-bottom: 1px solid #e6ecf3;
     color: #6a7a90; font-weight: 700; letter-spacing: .2px;
 
-    &::before { content: ""; flex: 0 0 44px; } /* 箭頭欄 */
+    &::before { content: ""; flex: 0 0 44px; }
     .cell { white-space: nowrap; }
     .w-name     { flex: 1 1 auto; }
     .w-progress { flex: 0 0 280px; }
@@ -439,13 +373,12 @@ $orange:#FF6721;
     @media (max-width: 1200px) { margin-right: 0; margin-left: 0; }
   }
 
-  /* 小螢幕：維持可 X 軸拖拉 */
   #tab-send & .node-children { overflow-x: auto; }
 }
 
 
 /* =====================================================
-   方形控制按鈕（暫停 / 停止 / 恢復）
+   方形控制按鈕（暫停 / 停止 / 恢復 / 設定）
 ===================================================== */
 .btn-icon.btn-square {
   width: 32px; height: 32px; padding: 0;
@@ -454,26 +387,11 @@ $orange:#FF6721;
   box-shadow: 0 2px 8px rgba(0,0,0,.08);
   color: #fff !important;
 }
+.btn-pause  { background-color: #FFA106; color: #fff; &:hover { background-color:#e0a800; } &:active { background-color: #c69500 !important; } }
+.btn-stop   { background-color: #E41669; color: #fff; &:hover { background-color: darken(#E41669, 5%);} &:active { background-color: darken(#E41669, 10%) !important; } }
+.btn-resume { background-color: #198754; color: #fff; &:hover { background-color: darken(#198754, 5%) !important; } &:active { background-color: darken(#198754, 10%) !important; } }
+.btn-gear   { background-color: $dark-grey; color: #fff; &:hover { background-color: darken($dark-grey, 5%);} &:active { background-color: darken($dark-grey, 10%) !important; }}
 
-.btn-pause  { background-color: #FFA106; color: #212529;
-  &:hover { background-color: #e0a800; color: #fff; }
-  &:active { background-color: #c69500 !important; color: #fff; }
-}
-.btn-stop   { background-color: #E41669; color: #fff;
-  &:hover { background-color: darken(#E41669, 5%); }
-  &:active { background-color: darken(#E41669, 10%) !important; }
-}
-.btn-resume { background-color: #198754; color: #fff;
-  &:hover { background-color: darken(#198754, 5%) !important; }
-  &:active { background-color: darken(#198754, 10%) !important; }
-}
-/* 設定（灰色） */
-.btn-gear {
-  background-color: $dark-grey;
-  color: #fff;
-  &:hover  { background-color: darken($dark-grey, 5%); }
-  &:active { background-color: darken($dark-grey, 10%) !important; }
-}
 
 /* =====================================================
    通用橫向滾動容器（供樹狀/表格）
@@ -483,7 +401,6 @@ $orange:#FF6721;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   cursor: grab;
-
   &.is-dragging { cursor: grabbing; }
 
   &.has-scroll {
@@ -492,9 +409,8 @@ $orange:#FF6721;
       position: absolute; top: 0; bottom: 0; width: 16px;
       pointer-events: none; z-index: 2; opacity: 0; transition: opacity .2s;
     }
-    &::before { left: 0;  background: linear-gradient(to right, rgba(255,255,255,.95), rgba(255,255,255,0)); }
-    /*&::after  { right: 0; background: linear-gradient(to left,  rgba(255,255,255,.95), rgba(255,255,255,0)); }*/
-    &::after  { right: 0;}
+    &::before { left: 0; background: linear-gradient(to right, rgba(255,255,255,.95), rgba(255,255,255,0)); }
+    &::after  { right: 0; }
     &:not(.at-left)::before  { opacity: 1; }
     &:not(.at-right)::after  { opacity: 1; }
   }
@@ -506,43 +422,32 @@ $orange:#FF6721;
   .h-scroll > .send-tree { min-width: 100%; }
 }
 
-/* L3 Grid 表格（發送列表的 L3 明細） */
-.l3-wrap {
-  overflow-x: auto;             /* 不夠寬就出現 X 軸拉霸 */
-  -webkit-overflow-scrolling: touch;
 
-  /* 拖拉時游標（可省略） */
+/* =====================================================
+   L3 Grid（發送列表明細）
+===================================================== */
+.l3-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   cursor: grab;
   &.is-dragging { cursor: grabbing; }
 }
 
-/* 依照欄位配置給最小寬度，避免擠爆 */
 .l3-table {
-  /* 欄位： 渠道 | 狀態 | 數量 | 結果 | 進度 | 優先度 | 更新 | 操作 */
-  --w-chan: 64px;
+  --w-chan: 80px;        /* 渠道 */
   --w-count: 110px;
   --w-result: 120px;
   --w-progress: 220px;
   --w-priority: 110px;
   --w-updated: 170px;
-  --w-actions: 110px;
-
+  --w-actions: 152px;    /* 3 顆 32px 鈕 + gap */
   min-width: calc(
-    var(--w-chan) +  /* 渠道 */
-    320px +          /* 狀態說明（彈性，給個基準） */
-    var(--w-count) +
-    var(--w-result) +
-    var(--w-progress) +
-    var(--w-priority) +
-    var(--w-updated) +
-    var(--w-actions) + 48px /* 欄間距預留 */
+    var(--w-chan) + 320px + var(--w-count) + var(--w-result) + var(--w-progress) +
+    var(--w-priority) + var(--w-updated) + var(--w-actions) + 48px
   );
-
-  display: grid;
-  row-gap: 12px;
+  display: grid; row-gap: 12px;
 }
 
-/* 表頭與資料列使用相同的欄位 Grid */
 .l3-head,
 .l3-row {
   display: grid;
@@ -557,6 +462,7 @@ $orange:#FF6721;
     var(--w-actions);
   column-gap: 12px;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .l3-head {
@@ -573,92 +479,26 @@ $orange:#FF6721;
   background: #fff;
   border: 1px solid #e6ecf3;
   border-radius: .75rem;
-}
 
-/* 進度欄位限制寬度，避免撐出容器 */
-.l3-row .col-progress .progress {
-  width: 100%;
-  max-width: var(--w-progress);
-  height: 8px;
-}
+  > div { min-width: 0; }  /* 允許縮排 */
+  .col-desc, .col-priority, .col-updated {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
 
-/* 保證渠道徽章會顯示 */
-.l3-row .col-chan .badge-chip {
-  display: inline-block;
-}
-
-/* 操作區按鈕群不換行、靠右 */
-.l3-row .col-actions {
-  white-space: nowrap;
-}
-
-/* ---------- 全域：小膠囊（不再只限 gs-table） ---------- */
-.badge-chip {
-  display: inline-block;
-  background: #B3B7C6;
-  color: $nav-bg-dark;
-  border-radius: 999px;
-  padding: .25rem .6rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-/* ---------- L3 Grid 調整：避免溢出、讓渠道與操作穩定顯示 ---------- */
-
-/* 讓每格包含內距計算寬度，避免看起來「出框」 */
-.l3-head,
-.l3-row { box-sizing: border-box; }
-
-/* 某些欄位允許縮排並截斷，避免把整列撐爆 */
-.l3-row > div { min-width: 0; }             /* 關鍵：Grid 子項可縮 */
-.l3-row .col-desc,
-.l3-row .col-priority,
-.l3-row .col-updated {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* 調整欄寬：渠道更寬一點；操作加寬到可放三顆 32px 鈕 */
-.l3-table {
-  --w-chan: 80px;        /* 原 64 → 80，保證看得到徽章 */
-  --w-actions: 152px;    /* 原 110 → 152，32*3 + gap(8*2) + 餘量 */
-}
-
-/* 渠道置中、確保顯示 */
-.l3-row .col-chan {
-  text-align: center;
-}
-
-/* 操作區：不換行、靠右，按鈕群寬度剛好 */
-.l3-row .col-actions {
-  white-space: nowrap;
-  text-align: right;
-}
-.l3-row .col-actions .d-inline-flex {
-  gap: 8px;
-}
-.l3-row .col-actions .btn {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 進度條維持在欄位內 */
-.l3-row .col-progress .progress {
-  width: 100%;
-  max-width: var(--w-progress); /* 你原本的數值 */
-  height: 8px;
+  .col-progress .progress { width: 100%; max-width: var(--w-progress); height: 8px; }
+  .col-chan { text-align: center; }
+  .col-actions { white-space: nowrap; text-align: right;
+    .d-inline-flex { gap: 8px; }
+    .btn { width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+  }
 }
 
 
-/*page05標題*/
-.modal-dialog {
-  text-align: left;
-}
+/* =====================================================
+   通用元件 / 按鈕 / 輸入
+===================================================== */
+.modal-dialog { text-align: left; }
+
 .btn-deep-blue {
   background-color: $light-blue;
   color: #fff;
@@ -666,416 +506,129 @@ $orange:#FF6721;
   font-weight: 600;
   border-radius: .25rem;
   padding: .45rem 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  transition: background-color .2s ease;
+  display: inline-flex; align-items: center; gap: .4rem;
   text-decoration: none;
+  transition: background-color .2s ease;
 
   &:hover  { color: #fff; background-color: darken($light-blue, 5%); }
   &:active { color: #fff !important; background-color: darken($light-blue, 10%) !important; }
 }
 
-/* 搜尋欄細節 */
 .form-control {
   border-radius: .25rem;
   border-color: #dee2e6;
   &:focus { box-shadow: 0 0 0 .2rem rgba($light-blue, .25); border-color: $light-blue; }
 }
 
-.bi-search {
-  pointer-events: none;
-}
-
-/* 篩選鈕：hover/active 也保持白字 */
-.btn-filter { color:#fff !important; }
+.btn-filter,
 .btn-filter:hover,
 .btn-filter:active,
 .btn-filter:focus { color:#fff !important; }
 
-/* Modal 樣式微調 */
-#filterModal .modal-content { border-radius: .75rem; }
-#filterModal .modal-header { border-bottom: 1px solid #e6ecf3; }
-#filterModal .modal-footer { border-top:  0 !important; }
-.modal-footer { border-top: 0 !important; }
-/* 日期輸入 + icon */
-#filterModal .date-field .input-group-text {
-  background: #f6f7fb;
-  border-color: #dee2e6;
-}
-#filterModal .date-field .form-control {
-  border-right: 0;
-}
-#filterModal .date-field .input-group-text i {
-  font-size: 1.05rem;
-  line-height: 1;
-}
+#filterModal {
+  .modal-content { border-radius: .75rem; }
+  .modal-header { border-bottom: 1px solid #e6ecf3; }
+  .modal-footer { border-top: 0 !important; }
 
-/* 只顯示自訂的日曆按鈕，隱藏原生圖示 */
-#filterModal input[type="date"] {
-  /* 讓文字和自訂圖示排版正常 */
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-/* Chrome/Safari */
-#filterModal input[type="date"]::-webkit-calendar-picker-indicator {
-  display: none;
-}
-
-/* Firefox（不會出現原生 icon，這段只是保險）*/
-#filterModal input[type="date"]::-moz-focus-inner { border: 0; }
-
-/* Edge/舊版 IE 清除鈕（若有） */
-#filterModal input[type="date"]::-ms-clear { display: none; }
-
-
-/* 專案報表列表：列表標頭 */
-.list-head {
-  .h6 { letter-spacing: .2px; }
-  .small span { color: #0a213f; }
-}
-
-/* 表格的灰底方形小按鈕（下載） */
-.btn-dark-ghost {
-  width: 36px; height: 36px; padding: 0;
-  border-radius: .5rem;
-  background: #6c757d; color: #fff;
-  display: inline-flex; align-items: center; justify-content: center;
-  border: 1px solid transparent;
-  i { font-size: 1rem; line-height: 1; }
-  &:hover { background: #5f676e; color: #fff; }
-  &:active { background: #4e565c !important; color: #fff !important; }
-}
-
-/* Modal：匯出報表 */
-.export-modal {
-  .modal-header { border-bottom-color: #edf1f6; }
-  .modal-footer { border-top-color: #edf1f6; }
-
-  .form-label { color: #0a213f; }
-  .form-select, .form-control { border-radius: .5rem; }
-
-  /* 下拉 caret（和設計稿一致） */
-  .select-caret {
-    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-    font-size: .85rem; color: #6c757d; pointer-events: none;
+  .date-field {
+    .input-group-text { background: #f6f7fb; border-color: #dee2e6; }
+    .form-control { border-right: 0; }
+    .input-group-text i { font-size: 1.05rem; line-height: 1; }
   }
 
-  /* 柔和警示 */
-  .alert-warning-soft {
-    --bs-alert-bg: #fff7e6;
-    --bs-alert-border-color: #ffe6b8;
-    --bs-alert-color: #7a5a00;
-    background: var(--bs-alert-bg);
-    border: 1px solid var(--bs-alert-border-color);
-    color: var(--bs-alert-color);
-    border-radius: .5rem;
-    font-size: .95rem;
-  }
+  /* 移除原生 date 圖示（只保留自訂 icon） */
+  input[type="date"] { -webkit-appearance: none; appearance: none; }
+  input[type="date"]::-webkit-calendar-picker-indicator { display: none; }
+  input[type="date"]::-moz-focus-inner { border: 0; }
+  input[type="date"]::-ms-clear { display: none; }
 }
 
-/* 表頭換行時：讓多行th好看些（和你的 gs-table 相容） */
-.gs-table thead th { vertical-align: bottom; }
-
-/* 讓特定表格撐滿容器（不受 max-content 影響） */
-.gs-table.is-fluid {
-  width: 100% !important;
-  min-width: 100% !important;
-  table-layout: auto;
-}
-
-/* 確保列能放絕對定位的偽元素 */
-#tab-prolist .gs-table tbody tr {
-  position: relative;
-  border-radius: .25rem; /* 跟原本一致 */
-  overflow: hidden;      /* 讓圓角生效 */
-}
-
-/* 在每列裡面畫一個 1px 的內框（不會被外層遮掉） */
-#tab-prolist .gs-table tbody tr::after {
-  content: "";
-  position: absolute;
-  inset: 0;                       /* top/right/bottom/left 全貼 */
-  border-left: 1px solid #e6ecf3;      /* 那條灰線 */
-  border-right: 1px solid #e6ecf3;      /* 那條灰線 */
-  border-radius: .75rem;
-  pointer-events: none;
-}
-
-
-
-/* ===== KPI Cards ===== */
+/* KPI */
 .kpi-row { margin-top: .25rem; }
-
 .kpi-card {
-  background: #fff;
-  border: 1px solid #e9edf3;
-  border-radius: .9rem;
-  padding: 1.25rem 1.25rem 1.5rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,.04);
-  transition: box-shadow .2s ease, transform .1s ease;
-  position: relative;
-  height: 100%;
-
+  background: #fff; border: 1px solid #e9edf3; border-radius: .9rem;
+  padding: 1.25rem 1.25rem 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,.04);
+  transition: box-shadow .2s, transform .1s; position: relative; height: 100%;
   &:hover { box-shadow: 0 8px 24px rgba(0,0,0,.08); transform: translateY(-2px); }
 }
-
-.kpi-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: .5rem;
-}
-
-.kpi-title {
-  font-weight: 700;
-  color: $dark-grey; /* 你前面變數已定義 */
-  font-size: 1rem;
-}
-
+.kpi-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
+.kpi-title { font-weight: 700; color: $dark-grey; font-size: 1rem; }
 .kpi-icon {
-  width: 56px; height: 56px;
-  display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 16px;
+  width: 56px; height: 56px; display: inline-flex; align-items: center; justify-content: center; border-radius: 16px;
   i { font-size: 1.35rem; }
   &--orange { background: #fdebd8; color: #ff8a1f; }
   &--cyan   { background: #e3f6fb; color: #35b8d0; }
   &--teal   { background: #e4f2ef; color: #1f8a78; }
   &--pink   { background: #fde4ee; color: #e55b94; }
 }
-
-.kpi-value {
-  font-weight: 800;
-  color: $nav-bg;    /* 深藍 */
-  line-height: 1.1;
-  font-size: clamp(2rem, 3.6vw, 3.25rem); /* 會隨寬度適度縮放 */
-  letter-spacing: .5px;
-}
+.kpi-value { font-weight: 800; color: $nav-bg; line-height: 1.1; font-size: clamp(2rem, 3.6vw, 3.25rem); letter-spacing: .5px; }
 
 
-/* ========= 建立新專案：表單樣式 ========= */
+/* =====================================================
+   建立新專案：表單樣式（Project Form）
+===================================================== */
 .project-form {
   border-radius: 12px;
   .card-body { background: #fff; }
 
-  .form-section + .form-section {
-    margin-top: 28px;
-    padding-top: 16px;
-  }
+  .form-section + .form-section { margin-top: 28px; padding-top: 16px; }
 
-  .section-title {
-    color: $orange;
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
+  /* 注意：此處橘色覆蓋全域 section-title（保留設計） */
+  .section-title { color: $orange; font-weight: 700; margin-bottom: 16px; }
 
-  .form-label.required::after {
-    content: " *";
-    color: #ff5a5a;
-    font-weight: 700;
-  }
+  .form-label.required::after { content: " *"; color: #ff5a5a; font-weight: 700; }
 
-  /* 日期欄右側 icon */
-  .date-field {
-    .input-group-text {
-      background: #f7f9fc;
-      border-color: #dee3ea;
-      cursor: pointer;
-    }
-  }
+  .date-field .input-group-text { background: #f7f9fc; border-color: #dee3ea; cursor: pointer; }
 
-  /* Select 統一箭頭（避免雙箭頭疊影） */
   .select-wrap {
     position: relative;
-    .form-select {
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      padding-right: 2.2rem;
-    }
-    .select-caret {
-      position: absolute;
-      right: 12px; top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-      font-size: 0.875rem;
-      color: #8aa0b4;
-    }
+    .form-select { appearance: none; -webkit-appearance: none; -moz-appearance: none; padding-right: 2.2rem; }
+    .select-caret { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: .875rem; color: #8aa0b4; }
   }
 
-  /* 輸入框右上角小圖示 */
-  .input-affix {
-    position: absolute;
-    right: 10px; top: 50%;
-    transform: translateY(-50%);
-    color: #8aa0b4;
-    pointer-events: none;
-  }
+  .input-affix { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #8aa0b4; pointer-events: none; }
 
-  /* 複製連結輸入列 */
   .input-copy-wrap {
     position: relative;
     .btn-copy {
-      position: absolute;
-      right: 6px; top: 50%;
-      transform: translateY(-50%);
-      border: 0;
-      background: transparent;
-      padding: 6px 8px;
-      color: #6b7f92;
+      position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+      border: 0; background: transparent; padding: 6px 8px; color: #6b7f92;
       &:hover { color: #0f2759; }
     }
   }
 }
 
-/* 小圖示按鈕通用 */
-.btn-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px; height: 36px;
-  border-radius: 8px;
-  border: 1px solid #e7ebf1;
-  background: #fff;
-  transition: all .15s ease;
-  i { font-size: 1rem; }
-  &:hover { background: #f7f9fc; }
-}
+/* 只在需要時使用的全域 section 樣式（深藍） */
+.section-title { font-weight: 700; font-size: 20px; color:#0e2a47; margin-bottom: 16px; }
+.section-caption{ font-weight: 700; color:#0e2a47; }
 
-/* 修正日期欄位 icon 重疊問題 */
-input[type="date"] {
-  &::-webkit-calendar-picker-indicator {
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-}
+/* 輸入（唯讀） */
+.form-control.readonly[readonly] { background-color: #f3f4f6; cursor: default; box-shadow: none; }
 
-/* 唯讀輸入欄：呈現灰底、不可編輯游標 */
-.form-control.readonly[readonly] {
-  background-color: #f3f4f6;
-  cursor: default;
-  box-shadow: none;
-}
-
-/* 右側複製按鈕（灰色方塊），和你截圖一致 */
-.copy-group .btn-copy {
-  background: #6b7280;          /* 灰 */
-  color: #fff;
-  border: 1px solid #6b7280;
-  padding: 0.5rem 0.75rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-
-  &:hover,
-  &:focus {
-    background-color: darken(#6b7280, 5%);
-    color: #ffffff;
-    text-decoration: none;
-  }
-
-  &:active {
-    color: white !important;
-    background-color: darken(#6b7280, 10%) !important;
-  }
-
-  &:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(6, 34, 73, 0.25);
-    background-color: darken(#6b7280, 10%);
-  }
-}
-.copy-group .btn-copy:hover { filter: brightness(1.05); }
-
-/* 複製成功的回饋（暫時變綠＋icon 變勾） */
-.btn-copy.copied {
-  background: #6b7280;
-  border-color: #6b7280;
-}
-
-/* 小標題字重，接近你圖上的效果 */
-.title-strong {
-  font-weight: 800;
-  color: #133153;               /* 深藍（依你站內色系可調） */
-}
-
-/* 讓一鍵複製全部與輸入框垂直對齊 */
-.copy-group + .btn-deep-blue,
-.col-lg-2 .btn-deep-blue {
-  height: 100%;
-  min-height: 42px; /* 與 input 高度一致 */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-}
-
-/* 讓 input group 內的 copy icon 與按鈕完美連接 */
+/* Copy Group Button */
 .copy-group {
-  .form-control.readonly {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
+  .form-control.readonly { border-top-right-radius: 0; border-bottom-right-radius: 0; }
   .btn-copy {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    height: 42px; /* 與 input 對齊 */
+    background: #6b7280; color:#fff; border: 1px solid #6b7280;
+    padding: .5rem .75rem; display: inline-flex; align-items:center; justify-content:center;
+    border-top-left-radius: 0; border-bottom-left-radius: 0; height: 42px;
+    &:hover, &:focus { background-color: darken(#6b7280, 5%); color: #fff; }
+    &:active { background-color: darken(#6b7280, 10%) !important; color: #fff !important; }
+    &:focus-visible { outline: none; box-shadow: 0 0 0 .2rem rgba(6,34,73,.25); background-color: darken(#6b7280, 10%); }
   }
 }
+.btn-copy.copied { background: #6b7280; border-color: #6b7280; }
+.title-strong { font-weight: 800; color: #133153; }
+.copy-group + .btn-deep-blue,
+.col-lg-2 .btn-deep-blue { height: 100%; min-height: 42px; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; }
 
-/* -----------------------------
-   建立新專案：步驟導覽
------------------------------ */
-.step-tabs {
-  .step-btn {
-    border: none;
-    outline: none;
-    padding: 0.75rem 2rem;
-    border-radius: 0.5rem;
-    font-weight: 700;
-    font-size: 1rem;
-    background: #fff;
-    color: #9ca3af; /* 淺灰 */
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
 
-    &.step-ok {
-      background: #00C951;
-      color: #fff;
-    }
-
-    &.active {
-      background: #092a58; /* 深藍底 */
-      color: #fff;
-      .num {
-        background: #fff;
-        color: #092a58;
-      }
-    }
-  }
-}
-
-/* 名單列表（建立新專案 step2） */
+/* =====================================================
+   名單列表（建立新專案 step2）
+===================================================== */
 .list-table {
-  thead th {
-    color: #6c757d;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-  td, th {
-    vertical-align: middle;
-    white-space: nowrap;
-  }
+  thead th { color: #6c757d; font-weight: 600; white-space: nowrap; }
+  td, th { vertical-align: middle; white-space: nowrap; }
 
   .w-name   { min-width: 180px; }
   .w-qty    { width: 110px; text-align: left; }
@@ -1084,68 +637,226 @@ input[type="date"] {
   .w-updated{ min-width: 160px; }
   .w-actions{ width: 100px; }
 
-  /* 小圓角膠囊 */
   .pill {
-    display:inline-block;
-    padding:.2rem .75rem;
-    border-radius:999px;
-    background:#eef2f7;
-    color:#0f2b59;
-    font-weight:600;
-    font-size:.875rem;
-    line-height:1;
+    display:inline-block; padding:.2rem .75rem; border-radius:999px;
+    background:#eef2f7; color:#0f2b59; font-weight:600; font-size:.875rem; line-height:1;
     &.pill-dim { background:#e6ebf2; color:#6b7280; }
   }
-  .pill-outline {
-    background:#fff;
-    border:2px solid #0f2b59;
-  }
+  .pill-outline { background:#fff; border:2px solid #0f2b59; }
 
-  /* 狀態 badge（延用現有色系） */
   .badge-state { font-weight:700; }
 
-  /* 小圓形 icon 按鈕（＋） */
   .btn-round-sm{
-    width:32px;
-    height:32px;
-    border-radius:8px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    background:#0f2b59;
-    color:#fff;
-    border:0;
-    
-    &:hover,
-    &:focus {
-      background-color: darken(#0f2b59, 5%);
-      color: #ffffff;
-      text-decoration: none;
-    }
+    width:32px; height:32px; border-radius:8px;
+    display:inline-flex; align-items:center; justify-content:center;
+    background:#0f2b59; color:#fff; border:0;
 
-    &:active {
-      color: white !important;
-      background-color: darken(#0f2b59, 10%) !important;
-    }
-
-    &:focus-visible {
-      outline: none;
-      box-shadow: 0 0 0 0.2rem rgba(6, 34, 73, 0.25);
-      background-color: darken(#0f2b59, 10%);
-    }
+    &:hover, &:focus { background-color: darken(#0f2b59, 5%); color: #fff; }
+    &:active { background-color: darken(#0f2b59, 10%) !important; color: #fff !important; }
+    &:focus-visible { outline: none; box-shadow: 0 0 0 .2rem rgba(6, 34, 73, .25); background-color: darken(#0f2b59, 10%); }
   }
 
-  /* 操作 icon 按鈕列，單行顯示 */
   .btn-icon{
-    width:34px;height:34px;border-radius:8px;
-    display:inline-flex;align-items:center;justify-content:center;
-    background:#f0f2f6;color:#0f2b59;
+    width:34px; height:34px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center;
+    background:#f0f2f6; color:#0f2b59;
+  }
+
+  .col-channels { white-space: nowrap; .btn-round-sm { margin-left: .5rem; vertical-align: middle; } }
+  .col-generated { white-space: nowrap; }
+}
+
+
+/* =====================================================
+   名單建立（白底容器）
+===================================================== */
+.module-white {
+  background:#fff; border-radius:12px; padding:24px; box-shadow:0 1px 2px rgba(16,24,40,.06);
+}
+.bar-row{
+  background:#f5f7fb; border-radius:12px; padding:16px; display:flex; flex-wrap:wrap; gap:16px;
+  &.bar-row-top { background: transparent; }
+}
+.bar-row .bar-item{ display:flex; align-items:center; flex-wrap:wrap; }
+.bar-row .bar-item.grow{ flex:1 1 280px; }
+
+.pkg-wrap{ background:#f5f7fb; border-radius:12px; padding:16px; margin-top:12px; }
+.pkg-grid{ display:flex; flex-wrap:wrap; gap:12px; }
+.pkg-chip{
+  flex:0 0 calc(25% - 9px); min-width:190px; background:#fff; border:1px solid #e5e7ec;
+  border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between;
+  font-weight:600; color:#0e2a47;
+  .btn-del{
+    border:none; background:#ffe9ed; color:#c92a47;
+    width:32px; height:32px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center;
+    &:hover{ background:#ffd4dc; }
   }
 }
 
-/* 渠道欄位排版：pill + + 按鈕對齊 */
-.list-table .col-channels {
-  white-space: nowrap;
-  .btn-round-sm { margin-left: .5rem; vertical-align: middle; }
+/* 小巧的湖綠色主要按鈕（上傳） */
+.btn-teal{ background:#06b6d4; color:#fff; border:0; border-radius:10px; padding:.4rem .9rem; }
+.btn-teal:hover{ filter:brightness(.95); }
+
+.stat-card{ background:#fff; border:1px solid #e5e7ec; border-radius:10px; padding:12px 16px; font-weight:600; color:#0e2a47; }
+.form-select-sm.w-auto{ min-width:180px; }
+
+
+/* =====================================================
+   名單發送列表（Send List）
+===================================================== */
+.send-list-table {
+  .w-channel { width: 120px; }
+  .w-progress { width: 320px; }
+  .w-qty { width: 120px; }
+  .w-updated { width: 180px; }
+  .w-actions { width: 100px; }
+  .col-progress { min-width: 260px; }
+
+  /* 百分比在上、Bar 在下（整併後只保留一份） */
+  .progress-row { min-width: 220px; display:flex; flex-direction: column; align-items: flex-start; gap: .25rem; }
+  .progress-row .progress { width: 240px; max-width: 100%; }
 }
-.list-table .col-generated { white-space: nowrap; }
+
+.pill-channel {
+  display: inline-block; padding: 4px 12px; border-radius: 999px;
+  background-color: #eef2f6; border: 1px solid #d8dee6; font-weight: 600; color: #2d3a4a;
+}
+
+
+/* =====================================================
+   發送渠道（Channel Grid）
+===================================================== */
+.channel-grid { --gap: 12px; }
+
+.send-channel {
+  background: #fff; border: 1px solid #E6EAF0; border-radius: 12px; padding: 12px 14px; min-height: 56px;
+  &.no-b { border:0; }
+
+  .channel-title { font-weight: 700; color: #1f2a37; line-height: 1.1; }
+  .channel-subtitle { font-size: .825rem; color: #8a94a6; }
+
+  .w-260 { width: 260px; max-width: 100%; }
+  .w-320 { width: 452px; max-width: 100%; }
+}
+
+/* 圓形單選風格 */
+.form-check-input.is-round { border-radius: 50%; width: 18px; height: 18px; margin-top: 0; }
+
+/* send-channel 鎖定樣式 */
+.send-channel.is-disabled {
+  opacity: 0.5; pointer-events: none; background-color: #f7f8fa; border-color: #e5e8ee;
+}
+.send-channel select:disabled,
+.send-channel input:disabled {
+  background-color: #f2f3f5 !important; color: #9ba2b1 !important; cursor: not-allowed;
+}
+
+/* input-group icon 風格（統一） */
+.input-group > .input-group-text { background: #f5f7fa; border-color: #E6EAF0; }
+
+
+/* =====================================================
+   小元件 / 公用
+===================================================== */
+.btn-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid #e7ebf1; background: #fff; transition: all .15s ease;
+  i { font-size: 1rem; }
+  &:hover { background: #f7f9fc; }
+}
+
+/* Date：修正重疊（只讓自訂按鈕可點） */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0; position: absolute; right: 0; width: 100%; height: 100%; cursor: pointer;
+}
+
+/* Time：隱藏原生小時鐘（避免雙 icon）。請在 input 上加 .no-native-picker */
+input[type="time"].no-native-picker { appearance: none; -moz-appearance: textfield; }
+input[type="time"].no-native-picker::-webkit-calendar-picker-indicator { display: none; }
+input[type="time"].no-native-picker::-webkit-clear-button,
+input[type="time"].no-native-picker::-webkit-inner-spin-button { display: none; }
+
+
+/* =====================================================
+   步驟導覽（建立新專案）
+===================================================== */
+.step-tabs .step-btn{
+  border: none; outline: none; padding: .75rem 2rem; border-radius: .5rem;
+  font-weight: 700; font-size: 1rem; background: #fff; color: #9ca3af;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: all .2s ease;
+  display: inline-flex; align-items: center; gap: .5rem;
+
+  &.step-ok { background: #00C951; color: #fff; }
+  &.active  { background: #092a58; color: #fff; .num { background:#fff; color:#092a58; } }
+}
+
+
+/* content.scss 補上 */
+.btn-teal {
+  background: #06b6d4;
+  color:#fff;
+  border:0;
+  border-radius:.25rem;
+  padding:.4rem .9rem;
+
+
+  &:active, &:hover {
+    color: white !important;
+    background-color: darken(#06b6d4, 10%) !important;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(6, 34, 73, 0.25);
+    background-color: #06b6d4;
+  }
+
+  /* 關鍵：disabled 時仍維持湖綠色，不被 Bootstrap 灰掉 */
+  &:disabled,
+  &.disabled {
+    background:#06b6d4 !important;
+    border-color:#06b6d4 !important;
+    color:#fff !important;
+    opacity:1;         /* 視覺上看起來是鎖住（可改成 1） */
+    cursor:not-allowed;
+  }
+}
+
+
+.module-white {
+  .bar-row {
+    // 讓每塊改成上下堆疊（標題在上、卡片在下）
+    .bar-item {
+      &.col-stack {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    // 小標題樣式（和設計稿一致）
+    .section-caption {
+      font-weight: 700;
+      color: #0e2a47; // 深藍
+      margin-bottom: 0; // 由 col-stack 的 gap 控制距離
+    }
+
+    // 卡片群組：可多個卡片並排、可換行
+    .stat-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px; // 卡片之間的間距
+    }
+
+    // 白色數字卡片
+    .stat-card {
+      background: #fff;
+      border: 1px solid #e5e7ec;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-weight: 600;
+      color: #0e2a47;
+      min-width: 220px; // 視覺穩定、接近圖示寬度
+    }
+  }
+}

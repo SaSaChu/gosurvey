@@ -115,174 +115,172 @@
               </button>
             </div>
 
-          <!-- 名單列表 -->
-          <div class="module-card card border-0 mt-2">
-            <div class="card-body px-0">
+            <!-- 名單發送列表（依照設計稿替換） -->
+            <div class="module-card card border-0 mt-2">
+              <div class="card-body px-0">
 
-              <!-- 標題 + 新增 -->
-              <div class="d-flex justify-content-between align-items-center px-3 py-3 mb-2 border-bottom">
-                <h3 class="h5 fw-bold text-orange mb-0">名單列表</h3>
-                <a href="page023.html" class="btn btn-orange d-inline-flex align-items-center gap-1">
-                  <i class="bi bi-plus-lg"></i> 新增名單
-                </a>
-              </div>
+                <!-- 標題 + 新增 -->
+                <div class="d-flex justify-content-between align-items-center px-3 py-3 mb-2 border-bottom">
+                  <div>
+                    <h3 class="h5 fw-bold text-orange mb-1">名單發送列表</h3>
+                    <div class="text-muted small">針對單一名單包進行發送控管設定</div>
+                  </div>
+                  <a href="page025.html" class="btn btn-orange d-inline-flex align-items-center gap-1">
+                    <i class="bi bi-plus-lg"></i> 新增渠道
+                  </a>
+                </div>
 
-              <div class="table-responsive">
-                <table class="table align-middle gs-table list-table mb-0">
-                  <thead>
-                    <tr>
-                      <th class="w-name">名單名稱</th>
-                      <th class="w-qty">總數量</th>
-                      <th class="w-qty">有效數量</th>
-                      <th class="w-wide">失效數量</th>
-                      <th class="w-wide">編碼類型</th>
-                      <th class="w-wide">已產生連結</th>
-                      <th class="w-wide">渠道</th>
-                      <th class="w-state">狀態</th>
-                      <th class="w-updated">最後編輯</th>
-                      <th class="w-actions">操作</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                <div class="table-responsive">
+                  <table class="table align-middle gs-table send-list-table  is-fluid mb-0">
+                    <thead>
+                      <tr>
+                        <th class="w-channel">渠道</th>
+                        <th class="w-wide">失效數量</th>
+                        <th class="w-qty">筆數</th>
+                        <th class="w-progress">進度</th>
+                        <th class="w-updated">最後更新時間</th>
+                        <th class="w-actions text-center">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
 
-                    <!-- row #1 -->
-                    <tr>
-                      <td class="text-deep-blue fw-semibold">主會員名單</td>
-                      <td>10,000</td>
-                      <td>9,500</td>
-                      <td class="text-muted">黑名單：500</td>
-                      <td>
-                        <span class="pill pill-outline">系統</span>
-                      </td>
-                      <td class="col-generated">
-                        <span class="fw-semibold text-deep-blue js-link-count">9,500</span>
-                      </td>
-                      <!-- 渠道（顯示 pill + ＋ 按鈕。按鈕會開新視窗） -->
-                      <td class="col-channels ps-2">
-                        <a href="page024.html" class="btn btn-round-sm ms-0 me-2 js-open-links" title="新增渠道">
-                          <i class="bi bi-plus-lg"></i>
-                        </a>
-                        <!-- <span class="badge badge-chip">Line</span>
-                        <span class="badge badge-chip ms-1">App Push</span> -->
-                      </td>
-                      <td><span class="badge badge-state bg-info text-white">已完成</span></td>
-                      <td class="text-muted">
-                        <div>2024-01-20 14:30</div>
-                        <div>王小華</div>
-                      </td>
-                      <td class="ps-2">
-                        <div class="d-flex gap-2">
-                          <a href="page023.html" class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-eye"></i></a>
-                        </div>
-                      </td>
-                    </tr>
+                      <!-- row #1 -->
+                      <tr>
+                        <td>
+                          <span class="badge badge-chip">SMS</span>
+                        </td>
+                        <td class="text-muted">
+                          <div>已發過(24hrs)：<span class="fw-semibold">1,000</span></div>
+                          <div>已完成：<span class="fw-semibold">562</span></div>
+                        </td>
+                        <td>9,500</td>
+                        <td class="col-progress">-</td>
+                        <td>2024-01-20 14:30</td>
+                        <td class="text-center">
+                          <a href="page024.html" class="btn btn-icon" data-bs-toggle="tooltip" title="設定">
+                            <i class="bi bi-gear"></i>
+                          </a>
+                        </td>
+                      </tr>
 
-                    <!-- row #2 -->
-                    <tr>
-                      <td class="text-deep-blue fw-semibold">主會員名單</td>
-                      <td>10,000</td>
-                      <td>9,500</td>
-                      <td class="text-muted">黑名單：500</td>
-                      <td>
-                        <span class="pill pill-outline">系統</span>
-                      </td>
-                      <td class="col-generated">
-                        <span class="fw-semibold text-deep-blue js-link-count">9,500</span>
-                      </td>
-                      <!-- 渠道（顯示 pill + ＋ 按鈕。按鈕會開新視窗） -->
-                      <td class="col-channels ps-2">
-                        <a href="page024.html" class="btn btn-round-sm ms-0 me-2 js-open-links" title="新增渠道">
-                          <i class="bi bi-plus-lg"></i>
-                        </a>
-                        <span class="badge badge-chip">Line</span>
-                        <span class="badge badge-chip ms-1">App Push</span>
-                      </td>
-                      <td><span class="badge badge-state bg-warning text-white">部分失敗</span></td>
-                      <td class="text-muted">
-                        <div>2024-01-20 14:30</div>
-                        <div>王小華</div>
-                      </td>
-                      <td class="ps-2">
-                        <div class="d-flex gap-2">
-                          <a href="page023.html" class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-pencil"></i></a>
-                        </div>
-                      </td>
-                    </tr>
+                      <!-- row #2 -->
+                      <tr>
+                        <td>
+                          <span class="badge badge-chip">SMS</span>
+                        </td>
+                        <td class="text-muted">
+                          <div>已發過(24hrs)：<span class="fw-semibold">1,000</span></div>
+                          <div>已完成：<span class="fw-semibold">562</span></div>
+                        </td>
+                        <td>12,500</td>
+                        <!-- 65% -->
+                        <td class="col-progress">
+                          <div class="progress-row d-flex">
+                            <div class="pct-text fw-semibold text-deep-blue small">完成：65%</div>
+                            <div class="progress progress-thin" aria-label="完成 65%">
+                              <div class="progress-bar progress-orange" style="width: 65%;" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>2024-01-20 15:45</td>
+                        <td class="text-center">
+                          <a href="page025.html" class="btn btn-icon" data-bs-toggle="tooltip" title="設定">
+                            <i class="bi bi-gear"></i>
+                          </a>
+                        </td>
+                      </tr>
 
-                    <!-- row #3 -->
-                    <tr>
-                      <td class="text-deep-blue fw-semibold">主會員名單</td>
-                      <td>10,000</td>
-                      <td>9,500</td>
-                      <td class="text-muted">黑名單：500</td>
-                      <td>
-                        <span class="pill pill-outline">系統</span>
-                      </td>
-                      <td class="col-generated">
-                        <span class="fw-semibold text-deep-blue js-link-count">9,500</span>
-                      </td>
-                      <!-- 渠道（顯示 pill + ＋ 按鈕。按鈕會開新視窗） -->
-                      <td class="col-channels ps-2">
-                        <a href="page024.html" class="btn btn-round-sm ms-0 me-2 js-open-links" title="新增渠道">
-                          <i class="bi bi-plus-lg"></i>
-                        </a>
-                        <span class="badge badge-chip">Line</span>
-                        <span class="badge badge-chip ms-1">App Push</span>
-                      </td>
-                      <td><span class="badge badge-state bg-success text-white">生成中</span></td>
-                      <td class="text-muted">
-                        <div>2024-01-20 14:30</div>
-                        <div>王小華</div>
-                      </td>
-                      <td class="ps-2">
-                        <div class="d-flex gap-2">
-                         <!--  <button class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-eye"></i></button>
-                          <button class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-eye"></i></button> -->
-                        </div>
-                      </td>
-                    </tr>
+                      <!-- row #3 -->
+                      <tr>
+                        <td>
+                          <span class="badge badge-chip">Line</span>
+                        </td>
+                        <td class="text-muted">
+                          <div>已發過(24hrs)：<span class="fw-semibold">1,000</span></div>
+                          <div>已完成：<span class="fw-semibold">562</span></div>
+                        </td>
+                        <td>12,500</td>
+                        <!-- 65% -->
+                        <td class="col-progress">
+                          <div class="progress-row d-flex">
+                            <div class="pct-text fw-semibold text-deep-blue small">完成：65%</div>
+                            <div class="progress progress-thin" aria-label="完成 65%">
+                              <div class="progress-bar progress-orange" style="width: 65%;" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>2024-01-20 15:45</td>
+                        <td class="text-center">
+                          <a href="page025.html" class="btn btn-icon" data-bs-toggle="tooltip" title="設定">
+                            <i class="bi bi-gear"></i>
+                          </a>
+                        </td>
+                      </tr>
 
-                    <!-- row #4 -->
-                    <tr>
-                      <td class="text-deep-blue fw-semibold">主會員名單</td>
-                      <td>10,000</td>
-                      <td>9,500</td>
-                      <td class="text-muted">黑名單：500</td>
-                      <td>
-                        <span class="pill pill-outline">系統</span>
-                      </td>
-                      <td class="col-generated">
-                        <span class="fw-semibold text-deep-blue js-link-count">9,500</span>
-                      </td>
-                      <!-- 渠道（顯示 pill + ＋ 按鈕。按鈕會開新視窗） -->
-                      <td class="col-channels ps-2">
-                        <span class="badge badge-chip">實體</span>
-                      </td>
-                      <td><span class="badge badge-state bg-success text-white">生成中</span></td>
-                      <td class="text-muted">
-                        <div>2024-01-20 14:30</div>
-                        <div>王小華</div>
-                      </td>
-                      <td class="ps-2">
-                        <div class="d-flex gap-2">
-                          <a href="page023.html" class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-eye"></i></a>
-                          <button class="btn btn-icon" data-bs-toggle="tooltip" title="預覽"><i class="bi bi-download"></i></button>
-                        </div>
-                      </td>
-                    </tr>
+                      <!-- row #4 -->
+                      <tr>
+                        <td>
+                          <span class="badge badge-chip">SMS</span>
+                        </td>
+                        <td class="text-muted">
+                          <div>已發過(24hrs)：<span class="fw-semibold">1,000</span></div>
+                          <div>已完成：<span class="fw-semibold">562</span></div>
+                        </td>
+                        <td>12,500</td>
+                        <!-- 65% -->
+                        <td class="col-progress">
+                          <div class="progress-row d-flex">
+                            <div class="pct-text fw-semibold text-deep-blue small">完成：65%</div>
+                            <div class="progress progress-thin" aria-label="完成 65%">
+                              <div class="progress-bar progress-orange" style="width: 65%;" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>2024-01-20 15:45</td>
+                        <td class="text-center">
+                          <a href="page025.html" class="btn btn-icon" data-bs-toggle="tooltip" title="設定">
+                            <i class="bi bi-gear"></i>
+                          </a>
+                        </td>
+                      </tr>
 
-                  </tbody>
-                </table>
-              </div>
+                      <!-- row #3 -->
+                      <tr>
+                        <td>
+                          <span class="badge badge-chip">Line</span>
+                        </td>
+                        <td class="text-muted">
+                          <div>已發過(24hrs)：<span class="fw-semibold">1,000</span></div>
+                          <div>已完成：<span class="fw-semibold">562</span></div>
+                        </td>
+                        <td>12,500</td>
+                        <!-- 65% -->
+                        <td class="col-progress">
+                          <div class="progress-row d-flex">
+                            <div class="pct-text fw-semibold text-deep-blue small">完成：65%</div>
+                            <div class="progress progress-thin" aria-label="完成 65%">
+                              <div class="progress-bar progress-orange" style="width: 65%;" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>2024-01-20 15:45</td>
+                        <td class="text-center">
+                          <a href="page025.html" class="btn btn-icon" data-bs-toggle="tooltip" title="設定">
+                            <i class="bi bi-gear"></i>
+                          </a>
+                        </td>
+                      </tr>
 
-              <!-- 底部動作 -->
-              <div class="d-flex justify-content-between align-items-center px-0 mt-4">
-                <a href="page021.html" class="btn btn-deep-blue px-4">回上一步</a>
-                <a href="page020.html" class="btn-deep-blue px-4">完成名單設定</a>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- 底部動作 -->
+                <div class="d-flex justify-content-between align-items-center px-0 mt-4">
+                  <a href="page022.html" class="btn btn-deep-blue px-4">回名單列表</a>
+                </div>
               </div>
             </div>
-          </div>
-
 
           </div>
         </div>
